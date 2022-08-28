@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ObedienceMobile.Views.CompetitionPage">
+    <ContentPage.Content>
+        <StackLayout>
+			<Label Text="Название кратко" FontSize="Medium" />
+			<Entry Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" />
+			<Label Text="Наименование организации / клуба" FontSize="Medium" />
+			<Editor Text="{Binding Club, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+			<Label Text="Судья" FontSize="Medium" />
+			<Entry Text="{Binding Judge, Mode=TwoWay}" FontSize="Medium" />
+			<Button Text="Испытания"
+                    Clicked="OnExaminationsClicked" />
+			<Grid ColumnDefinitions="*,*">
+				<Button Text="Save"
+                    Clicked="OnSaveButtonClicked" />
+				<Button Grid.Column="1"
+                    Text="Delete"
+                    Clicked="OnDeleteButtonClicked"/>
+			</Grid>
+		</StackLayout>
+    </ContentPage.Content>
+</ContentPage>
