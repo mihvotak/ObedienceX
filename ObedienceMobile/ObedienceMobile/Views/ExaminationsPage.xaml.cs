@@ -23,24 +23,25 @@ namespace ObedienceX.Views
 
 		protected override void OnAppearing()
 		{
+			UpdateNumbers();
 			base.OnAppearing();
 
 			collectionView.ItemsSource = Model.Competition.Examinations;
+			Title = Model.Competition.Name;
 			_selectedExamination = null;
 		}
 
 		public void OnAddClicked(object sender, EventArgs e)
 		{
-			Model.Competition.Examinations.Add(new Examination());
+			var exam = new Examination();
+			exam.SetNumber(Model.Competition.Examinations.Count + 2);
+			Model.Competition.Examinations.Add(exam);
 		}
 
 		void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			if (e.CurrentSelection != null)
 			{
-				if (_selectedExamination != null)
-					_selectedExamination.SetSelected(false);
-
 				var exam = (Examination)e.CurrentSelection.FirstOrDefault();
 				if (exam == _selectedExamination)
 				{
@@ -48,16 +49,21 @@ namespace ObedienceX.Views
 				}
 				else
 					_selectedExamination = exam;
-
-				if (_selectedExamination != null)
-					_selectedExamination.SetSelected(true);
 			}
 		}
 
 		public void OnRemoveClicked(object sender, EventArgs e)
 		{
-			if (_selectedExamination != null)
-				Model.Competition.Examinations.Remove(_selectedExamination);
+			int index = (int)((Button)sender).CommandParameter - 1;
+			if (index >= 0 && index <= Model.Competition.Examinations.Count - 1)
+			Model.Competition.Examinations.RemoveAt(index);
+			UpdateNumbers();
+		}
+
+		private void UpdateNumbers()
+		{
+			for (int i = 0; i < Model.Competition.Examinations.Count; i++)
+				Model.Competition.Examinations[i].SetNumber(i + 1);
 		}
 	}
 }

@@ -9,10 +9,10 @@ public class Examination : INotifyPropertyChanged
 	public int Multiplier { get; set; }
 
 	public event PropertyChangedEventHandler PropertyChanged;
-	public bool Selected { get; private set; }
-	public void SetSelected(bool value)
+	public int Number { get; private set; }
+	public void SetNumber(int value)
 	{
-		Selected = value;
-		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Selected)));
+		Number = value;
+		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Number)));
 	}
 }

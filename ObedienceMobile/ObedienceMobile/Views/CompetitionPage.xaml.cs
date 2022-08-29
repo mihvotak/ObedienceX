@@ -58,6 +58,11 @@ namespace ObedienceMobile.Views
 			await Shell.Current.GoToAsync($"{nameof(ExaminationsPage)}");
 		}
 
+		async void OnPairsClicked(object sender, EventArgs e)
+		{
+			await Shell.Current.GoToAsync($"{nameof(ExaminationsPage)}");
+		}
+
 		async void OnDeleteButtonClicked(object sender, EventArgs e)
 		{
 			var competition = (Competition)BindingContext;
