@@ -12,19 +12,18 @@ using Xamarin.Forms.Xaml;
 namespace ObedienceX.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class PairsPage : ContentPage
+	public partial class ResultsPage : ContentPage
 	{
-
-		public PairsPage()
+		public ResultsPage()
 		{
 			InitializeComponent();
 		}
 
 		protected override void OnAppearing()
 		{
-			UpdateNumbers();
 			base.OnAppearing();
 
+			Model.Competition.RecalculateResults();
 			collectionView.ItemsSource = Model.Competition.Pairs;
 			if (Model.Competition.LastPairIndex >= 0 && Model.Competition.LastPairIndex < Model.Competition.Pairs.Count)
 				Model.Competition.Pairs[Model.Competition.LastPairIndex].DispatchNamesChanged();
@@ -47,23 +46,9 @@ namespace ObedienceX.Views
 				if (pair != null)
 				{
 					Model.Competition.LastPairIndex = Model.Competition.Pairs.IndexOf(pair);
-					AppShell.Current.GoToAsync(nameof(PairDetailsPage));
+					AppShell.Current.GoToAsync(nameof(PairMarksPage));
 				}
 			}
-		}
-
-		public void OnRemoveClicked(object sender, EventArgs e)
-		{
-			int index = (int)((Button)sender).CommandParameter - 1;
-			if (index >= 0 && index <= Model.Competition.Pairs.Count - 1)
-				Model.Competition.Pairs.RemoveAt(index);
-			UpdateNumbers();
-		}
-
-		private void UpdateNumbers()
-		{
-			for (int i = 0; i < Model.Competition.Pairs.Count; i++)
-				Model.Competition.Pairs[i].SetNumber(i + 1);
 		}
 	}
 }

@@ -1,10 +1,10 @@
-﻿using ObedienceMobile.Views;
+﻿using ObedienceX.Views;
 using System;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ObedienceMobile
+namespace ObedienceX
 {
 	public partial class App : Application
 	{

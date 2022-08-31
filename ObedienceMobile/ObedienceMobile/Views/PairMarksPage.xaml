@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ObedienceX.Views.PairMarksPage">
+	<StackLayout Orientation="Vertical">
+		<Grid Padding="10,10,0,0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="23" />
+				<RowDefinition Height="20" />
+				<RowDefinition Height="20" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="70" />
+			</Grid.ColumnDefinitions>
+
+			<Label Grid.Column="0" Grid.Row="0" 
+				   Text="{Binding Handler}"/>
+			<Label Grid.Column="0" Grid.Row="1" 
+				   Text="{Binding DogKind}"/>
+			<Label Grid.Column="0" Grid.Row="2" 
+				   Text="{Binding DogName}"/>
+			<Label Grid.Column="1" 
+				   FontSize="Large" FontAttributes="Bold"
+				   Text="{Binding Sum}"/>
+			<Label Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
+				   FontSize="Small" FontAttributes="Bold"
+				   Text="{Binding Result}"/>
+		</Grid>
+
+		<Grid Padding="10,10,10,0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="25" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="30" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="45" />
+				<ColumnDefinition Width="40" />
+			</Grid.ColumnDefinitions>
+
+			<Label Grid.Column="0"
+					Text="№"
+					Margin="3,0,0,0"
+					FontSize="Medium"  
+						   />
+			<Label Grid.Column="1"
+					Text="Испытание"
+					Margin="3,0,0,0"
+					FontSize="Medium"  
+						   />
+			<Label Grid.Column="2"
+					Text="Оц."
+					Margin="3,0,0,0"
+					FontSize="Medium"  
+							/>
+			<Label Grid.Column="3"
+					Text="Умн."
+					Margin="3,0,0,0"
+					FontSize="Medium"  
+							/>
+		</Grid>
+
+		<ScrollView>
+			<CollectionView x:Name="collectionView">
+				<CollectionView.ItemsLayout>
+					<GridItemsLayout Orientation="Vertical"/>
+				</CollectionView.ItemsLayout>
+				
+				<CollectionView.ItemTemplate>
+					<DataTemplate>
+						<Grid Padding="10,0,10,10">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="45" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="30" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="45" />
+								<ColumnDefinition Width="40" />
+							</Grid.ColumnDefinitions>
+
+							<Label Grid.Column="0"
+							   Text="{Binding ExamNumber}"
+							   FontSize="Large"
+							   VerticalTextAlignment="Center"
+							/>
+							<Label Grid.Column="1"
+							   Text="{Binding ExamName}"
+							   VerticalTextAlignment="Center"
+							   FontSize="Medium"  
+						   />
+							<Picker Grid.Column="2"
+								ItemsSource="{Binding Values}" SelectedItem="{Binding ValueStr}"
+								BackgroundColor="AliceBlue"
+								FontSize="Large"  
+							/>
+							<Label Text="{Binding MultipliedValueStr}" Grid.Column="3"
+								BackgroundColor="AliceBlue"
+								FontSize="Medium" />
+						</Grid>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
+		</ScrollView>
+	</StackLayout>
+</ContentPage>

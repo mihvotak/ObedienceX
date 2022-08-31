@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace ObedienceMobile.iOS
+namespace ObedienceX.iOS
 {
     public class Application
     {

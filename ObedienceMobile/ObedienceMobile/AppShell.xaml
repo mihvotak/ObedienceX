@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:ObedienceMobile.Views"
+       xmlns:local="clr-namespace:ObedienceX.Views"
        Title="ObedienceMobile"
-       x:Class="ObedienceMobile.AppShell">
+       x:Class="ObedienceX.AppShell">
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -31,8 +31,8 @@
 
     <TabBar>
 		<ShellContent Title="Files" Icon="icon_feed.png" Route="CompetitionsPage" ContentTemplate="{DataTemplate local:CompetitionsPage}" />
-		<ShellContent Title="Files" Icon="icon_feed.png" Route="CompetitionPage" ContentTemplate="{DataTemplate local:CompetitionPage}" />
-		<ShellContent Title="About" Icon="icon_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+		<ShellContent Title="Competotion" Icon="icon_feed.png" Route="CompetitionPage" ContentTemplate="{DataTemplate local:CompetitionPage}" />
+		<ShellContent Title="Results" Icon="icon_about.png" Route="ResultsPage" ContentTemplate="{DataTemplate local:ResultsPage}" />
 	</TabBar>
 
     <!--

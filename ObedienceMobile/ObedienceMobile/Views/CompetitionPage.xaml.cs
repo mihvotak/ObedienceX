@@ -13,7 +13,7 @@ using Xamarin.Forms.Xaml;
 using static System.Net.Mime.MediaTypeNames;
 using Json = Newtonsoft.Json;
 
-namespace ObedienceMobile.Views
+namespace ObedienceX.Views
 {
 	public partial class CompetitionPage : ContentPage
 	{
@@ -60,6 +60,11 @@ namespace ObedienceMobile.Views
 		async void OnPairsClicked(object sender, EventArgs e)
 		{
 			await Shell.Current.GoToAsync($"{nameof(PairsPage)}");
+		}
+
+		async void OnResultsClicked(object sender, EventArgs e)
+		{
+			await Shell.Current.GoToAsync($"//{nameof(ResultsPage)}");
 		}
 
 		async void OnDeleteButtonClicked(object sender, EventArgs e)

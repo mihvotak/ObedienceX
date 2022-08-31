@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Xamarin.Forms;
 
 [Serializable]
 public class Competition
@@ -17,4 +18,24 @@ public class Competition
 	public ObservableCollection<Examination> Examinations = new ObservableCollection<Examination>();
 	public ObservableCollection<Pair> Pairs = new ObservableCollection<Pair>();
 	public int LastPairIndex { get; set; }
+	
+	public void RecalculateResults()
+	{
+		List<Pair> list = new List<Pair>();
+		foreach (var pair in Pairs)
+			list.Add(pair);
+		list.Sort((p1, p2) => p2.Sum.CompareTo(p1.Sum));
+		int place = 0;
+		for (int i = 0; i < list.Count; i++)
+		{
+			if (i == 0 || list[i].Sum < list[i - 1].Sum)
+				place = i + 1;
+			if (list[i].Place != place)
+			{
+				list[i].Place = place;
+				list[i].DispatchPlaceChanged();
+			}
+		}
+	}
+
 }

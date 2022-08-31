@@ -3,7 +3,7 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ObedienceMobile.Views
+namespace ObedienceX.Views
 {
 	public partial class AboutPage : ContentPage
 	{

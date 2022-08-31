@@ -1,4 +1,4 @@
-﻿using ObedienceMobile.Views;
+﻿using ObedienceX.Views;
 using ObedienceX.Data;
 using System;
 using System.Collections.Generic;

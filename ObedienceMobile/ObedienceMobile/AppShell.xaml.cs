@@ -1,11 +1,11 @@
-﻿using ObedienceMobile.ViewModels;
-using ObedienceMobile.Views;
+﻿using ObedienceX.ViewModels;
+using ObedienceX.Views;
 using ObedienceX.Views;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
-namespace ObedienceMobile
+namespace ObedienceX
 {
 	public partial class AppShell : Xamarin.Forms.Shell
 	{
@@ -15,6 +15,7 @@ namespace ObedienceMobile
 			Routing.RegisterRoute(nameof(ExaminationsPage), typeof(ExaminationsPage));
 			Routing.RegisterRoute(nameof(PairsPage), typeof(PairsPage));
 			Routing.RegisterRoute(nameof(PairDetailsPage), typeof(PairDetailsPage));
+			Routing.RegisterRoute(nameof(PairMarksPage), typeof(PairMarksPage));
 		}
 
 	}

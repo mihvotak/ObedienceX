@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using ObedienceMobile.ViewModels;
+using ObedienceX.ViewModels;
 using ObedienceX.Data;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ObedienceMobile.Views
+namespace ObedienceX.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CompetitionsPage : ContentPage
