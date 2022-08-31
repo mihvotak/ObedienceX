@@ -16,5 +16,5 @@ public class Competition
 	public string Secretary { get; set; }
 	public ObservableCollection<Examination> Examinations = new ObservableCollection<Examination>();
 	public ObservableCollection<Pair> Pairs = new ObservableCollection<Pair>();
-	public int LastPair { get; set; }
+	public int LastPairIndex { get; set; }
 }

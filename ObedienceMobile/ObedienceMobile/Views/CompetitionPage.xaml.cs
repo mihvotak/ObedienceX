@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using ObedienceMobile.Models;
 using ObedienceX.Data;
 using ObedienceX.Views;
 using System;
@@ -60,7 +59,7 @@ namespace ObedienceMobile.Views
 
 		async void OnPairsClicked(object sender, EventArgs e)
 		{
-			await Shell.Current.GoToAsync($"{nameof(ExaminationsPage)}");
+			await Shell.Current.GoToAsync($"{nameof(PairsPage)}");
 		}
 
 		async void OnDeleteButtonClicked(object sender, EventArgs e)

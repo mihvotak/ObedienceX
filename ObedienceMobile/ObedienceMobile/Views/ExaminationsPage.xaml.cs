@@ -34,7 +34,7 @@ namespace ObedienceX.Views
 		public void OnAddClicked(object sender, EventArgs e)
 		{
 			var exam = new Examination();
-			exam.SetNumber(Model.Competition.Examinations.Count + 2);
+			exam.SetNumber(Model.Competition.Examinations.Count + 1);
 			Model.Competition.Examinations.Add(exam);
 		}
 

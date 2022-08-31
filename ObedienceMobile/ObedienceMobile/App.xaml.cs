@@ -1,5 +1,4 @@
-﻿using ObedienceMobile.Services;
-using ObedienceMobile.Views;
+﻿using ObedienceMobile.Views;
 using System;
 using System.IO;
 using Xamarin.Forms;
@@ -17,7 +16,6 @@ namespace ObedienceMobile
 
 			FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
-			DependencyService.Register<MockDataStore>();
 			MainPage = new AppShell();
 		}
 
