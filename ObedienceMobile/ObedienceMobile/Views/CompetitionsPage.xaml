@@ -2,31 +2,47 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ObedienceX.Views.CompetitionsPage"
-			 Title="Competitions">
+			 Title="Файлы соревнований">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Add"
+		<ToolbarItem Text="Новый"
                      Clicked="OnAddClicked" />
 	</ContentPage.ToolbarItems>
 
-	<CollectionView x:Name="collectionView"
-                    Margin="20"
+	<StackLayout>
+		<Grid ColumnDefinitions="*,*,*" RowDefinitions="40, 50" Margin="10">
+			<Button Text="Корень" Clicked="OnGoRootClick"/>
+			<Button Text="Выше" Clicked="OnGoUpClick" Grid.Column="1"/>
+			<Button Text="Домой" Clicked="OnGoHomeClick" Grid.Column="2"/>
+			<Label x:Name="CurrentPath" Grid.ColumnSpan="3" Grid.Row="1"
+				   Padding="5,0"
+				   FontSize="Medium" VerticalTextAlignment="Center"
+				   BackgroundColor="LightGray"/>
+		</Grid>
+		<ScrollView>
+			<CollectionView x:Name="collectionView"
+                    Margin="10"
                     SelectionMode="Single"
                     SelectionChanged="OnSelectionChanged">
-		<CollectionView.ItemsLayout>
-			<LinearItemsLayout Orientation="Vertical"
-                               ItemSpacing="10" />
-		</CollectionView.ItemsLayout>
-		<!-- Define the appearance of each item in the list -->
-		<CollectionView.ItemTemplate>
-			<DataTemplate>
-				<StackLayout>
-					<Label Text="{Binding FileName}"
-                           FontSize="Medium"/>
-					<Label Text="{Binding Date}"
-                           TextColor="Silver"
-                           FontSize="Small" />
-				</StackLayout>
-			</DataTemplate>
-		</CollectionView.ItemTemplate>
-	</CollectionView>
+				<CollectionView.ItemsLayout>
+					<LinearItemsLayout Orientation="Vertical"
+                               ItemSpacing="5" />
+				</CollectionView.ItemsLayout>
+				<!-- Define the appearance of each item in the list -->
+				<CollectionView.ItemTemplate>
+					<DataTemplate>
+						<StackLayout Margin="0" Padding="5" Spacing="0" BackgroundColor="White">
+							<Label Text="{Binding ShortName}"
+								   Padding="5,10"
+								   FontSize="Medium"/>
+							<Label Text="{Binding DateStr}"
+								   TextColor="Gray"
+								   BackgroundColor="AliceBlue"
+								   Padding="5,0"
+								   FontSize="Small" />
+						</StackLayout>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
+		</ScrollView>
+	</StackLayout>
 </ContentPage>

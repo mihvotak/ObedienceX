@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ObedienceX.Views.PairMarksPage">
-	<StackLayout Orientation="Vertical">
-		<Grid Padding="10,10,0,0">
+	<StackLayout Orientation="Vertical" Spacing="0">
+		<Grid Padding="10,10,10,0" RowSpacing="0">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="23" />
+				<RowDefinition Height="25" />
 				<RowDefinition Height="20" />
 				<RowDefinition Height="20" />
 			</Grid.RowDefinitions>
@@ -15,16 +15,21 @@
 			</Grid.ColumnDefinitions>
 
 			<Label Grid.Column="0" Grid.Row="0" 
-				   Text="{Binding Handler}"/>
+				   Text="{Binding Handler}"
+				   FontSize="Medium"/>
 			<Label Grid.Column="0" Grid.Row="1" 
 				   Text="{Binding DogKind}"/>
 			<Label Grid.Column="0" Grid.Row="2" 
 				   Text="{Binding DogName}"/>
 			<Label Grid.Column="1" 
 				   FontSize="Large" FontAttributes="Bold"
-				   Text="{Binding Sum}"/>
+				   Text="{Binding Sum}"
+				   Margin="0"
+				   HorizontalTextAlignment="Center"/>
 			<Label Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
 				   FontSize="Small" FontAttributes="Bold"
+				   VerticalTextAlignment="Center"
+				   HorizontalTextAlignment="Center"
 				   Text="{Binding Result}"/>
 		</Grid>
 
@@ -40,23 +45,27 @@
 			</Grid.ColumnDefinitions>
 
 			<Label Grid.Column="0"
-					Text="№"
-					Margin="3,0,0,0"
-					FontSize="Medium"  
+				   Text="№"
+				   Margin="3,0,0,0"
+				   BackgroundColor="White"
+				   FontSize="Medium"  
 						   />
 			<Label Grid.Column="1"
-					Text="Испытание"
-					Margin="3,0,0,0"
-					FontSize="Medium"  
+				   Text="Испытание"
+				   Margin="3,0,0,0"
+				   BackgroundColor="White"
+				   FontSize="Medium"  
 						   />
 			<Label Grid.Column="2"
 					Text="Оц."
 					Margin="3,0,0,0"
+				   BackgroundColor="White"
 					FontSize="Medium"  
 							/>
 			<Label Grid.Column="3"
 					Text="Умн."
 					Margin="3,0,0,0"
+				   BackgroundColor="White"
 					FontSize="Medium"  
 							/>
 		</Grid>
@@ -92,11 +101,10 @@
 						   />
 							<Picker Grid.Column="2"
 								ItemsSource="{Binding Values}" SelectedItem="{Binding ValueStr}"
-								BackgroundColor="AliceBlue"
 								FontSize="Large"  
 							/>
 							<Label Text="{Binding MultipliedValueStr}" Grid.Column="3"
-								BackgroundColor="AliceBlue"
+								   VerticalTextAlignment="Center"
 								FontSize="Medium" />
 						</Grid>
 					</DataTemplate>

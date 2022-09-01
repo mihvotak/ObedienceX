@@ -10,6 +10,11 @@ public class Pair: INotifyPropertyChanged
 {
 	public enum DogGender { Male, Female }
 
+	public Pair()
+	{
+		BirthDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+	}
+
 	[JsonIgnore]
 	public Competition Competition { get; set; }
 
@@ -87,6 +92,8 @@ public class Pair: INotifyPropertyChanged
 	{
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Handler)));
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DogName)));
+		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DogKind)));
+		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DogKindAndName)));
 	}
 
 	public void DispatchPlaceChanged()

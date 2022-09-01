@@ -31,25 +31,14 @@ namespace ObedienceX.Views
 			BindingContext = Model.Competition;
 		}
 
-		async void OnSaveButtonClicked(object sender, EventArgs e)
+		void OnSaveClicked(object sender, EventArgs e)
 		{
-			var competition = Model.Competition;
-			var jsonText = JsonConvert.SerializeObject(competition);
-			if (string.IsNullOrWhiteSpace(competition.FileName))
-			{
-				// Save the file.
-				var filename = Path.Combine(App.FolderPath, $"{competition.Name}.txt");
-				competition.FileName = filename;
-				File.WriteAllText(filename, jsonText);
-			}
-			else
-			{
-				// Update the file.
-				File.WriteAllText(competition.FileName, jsonText);
-			}
+			Model.ReSaveCurrent();
+		}
 
-			// Navigate backwards
-			await Shell.Current.GoToAsync("..");
+		async void OnSaveAsClicked(object sender, EventArgs e)
+		{
+			await Shell.Current.GoToAsync($"{nameof(SaveAsPage)}");
 		}
 
 		async void OnExaminationsClicked(object sender, EventArgs e)

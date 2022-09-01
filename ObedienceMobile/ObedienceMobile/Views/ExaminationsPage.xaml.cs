@@ -54,10 +54,13 @@ namespace ObedienceX.Views
 
 		public void OnRemoveClicked(object sender, EventArgs e)
 		{
-			int index = (int)((Button)sender).CommandParameter - 1;
-			if (index >= 0 && index <= Model.Competition.Examinations.Count - 1)
-			Model.Competition.Examinations.RemoveAt(index);
-			UpdateNumbers();
+			if (Model.Competition.Examinations.Count > 0)
+			Model.Competition.Examinations.RemoveAt(Model.Competition.Examinations.Count - 1);
+		}
+
+		public void OnSaveClicked(object sender, EventArgs e)
+		{
+			Model.ReSaveCurrent();
 		}
 
 		private void UpdateNumbers()

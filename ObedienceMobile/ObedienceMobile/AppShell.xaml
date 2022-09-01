@@ -26,13 +26,22 @@
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
-        </ResourceDictionary>
+			<Style TargetType="Label" BasedOn="{StaticResource BaseStyle}" >
+				<Setter Property="BackgroundColor" Value="#FFD5EEFF"/>
+			</Style>
+			<Style TargetType="Entry" BasedOn="{StaticResource BaseStyle}" >
+				<Setter Property="BackgroundColor" Value="#FFEEF9FF"/>
+			</Style>
+			<Style TargetType="Editor" BasedOn="{StaticResource BaseStyle}" >
+				<Setter Property="BackgroundColor" Value="#FFEEF9FF"/>
+			</Style>
+		</ResourceDictionary>
     </Shell.Resources>
 
     <TabBar>
-		<ShellContent Title="Files" Icon="icon_feed.png" Route="CompetitionsPage" ContentTemplate="{DataTemplate local:CompetitionsPage}" />
-		<ShellContent Title="Competotion" Icon="icon_feed.png" Route="CompetitionPage" ContentTemplate="{DataTemplate local:CompetitionPage}" />
-		<ShellContent Title="Results" Icon="icon_about.png" Route="ResultsPage" ContentTemplate="{DataTemplate local:ResultsPage}" />
+		<ShellContent Title="Файлы" Icon="icon_feed.png" Route="CompetitionsPage" ContentTemplate="{DataTemplate local:CompetitionsPage}" />
+		<ShellContent Title="Соревнование" Icon="icon_feed.png" Route="CompetitionPage" ContentTemplate="{DataTemplate local:CompetitionPage}" />
+		<ShellContent Title="Результаты" Icon="icon_about.png" Route="ResultsPage" ContentTemplate="{DataTemplate local:ResultsPage}" />
 	</TabBar>
 
     <!--

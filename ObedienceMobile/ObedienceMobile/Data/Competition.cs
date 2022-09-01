@@ -1,15 +1,20 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Xamarin.Forms;
 
 [Serializable]
 public class Competition
 {
+	public Competition()
+	{
+		Date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+	}
+
 	public string FileName { get; set; }
 	public string Name { get; set; }
 	public DateTime Date { get; set; }
-	public int Level { get; set; }
+	public string Level { get; set; }
 	public string Club { get; set; }
 	public string Place { get; set; }
 	public string Director { get; set; }
@@ -18,6 +23,10 @@ public class Competition
 	public ObservableCollection<Examination> Examinations = new ObservableCollection<Examination>();
 	public ObservableCollection<Pair> Pairs = new ObservableCollection<Pair>();
 	public int LastPairIndex { get; set; }
+
+	[JsonIgnore]
+	public List<string> Levels { get { return AllLevels; } }
+	public static List<string> AllLevels = new List<string> { "Обидиенс-0", "Обидиенс-1", "Обидиенс-2", "Обидиенс-3" };
 	
 	public void RecalculateResults()
 	{

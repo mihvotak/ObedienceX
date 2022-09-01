@@ -2,62 +2,102 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ObedienceX.Views.ResultsPage">
-	<CollectionView x:Name="collectionView"
+	<StackLayout Orientation="Vertical" Spacing="0">
+		<Grid Padding="10,5,10,0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="35"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="30" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="55" />
+				<ColumnDefinition Width="30" />
+			</Grid.ColumnDefinitions>
+
+			<Label Grid.Column="0"
+				   Text="№"
+				   Margin="3,0,0,0"
+				   BackgroundColor="White"
+				   VerticalOptions="End"
+				   FontSize="Medium"  
+						   />
+			<Label Grid.Column="1"
+				   Text="Пара"
+				   Margin="3,0,0,0"
+				   BackgroundColor="White"
+				   VerticalOptions="End"
+				   FontSize="Medium"  
+						   />
+			<Label Grid.Column="2"
+					Text="Балл"
+					Margin="3,0,0,0"
+				   BackgroundColor="White"
+				   VerticalOptions="End"
+					FontSize="Medium"  
+							/>
+			<Label Grid.Column="3"
+					Text="Место"
+					Margin="3,0,0,0"
+				   BackgroundColor="White"
+				   VerticalOptions="End"
+					FontSize="Small"  
+							/>
+		</Grid>
+
+		<ScrollView>
+			<CollectionView x:Name="collectionView"
 					SelectionMode="Single"
 					SelectionChanged="OnSelectionChanged" Margin="5">
-		<CollectionView.ItemsLayout>
-			<GridItemsLayout Orientation="Vertical"
-							 HorizontalItemSpacing="10" />
-		</CollectionView.ItemsLayout>
-		<!-- Define the appearance of each item in the list -->
-		<CollectionView.ItemTemplate>
-			<DataTemplate>
-				<Grid Padding="5" Margin="0">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="30" />
-						<RowDefinition Height="15" />
-						<RowDefinition Height="15" />
-					</Grid.RowDefinitions>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="30" />
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="55" />
-						<ColumnDefinition Width="30" />
-					</Grid.ColumnDefinitions>
+				<CollectionView.ItemsLayout>
+					<GridItemsLayout Orientation="Vertical"
+							 HorizontalItemSpacing="10"/>
+				</CollectionView.ItemsLayout>
+				<!-- Define the appearance of each item in the list -->
+				<CollectionView.ItemTemplate>
+					<DataTemplate>
+						<Grid Padding="5" Margin="0" RowSpacing="0">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="30" />
+								<RowDefinition Height="35" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="30" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="55" />
+								<ColumnDefinition Width="30" />
+							</Grid.ColumnDefinitions>
 
-					<Label Grid.Column="0" Grid.RowSpan="3"
+							<Label Grid.Column="0" Grid.RowSpan="2"
 							Text="{Binding Number}"
 							FontSize="Medium"
-							BackgroundColor="AliceBlue"
 							HorizontalTextAlignment="Center"
 						   VerticalTextAlignment="Center"
 						/>
-					<Label Grid.Column="1" Grid.Row="0"
+							<Label Grid.Column="1" Grid.Row="0"
 							Text="{Binding Handler}"
-							BackgroundColor="AliceBlue"
+						   Padding="5,0,5,0"
 							FontSize="Large"  
 						/>
-					<Label Grid.Column="1" Grid.Row="1"	Grid.RowSpan="2"
+							<Label Grid.Column="1" Grid.Row="1"	
 						   Text="{Binding DogKindAndName}"
-						   BackgroundColor="AliceBlue" 
+						   Padding="5,0,5,0"
 						   FontSize="Small"  
 						   />
-					<Label Text="{Binding Sum}" Grid.Column="2" Grid.Row="0"
-						   BackgroundColor="AliceBlue" 
+							<Label Text="{Binding Sum}" Grid.Column="2" Grid.Row="0"
 						   HorizontalTextAlignment="Center"
 						   FontSize="Large" />
-					<Label Text="{Binding Result}" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2"
-						   BackgroundColor="AliceBlue" 
+							<Label Text="{Binding Result}" Grid.Column="2" Grid.Row="1" 
 						   HorizontalTextAlignment="Center"
 						   VerticalTextAlignment="Center"
 						   FontSize="Small" />
-					<Label Text="{Binding Place}" Grid.Column="3" Grid.RowSpan="3"
-						   BackgroundColor="AliceBlue" 
+							<Label Text="{Binding Place}" Grid.Column="3" Grid.RowSpan="2"
 						   HorizontalTextAlignment="Center"
 						   VerticalTextAlignment="Center"
 						   FontSize="Large" FontAttributes="Bold" />
-				</Grid>
-			</DataTemplate>
-		</CollectionView.ItemTemplate>
-	</CollectionView>
+						</Grid>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
+		</ScrollView>
+	</StackLayout>
 </ContentPage>

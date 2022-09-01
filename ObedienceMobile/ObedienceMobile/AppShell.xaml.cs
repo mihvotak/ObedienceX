@@ -1,8 +1,4 @@
-﻿using ObedienceX.ViewModels;
-using ObedienceX.Views;
-using ObedienceX.Views;
-using System;
-using System.Collections.Generic;
+﻿using ObedienceX.Views;
 using Xamarin.Forms;
 
 namespace ObedienceX
@@ -16,6 +12,7 @@ namespace ObedienceX
 			Routing.RegisterRoute(nameof(PairsPage), typeof(PairsPage));
 			Routing.RegisterRoute(nameof(PairDetailsPage), typeof(PairDetailsPage));
 			Routing.RegisterRoute(nameof(PairMarksPage), typeof(PairMarksPage));
+			Routing.RegisterRoute(nameof(SaveAsPage), typeof(SaveAsPage));
 		}
 
 	}

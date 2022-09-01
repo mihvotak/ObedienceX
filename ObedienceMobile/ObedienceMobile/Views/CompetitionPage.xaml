@@ -3,14 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ObedienceX.Views.CompetitionPage"
 			 Title="Описание соревнования">
-    <ContentPage.Content>
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Сохранить"
+                     Clicked="OnSaveClicked" />
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
 		<Grid RowDefinitions="*, Auto" Padding="0" Margin="0" >
 			<ScrollView>
 				<StackLayout Padding="10,10,10,50" VerticalOptions="Fill" >
 					<Label Text="Название кратко (имя файла)" FontSize="Medium" />
 					<Entry Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" />
 					<Label Text="Уровень" FontSize="Medium" />
-					<Entry Text="{Binding Level, Mode=TwoWay}" Keyboard="Numeric" />
+					<Picker ItemsSource="{Binding Levels}" SelectedItem="{Binding Level}"/>
 					<Label Text="Дата проведения" FontSize="Medium" />
 					<DatePicker Date="{Binding Date, Mode=TwoWay}" Format="dd.MM.yyyy"/>
 					<Label Text="Место проведения" FontSize="Medium" />
@@ -34,8 +38,8 @@
 							Clicked="OnPairsClicked" />
 					<Button Text="Результаты" Grid.ColumnSpan="2"  Grid.Row="2"
 							Clicked="OnResultsClicked" />
-					<Button Text="Сохранить" Grid.Row="3"
-						Clicked="OnSaveButtonClicked" />
+					<Button Text="Сохранить как..." Grid.Row="3"
+						Clicked="OnSaveAsClicked" />
 					<Button Grid.Column="1" Grid.Row="3"
 						Text="Удалить"
 						Clicked="OnDeleteButtonClicked"/>

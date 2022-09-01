@@ -23,12 +23,15 @@ namespace ObedienceX.Views
 		{
 			base.OnAppearing();
 
-			Model.Competition.RecalculateResults();
-			collectionView.ItemsSource = Model.Competition.Pairs;
-			if (Model.Competition.LastPairIndex >= 0 && Model.Competition.LastPairIndex < Model.Competition.Pairs.Count)
-				Model.Competition.Pairs[Model.Competition.LastPairIndex].DispatchNamesChanged();
+			var competition = Model.Competition;
+			competition.RecalculateResults();
+			for (int i = 0; i < competition.Pairs.Count; i++)
+				competition.Pairs[i].SetNumber(i + 1);
+			collectionView.ItemsSource = competition.Pairs;
+			if (competition.LastPairIndex >= 0 && competition.LastPairIndex < competition.Pairs.Count)
+				competition.Pairs[competition.LastPairIndex].DispatchNamesChanged();
 			collectionView.SelectedItem = null;
-			Title = Model.Competition.Name;
+			Title = competition.Name;
 		}
 
 		public void OnAddClicked(object sender, EventArgs e)

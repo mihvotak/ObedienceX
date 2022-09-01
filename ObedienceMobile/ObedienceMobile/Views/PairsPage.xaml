@@ -8,17 +8,19 @@
 	</ContentPage.ToolbarItems>
 	<CollectionView x:Name="collectionView"
 					SelectionMode="Single"
-					SelectionChanged="OnSelectionChanged">
+					SelectionChanged="OnSelectionChanged"
+					Margin="5">
 		<CollectionView.ItemsLayout>
-			<GridItemsLayout Orientation="Vertical"/>
+			<GridItemsLayout Orientation="Vertical"
+							 HorizontalItemSpacing="10" />
 		</CollectionView.ItemsLayout>
 		<!-- Define the appearance of each item in the list -->
 		<CollectionView.ItemTemplate>
 			<DataTemplate>
-				<Grid Padding="10,0,0,10" Margin="10">
+				<Grid Padding="5" Margin="0" RowSpacing="0">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="30" />
-						<RowDefinition Height="30" />
+						<RowDefinition Height="35" />
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="30" />
@@ -29,19 +31,16 @@
 					<Label Grid.Column="0" Grid.RowSpan="2"
 							Text="{Binding Number}"
 							FontSize="Medium"
-							Padding="0,20"
-							BackgroundColor="AliceBlue"
+							VerticalTextAlignment="Center"
 							HorizontalTextAlignment="Center"
 						/>
 					<Label Grid.Column="1" Grid.Row="0"
 							Text="{Binding Handler}"
-							BackgroundColor="AliceBlue"
-							FontSize="Large"  
+							FontSize="Large" Padding="5,0,0,0"
 						/>
 					<Label Grid.Column="1" Grid.Row="1"	
-						   Text="{Binding DogName}"
-						   BackgroundColor="AliceBlue" 
-						   FontSize="Large"  
+						   Text="{Binding DogKindAndName}"
+						   FontSize="Small" Padding="5,0,0,0"
 						   />
 					<Button Text="X" Grid.Column="2" Grid.RowSpan="2"
 							Clicked="OnRemoveClicked" 
