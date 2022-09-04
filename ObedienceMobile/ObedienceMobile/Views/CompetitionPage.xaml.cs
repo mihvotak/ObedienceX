@@ -1,27 +1,21 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using ObedienceX.Data;
-using ObedienceX.Views;
+﻿using ObedienceX.Data;
+using ObedienceX.Utils;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using static System.Net.Mime.MediaTypeNames;
-using Json = Newtonsoft.Json;
 
 namespace ObedienceX.Views
 {
 	public partial class CompetitionPage : ContentPage
 	{
+		private ExcelProxy _excelProxy;
 
 		public CompetitionPage()
 		{
 			InitializeComponent();
 
+			_excelProxy = new ExcelProxy();
 		}
 
 		protected override void OnAppearing()
@@ -68,6 +62,16 @@ namespace ObedienceX.Views
 
 			// Navigate backwards
 			await Shell.Current.GoToAsync("..");
+		}
+
+		void OnSaveExcelClicked(object sender, EventArgs e)
+		{
+			if (!string.IsNullOrEmpty(Model.Competition.ExcelName))
+				_excelProxy.WriteExcel(Model.Competition.ExcelName);
+			else
+			{
+				_excelProxy.WriteExcel(Model.Competition.ExcelName);
+			}
 		}
 	}
 }

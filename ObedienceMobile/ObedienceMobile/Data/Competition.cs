@@ -11,7 +11,11 @@ public class Competition
 		Date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 	}
 
+	[JsonIgnore]
 	public string FileName { get; set; }
+	[JsonIgnore]
+	public string ExcelName { get; set; }
+
 	public string Name { get; set; }
 	public DateTime Date { get; set; }
 	public string Level { get; set; }

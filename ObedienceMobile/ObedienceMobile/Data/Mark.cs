@@ -8,7 +8,13 @@ namespace ObedienceX.Data
 {
 	public class Mark : INotifyPropertyChanged
 	{
-		public float Value { get; set; }
+		
+		public double Value { get; set; }
+
+		public bool IsSet { get; set; }
+
+		[JsonIgnore]
+		public bool IsValid { get { return Value == 0 || (Value % .5 == 0 && Value >= 5 && Value <= 10); } }
 
 		[JsonIgnore]
 		public Pair Pair { get; set; }
@@ -37,7 +43,7 @@ namespace ObedienceX.Data
 		{
 			get
 			{
-				return Value == 0 ? "" : Value.ToString();
+				return IsSet ? Value.ToString() : "";
 			}
 			set
 			{
@@ -45,6 +51,7 @@ namespace ObedienceX.Data
 				if (float.TryParse(value, out newVal))
 				{
 					Value = newVal;
+					IsSet = true;
 					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MultipliedValueStr)));
 					Pair.RecalculateSum();
 				}
@@ -52,10 +59,10 @@ namespace ObedienceX.Data
 		}
 
 		[JsonIgnore]
-		public float MultipliedValue { get { return Value * ExamMultiplier; } }
+		public double MultipliedValue { get { return Value * ExamMultiplier; } }
 
 		[JsonIgnore]
-		public string MultipliedValueStr { get { return Value == 0 ? "" : MultipliedValue.ToString(); } }
+		public string MultipliedValueStr { get { return IsSet ? MultipliedValue.ToString() : ""; } }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 

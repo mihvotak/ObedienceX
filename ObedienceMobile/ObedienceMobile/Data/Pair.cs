@@ -33,7 +33,7 @@ public class Pair: INotifyPropertyChanged
 	public string DogKindAndName { get { return DogKind + "\n" + DogName; } }
 
 	public ObservableCollection<Mark> Marks { get; set; }
-	public float Sum { get; set; }
+	public double Sum { get; set; }
 	[JsonIgnore]
 	public string Result
 	{ 
@@ -55,7 +55,7 @@ public class Pair: INotifyPropertyChanged
 	{
 		get
 		{
-			return new List<string> { "Кобель", "Сука" };
+			return new List<string> { "кобель", "сука" };
 		}
 	}
 
@@ -63,7 +63,7 @@ public class Pair: INotifyPropertyChanged
 	public List<string> GendersList { get { return AllGendersList; } }
 
 	[JsonIgnore]
-	public string SelectedBreed
+	public string SelectedGender
 	{
 		get
 		{
@@ -103,7 +103,7 @@ public class Pair: INotifyPropertyChanged
 
 	public void RecalculateSum()
 	{
-		float sum = 0;
+		double sum = 0;
 		for (int i = 0; i < Marks.Count; i++)
 			sum += Marks[i].MultipliedValue;
 		Sum = sum;

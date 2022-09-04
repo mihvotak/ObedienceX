@@ -32,12 +32,14 @@
 			</ScrollView>
 			<StackLayout VerticalOptions="End" BackgroundColor="White" Padding="20,10" Margin="-10">
 				<Grid ColumnDefinitions="*,*" RowDefinitions="Auto, Auto">
-					<Button Text="Испытания" Grid.ColumnSpan="2"
+					<Button Text="Испытания" 
 							Clicked="OnExaminationsClicked" />
-					<Button Text="Спортсмены" Grid.ColumnSpan="2"  Grid.Row="1"
+					<Button Text="Спортсмены" Grid.Column="1"
 							Clicked="OnPairsClicked" />
-					<Button Text="Результаты" Grid.ColumnSpan="2"  Grid.Row="2"
+					<Button Text="Результаты" Grid.ColumnSpan="2"  Grid.Row="1"
 							Clicked="OnResultsClicked" />
+					<Button Text="В Excel" Grid.ColumnSpan="2"  Grid.Row="2"
+							Clicked="OnSaveExcelClicked" />
 					<Button Text="Сохранить как..." Grid.Row="3"
 						Clicked="OnSaveAsClicked" />
 					<Button Grid.Column="1" Grid.Row="3"

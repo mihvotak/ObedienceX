@@ -63,7 +63,7 @@
 					FontSize="Medium"  
 							/>
 			<Label Grid.Column="3"
-					Text="Умн."
+					Text="xK-т"
 					Margin="3,0,0,0"
 				   BackgroundColor="White"
 					FontSize="Medium"  
@@ -78,9 +78,10 @@
 				
 				<CollectionView.ItemTemplate>
 					<DataTemplate>
-						<Grid Padding="10,0,10,10">
+						<Grid Padding="10,0,10,10" RowSpacing="0">
 							<Grid.RowDefinitions>
-								<RowDefinition Height="45" />
+								<RowDefinition Height="15" />
+								<RowDefinition Height="30" />
 							</Grid.RowDefinitions>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="30" />
@@ -89,23 +90,30 @@
 								<ColumnDefinition Width="40" />
 							</Grid.ColumnDefinitions>
 
-							<Label Grid.Column="0"
+							<Label Grid.Column="0" Grid.RowSpan="2"
 							   Text="{Binding ExamNumber}"
 							   FontSize="Large"
 							   VerticalTextAlignment="Center"
 							/>
-							<Label Grid.Column="1"
+							<Label Grid.Column="1" Grid.RowSpan="2"
 							   Text="{Binding ExamName}"
 							   VerticalTextAlignment="Center"
 							   FontSize="Medium"  
 						   />
-							<Picker Grid.Column="2"
+							<Picker Grid.Column="2" Grid.RowSpan="2"
 								ItemsSource="{Binding Values}" SelectedItem="{Binding ValueStr}"
-								FontSize="Large"  
+								FontSize="Large"  HorizontalTextAlignment="Center"
 							/>
-							<Label Text="{Binding MultipliedValueStr}" Grid.Column="3"
+							<Label Text="{Binding ExamMultiplier}" Grid.Column="3"
 								   VerticalTextAlignment="Center"
-								FontSize="Medium" />
+								   HorizontalTextAlignment="End"
+								   Padding="0,0,3,0"
+								   TextColor="Silver"
+								   FontSize="Small" />
+							<Label Text="{Binding MultipliedValueStr}" Grid.Column="3" Grid.Row="1"
+								   VerticalTextAlignment="Center"
+								   HorizontalTextAlignment="Center"
+								   FontSize="Medium" />
 						</Grid>
 					</DataTemplate>
 				</CollectionView.ItemTemplate>

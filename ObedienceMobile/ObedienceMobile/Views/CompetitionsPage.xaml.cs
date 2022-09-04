@@ -79,7 +79,7 @@ namespace ObedienceX.Views
 						.OrderBy(d => d.Date)
 						.ToList();
 				}
-				catch (Exception e)
+				catch (Exception )
 				{
 
 				}
@@ -128,6 +128,16 @@ namespace ObedienceX.Views
 					//await Shell.Current.GoToAsync("//Competition");
 					//((CompetitionPage)(Shell.Current.CurrentPage)).FileName = competition.FileName;
 					await Shell.Current.GoToAsync($"//{nameof(CompetitionPage)}");
+				}
+				else if (file.FileName.Length > 5 && file.FileName.Substring(file.FileName.Length - 5, 5) == ".xlsx" && File.Exists(file.FileName))
+				{
+					ExcelProxy excelProxy = new ExcelProxy();
+					Competition competition = excelProxy.ReadExcel(file.FileName);
+					if (competition != null)
+					{
+						Model.Competition = competition;
+						await Shell.Current.GoToAsync($"//{nameof(CompetitionPage)}");
+					}
 				}
 			}
 		}
