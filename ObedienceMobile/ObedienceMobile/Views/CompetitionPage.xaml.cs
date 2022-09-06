@@ -9,19 +9,18 @@ namespace ObedienceX.Views
 {
 	public partial class CompetitionPage : ContentPage
 	{
-		private ExcelProxy _excelProxy;
 
 		public CompetitionPage()
 		{
 			InitializeComponent();
-
-			_excelProxy = new ExcelProxy();
 		}
 
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
 
+			if (Model.Competition == null)
+				Model.Competition = new Competition();
 			BindingContext = Model.Competition;
 		}
 
@@ -55,23 +54,15 @@ namespace ObedienceX.Views
 			var competition = (Competition)BindingContext;
 
 			// Delete the file.
-			if (File.Exists(competition.FileName))
-			{
-				File.Delete(competition.FileName);
-			}
+			//if (File.Exists(competition.FileName))
+			//	File.Delete(competition.FileName);
+			if (File.Exists(competition.ExcelName))
+				File.Delete(competition.ExcelName);
 
 			// Navigate backwards
-			await Shell.Current.GoToAsync("..");
+			Model.Competition = null;
+			await Shell.Current.GoToAsync($"//{nameof(FirstPage)}");
 		}
 
-		void OnSaveExcelClicked(object sender, EventArgs e)
-		{
-			if (!string.IsNullOrEmpty(Model.Competition.ExcelName))
-				_excelProxy.WriteExcel(Model.Competition.ExcelName);
-			else
-			{
-				_excelProxy.WriteExcel(Model.Competition.ExcelName);
-			}
-		}
 	}
 }

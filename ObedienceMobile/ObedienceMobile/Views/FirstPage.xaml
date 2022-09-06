@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ObedienceX.Views.FirstPage">
+    <ContentPage.Content>
+        <StackLayout Spacing="30" VerticalOptions="Center" Padding="20">
+			<Label Text="Пока здесь пусто" x:Name="FileName"
+				   FontSize="Medium"
+				   Padding="20"
+				   HorizontalOptions="Fill" 
+				   VerticalOptions="FillAndExpand" />
+
+			<Button Text="Открыть файл..." Clicked="OnOpenClick"/>
+
+			<Button Text="Создать новый" Clicked="OnAddClicked"/>
+		</StackLayout>
+    </ContentPage.Content>
+</ContentPage>

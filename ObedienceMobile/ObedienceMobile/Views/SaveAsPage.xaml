@@ -4,7 +4,7 @@
              x:Class="ObedienceX.Views.SaveAsPage">
     <ContentPage.Content>
         <StackLayout >
-			<Grid  RowDefinitions="50,30,80,60,30,50,90,60" ColumnDefinitions="*" Margin="10" RowSpacing="0"> 
+			<Grid  RowDefinitions="50,30,Auto,60,30,50,90,60" ColumnDefinitions="*" Margin="10" RowSpacing="0"> 
 				<Label Text="{Binding Error}" Grid.Row="0"
 					   FontSize="Medium"
 					   BackgroundColor="White"
@@ -16,12 +16,12 @@
 					   VerticalOptions="CenterAndExpand" 
 					   HorizontalOptions="Fill" />
 				<Label Text="{Binding Folder}" Grid.Row="2"
-					   VerticalOptions="Fill" 
+					   VerticalOptions="CenterAndExpand" 
 					   HorizontalOptions="Fill" 
-					   FontSize="Medium"
-					   BackgroundColor="AliceBlue"/>
+					   FontSize="Large"
+					   BackgroundColor="AliceBlue" Padding="10"/>
 				<Button Text="Выбрать папку" Grid.Row="3"
-						Margin="5,0,5,20"
+						Margin="0,0,0,20"
 						Clicked="OnBrowseClicked"	/>
 				<Label Text="Имя файла" Grid.Row="4"
 					   VerticalOptions="CenterAndExpand" 

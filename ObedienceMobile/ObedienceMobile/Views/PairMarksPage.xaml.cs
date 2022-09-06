@@ -54,5 +54,10 @@ namespace ObedienceX.Views
 			BindingContext = pair;
 			collectionView.ItemsSource = pair.Marks;
 		}
+
+		void OnSaveClicked(object sender, EventArgs e)
+		{
+			Model.ReSaveCurrent();
+		}
 	}
 }

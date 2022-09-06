@@ -2,21 +2,26 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO;
 
 [Serializable]
-public class Competition
+public class Competition : INotifyPropertyChanged
 {
+	public const int MaxExamsCount = 11;
+
 	public Competition()
 	{
 		Date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 	}
 
-	[JsonIgnore]
-	public string FileName { get; set; }
+	//[JsonIgnore]
+	//public string FileName { get; set; }
 	[JsonIgnore]
 	public string ExcelName { get; set; }
 
-	public string Name { get; set; }
+	[JsonIgnore]
+	public string Name { get { return string.IsNullOrEmpty(ExcelName) ? "" : Path.GetFileNameWithoutExtension(ExcelName); } }
 	public DateTime Date { get; set; }
 	public string Level { get; set; }
 	public string Club { get; set; }
@@ -31,7 +36,14 @@ public class Competition
 	[JsonIgnore]
 	public List<string> Levels { get { return AllLevels; } }
 	public static List<string> AllLevels = new List<string> { "Обидиенс-0", "Обидиенс-1", "Обидиенс-2", "Обидиенс-3" };
-	
+
+	public event PropertyChangedEventHandler PropertyChanged;
+
+	public void DispatchNameChanged()
+	{
+		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
+	}
+
 	public void RecalculateResults()
 	{
 		List<Pair> list = new List<Pair>();

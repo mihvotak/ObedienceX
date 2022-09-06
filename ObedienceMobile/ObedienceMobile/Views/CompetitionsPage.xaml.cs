@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -18,12 +19,16 @@ namespace ObedienceX.Views
 	{
 		private PermissionService _permissionService;
 		private Label _pathLabel;
+		private Label _errorLabel;
+		private Button _okButton;
 
 		public CompetitionsPage()
 		{
 			InitializeComponent();
 			_permissionService = new PermissionService();
 			_pathLabel = (Label)FindByName("CurrentPath");
+			_errorLabel = (Label)FindByName("Error");
+			_okButton = (Button)FindByName("OkButton");
 		}
 
 		protected override void OnAppearing()
@@ -31,6 +36,8 @@ namespace ObedienceX.Views
 			base.OnAppearing();
 
 			UpdateList();
+			Title = Model.ChangeFolderMode ? "Выберите папку" : "Выберите файл соревнований";
+			_okButton.IsVisible = Model.ChangeFolderMode;
 		}
 
 		private async Task<bool> CheckPermissions()
@@ -47,6 +54,8 @@ namespace ObedienceX.Views
 		async private void UpdateList()
 		{
 			_pathLabel.Text = App.FolderPath;
+			_errorLabel.IsVisible = false;
+			_errorLabel.Text = "";
 			if (await CheckPermissions())
 			{
 				try
@@ -72,7 +81,8 @@ namespace ObedienceX.Views
 							file.ShortName = Path.GetFileName(filename);
 							file.Date = File.GetCreationTime(filename);
 						}
-						competitionFiles.Add(file);
+						if (file.IsFolder || ((file.IsExcel || file.IsXls) && !Model.ChangeFolderMode))
+							competitionFiles.Add(file);
 					}
 
 					collectionView.ItemsSource = competitionFiles
@@ -84,13 +94,6 @@ namespace ObedienceX.Views
 
 				}
 			}
-		}
-
-		async void OnAddClicked(object sender, EventArgs e)
-		{
-			Model.Competition = new Competition();
-			// Navigate to the CompetitionPage, without passing any data.
-			await Shell.Current.GoToAsync($"//{nameof(CompetitionPage)}");
 		}
 
 		void OnGoHomeClick(object sender, EventArgs e)
@@ -122,27 +125,47 @@ namespace ObedienceX.Views
 					App.FolderPath = file.FileName;
 					UpdateList();
 				}
-				else if (file.FileName.Length > 4 && file.FileName.Substring(file.FileName.Length - 4, 4) == ".txt" && File.Exists(file.FileName))
+				/*else if (file.FileName.Length > 4 && file.FileName.Substring(file.FileName.Length - 4, 4) == ".txt" && File.Exists(file.FileName))
 				{
-					LoadCompetition(file.FileName);
+					var competition = LoadCompetition(file.FileName);
 					//await Shell.Current.GoToAsync("//Competition");
 					//((CompetitionPage)(Shell.Current.CurrentPage)).FileName = competition.FileName;
-					await Shell.Current.GoToAsync($"//{nameof(CompetitionPage)}");
-				}
-				else if (file.FileName.Length > 5 && file.FileName.Substring(file.FileName.Length - 5, 5) == ".xlsx" && File.Exists(file.FileName))
-				{
-					ExcelProxy excelProxy = new ExcelProxy();
-					Competition competition = excelProxy.ReadExcel(file.FileName);
 					if (competition != null)
 					{
 						Model.Competition = competition;
+						await Shell.Current.GoToAsync("..");
 						await Shell.Current.GoToAsync($"//{nameof(CompetitionPage)}");
+					}
+				}*/
+				else if (file.FileName.Length > 5 && Path.GetExtension(file.FileName) == ".xls" && File.Exists(file.FileName))
+				{
+					await Shell.Current.DisplayAlert("Не поддерживается", "Файлы с расширением 'xls' не поддерживаются. Только современные 'xlsx'.", "OK");
+				}
+				else if (file.FileName.Length > 5 && Path.GetExtension(file.FileName) == ".xlsx" && File.Exists(file.FileName))
+				{
+					Competition competition = Model.ExcelProxy.ReadExcel(file.FileName);
+					if (competition != null)
+					{
+						Model.Competition = competition;
+						await Shell.Current.GoToAsync("..");
+						await Shell.Current.GoToAsync($"//{nameof(CompetitionPage)}");
+					}
+					else
+					{
+						_errorLabel.Text = Model.ExcelProxy.LastError;
+						_errorLabel.IsVisible = true;
+						Model.ExcelProxy.LastError = null;
 					}
 				}
 			}
 		}
 
-		private void LoadCompetition(string filename)
+		private void OnOkClicked(object sender, EventArgs e)
+		{
+			Shell.Current.GoToAsync("..");
+		}
+
+		/*private Competition LoadCompetition(string filename)
 		{
 			try
 			{
@@ -152,13 +175,14 @@ namespace ObedienceX.Views
 				if (competition != null)
 				{
 					competition.FileName = filename;
-					Model.Competition = competition;
+					return competition;
 				}
 			}
 			catch (Exception)
 			{
 				Console.WriteLine("Failed to load competition.");
 			}
-		}
+			return null;
+		}*/
 	}
 }

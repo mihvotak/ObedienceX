@@ -39,7 +39,7 @@
     </Shell.Resources>
 
     <TabBar>
-		<ShellContent Title="Файлы" Icon="icon_feed.png" Route="CompetitionsPage" ContentTemplate="{DataTemplate local:CompetitionsPage}" />
+		<ShellContent Title="Файлы" Icon="icon_about.png" Route="FirstPage" ContentTemplate="{DataTemplate local:FirstPage}" />
 		<ShellContent Title="Соревнование" Icon="icon_feed.png" Route="CompetitionPage" ContentTemplate="{DataTemplate local:CompetitionPage}" />
 		<ShellContent Title="Результаты" Icon="icon_about.png" Route="ResultsPage" ContentTemplate="{DataTemplate local:ResultsPage}" />
 	</TabBar>

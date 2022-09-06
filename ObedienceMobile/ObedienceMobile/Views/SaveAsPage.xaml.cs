@@ -35,18 +35,22 @@ namespace ObedienceX.Views
 		{
 			_data.Error = null;
 			string fullPath = Path.Combine(App.FolderPath, _data.FileName + App.FileExtention);
-			if (Model.SaveCurrentAs(fullPath))
+			if (Model.ExcelProxy.WriteExcel(fullPath))// SaveCurrentAs(fullPath))
+			{
 				await Shell.Current.GoToAsync("..");
+				Model.Competition.DispatchNameChanged();
+			}
 			else
 			{
-				_data.Error = Model.LastError;
-				Model.LastError = null;
+				_data.Error = Model.ExcelProxy.LastError;
+				Model.ExcelProxy.LastError = null;
 			}
 		}
 
 		private async void OnBrowseClicked(object sender, EventArgs e)
 		{
-			await Shell.Current.GoToAsync($"//{nameof(CompetitionsPage)}");
+			Model.ChangeFolderMode = true;
+			await Shell.Current.GoToAsync($"{nameof(CompetitionsPage)}");
 		}
 
 		private async void OnCancelClicked(object sender, EventArgs e)

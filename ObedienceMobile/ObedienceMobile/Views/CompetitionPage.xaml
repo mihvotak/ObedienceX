@@ -11,8 +11,8 @@
 		<Grid RowDefinitions="*, Auto" Padding="0" Margin="0" >
 			<ScrollView>
 				<StackLayout Padding="10,10,10,50" VerticalOptions="Fill" >
-					<Label Text="Название кратко (имя файла)" FontSize="Medium" />
-					<Entry Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" />
+					<Label Text="Имя файла" FontSize="Medium" />
+					<Label Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" BackgroundColor="White"/>
 					<Label Text="Уровень" FontSize="Medium" />
 					<Picker ItemsSource="{Binding Levels}" SelectedItem="{Binding Level}"/>
 					<Label Text="Дата проведения" FontSize="Medium" />
@@ -38,11 +38,9 @@
 							Clicked="OnPairsClicked" />
 					<Button Text="Результаты" Grid.ColumnSpan="2"  Grid.Row="1"
 							Clicked="OnResultsClicked" />
-					<Button Text="В Excel" Grid.ColumnSpan="2"  Grid.Row="2"
-							Clicked="OnSaveExcelClicked" />
-					<Button Text="Сохранить как..." Grid.Row="3"
+					<Button Text="Сохранить как..." Grid.Row="2"
 						Clicked="OnSaveAsClicked" />
-					<Button Grid.Column="1" Grid.Row="3"
+					<Button Grid.Column="1" Grid.Row="2"
 						Text="Удалить"
 						Clicked="OnDeleteButtonClicked"/>
 				</Grid>

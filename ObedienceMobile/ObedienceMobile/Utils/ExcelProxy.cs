@@ -1,12 +1,17 @@
 ﻿using ObedienceX.Data;
 using OfficeOpenXml;
+using OfficeOpenXml.Core;
+using OfficeOpenXml.Style;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace ObedienceX.Utils
 {
@@ -16,12 +21,16 @@ namespace ObedienceX.Utils
 		{
 			Competition competition = new Competition();
 
-			competition.Name = Path.GetFileNameWithoutExtension(fileName);
 			competition.ExcelName = fileName;
 
 			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 			using (var package = new ExcelPackage(fileName))
 			{
+				if (package == null || package.Workbook == null || package.Workbook.Worksheets == null || package.Workbook.Worksheets.Count == 0)
+				{
+					LastError = "Не найдено ни одной таблицы";
+					return null;
+				}	
 				var sheet = package.Workbook.Worksheets[0];
 				int index = 0;
 				int startColumn = 12;
@@ -140,55 +149,153 @@ namespace ObedienceX.Utils
 			return competition;
 		}
 
-		public void WriteExcel(string fileName)
+		private void CopyStyle(ExcelRange range, ExcelStyle style)
 		{
+			range.Style.Font.Size = style.Font.Size;
+			range.Style.Font.Bold = style.Font.Bold;
+			range.Style.Font.Family = style.Font.Family;
+			range.Style.Border.BorderAround(style.Border.Top.Style);
+			range.Style.Fill.PatternType = style.Fill.PatternType;
+			range.Style.Fill.SetBackground(Color.White);
+		}
+
+		public bool WriteExcel(string fileName)
+		{
+			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 			var competition = Model.Competition;
+			string templateFile = Model.Competition.ExcelName == null ? App.ExcelTemplate : competition.ExcelName;
 			//competition.Name = Path.GetFileNameWithoutExtension(fileName);
 
-			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-			using (var package = new ExcelPackage(fileName))
+			try
 			{
-				var sheet = package.Workbook.Worksheets[0];
-				int startColumn = 12;
-				try
+				Stream templateStream = null;
+				Stream resultStream = null;
+				if (!File.Exists(fileName))
 				{
+					var assembly = Assembly.GetExecutingAssembly();
+					var resName = assembly.GetName().Name.ToString() + ".Res.Template.xlsx";
+					templateStream = assembly.GetManifestResourceStream(resName);
+					resultStream = File.Create(fileName);
+				}
+
+
+				using (var package = templateStream == null ? new ExcelPackage(fileName) : new ExcelPackage(resultStream, templateStream))
+				{
+					var sheet = package.Workbook.Worksheets[0];
+					int startColumn = 12;
+					int lastColNum = 12;
 					for (int i = 0; i < competition.Examinations.Count; i++)
 					{
 						sheet.Cells[1, startColumn + i].Value = i + 1;
 						sheet.Cells[2, startColumn + i].Value = competition.Examinations[i].Name;
 						sheet.Cells[3, startColumn + i].Value = competition.Examinations[i].Multiplier;
+						lastColNum = startColumn + i;
 					}
-					for (int i = 0; i < competition.Pairs.Count; i++)
+					for (int i = competition.Examinations.Count; i < Competition.MaxExamsCount; i++)
 					{
-						Pair pair = competition.Pairs[i];
-						sheet.Cells[4 + i * 2, 1].Value = i + 1;
-						sheet.Cells[4 + i * 2, 2].Value = pair.Handler;
-						sheet.Cells[4 + i * 2, 3].Value = pair.DogKind;
-						sheet.Cells[4 + i * 2, 4].Value = pair.DogName;
-						sheet.Cells[4 + i * 2, 5].Value = pair.SelectedGender;
-						sheet.Cells[4 + i * 2, 6].Value = pair.BirthDate;
-						sheet.Cells[4 + i * 2, 7].Value = pair.Pedigree;
-						sheet.Cells[4 + i * 2, 8].Value = pair.QualiBook;
-						sheet.Cells[4 + i * 2, 9].Value = pair.ChipNumber;
-						sheet.Cells[4 + i * 2, 10].Value = pair.Owner;
-						sheet.Cells[4 + i * 2, 11].Value = pair.OwnedBy;
-						for (int j = 0; j < pair.Marks.Count; j++)
+						if (sheet.Cells[1, startColumn + i].Value != null)
 						{
-							Mark mark = pair.Marks[j];
-							if (mark.IsSet)
-								sheet.Cells[4 + i * 2, 12 + j].Value = mark.Value;
-							else
-								sheet.Cells[4 + i * 2, 12 + j].Value = null;
+							sheet.Cells[1, startColumn + i].Value = null;
+							sheet.Cells[2, startColumn + i].Value = null;
+							sheet.Cells[3, startColumn + i].Value = null;
+							lastColNum = startColumn + i;
 						}
 					}
+					int lastMarkColNum = lastColNum;
+					while (true)
+					{
+						var cell = sheet.Cells[2, lastColNum + 1];
+						if (cell != null && cell.Value != null)
+							lastColNum++;
+						else
+							break;
+					}
+					ExcelStyle[] styles = new ExcelStyle[12];
+					double rowHeight1 = 0;
+					double rowHeight2 = 0;
+					ExcelStyle style1 = null;
+					ExcelStyle style2 = null;
+					string formula = null;
+					for (int i = 0; i < competition.Pairs.Count; i++)
+					{
+						int rowNum = 4 + i * 2;
+						if (i == 0)
+						{
+							rowHeight1 = sheet.Rows[rowNum + 0].Height;
+							rowHeight2 = sheet.Rows[rowNum + 1].Height;
+							style1 = sheet.Cells[rowNum + 0, 12].Style;
+							style2 = sheet.Cells[rowNum + 1, 12].Style;
+							for (int j = 1; j <= 11; j++)
+								styles[j] = sheet.Cells[rowNum, j].Style;
+							formula = sheet.Cells[rowNum + 1, 12].Formula;
+						}
+						else
+						{
+							sheet.Rows[rowNum].Height = rowHeight1;
+							for (int j = 1; j <= 11; j++)
+								CopyStyle(sheet.Cells[rowNum, j], styles[j]);
+							sheet.Cells[rowNum + 0, 6].Style.Numberformat.Format = styles[6].Numberformat.Format;
+							for (int j = 12; j <= lastColNum; j++)
+							{
+								CopyStyle(sheet.Cells[rowNum + 0, j], sheet.Cells[rowNum - 2 + 0, j].Style);
+								CopyStyle(sheet.Cells[rowNum + 1, j], sheet.Cells[rowNum - 2 + 1, j].Style);
+								sheet.Cells[rowNum + 0, j].FormulaR1C1 = sheet.Cells[rowNum - 2 + 0, j].FormulaR1C1;
+								sheet.Cells[rowNum + 1, j].FormulaR1C1 = sheet.Cells[rowNum - 2 + 1, j].FormulaR1C1;
+							}
+						}
+						Pair pair = competition.Pairs[i];
+						sheet.Cells[rowNum, 1].Value = i + 1;
+						sheet.Cells[rowNum, 2].Value = pair.Handler;
+						sheet.Cells[rowNum, 3].Value = pair.DogKind;
+						sheet.Cells[rowNum, 4].Value = pair.DogName;
+						sheet.Cells[rowNum, 5].Value = pair.SelectedGender;
+						sheet.Cells[rowNum, 6].Value = pair.BirthDate;
+						sheet.Cells[rowNum, 7].Value = pair.Pedigree;
+						sheet.Cells[rowNum, 8].Value = pair.QualiBook;
+						sheet.Cells[rowNum, 9].Value = pair.ChipNumber;
+						sheet.Cells[rowNum, 10].Value = pair.Owner;
+						sheet.Cells[rowNum, 11].Value = pair.OwnedBy;
+						for (int j = 12; j < 12 + pair.Marks.Count; j++)
+						{
+							Mark mark = pair.Marks[j - 12];
+							if (mark.IsSet)
+								sheet.Cells[rowNum, j].Value = mark.Value;
+							else
+								sheet.Cells[rowNum, j].Value = null;
+						}
+						for (int j = 12 + pair.Marks.Count; j <= lastMarkColNum; j++)
+						{
+							sheet.Cells[rowNum + 0, j].Value = null;
+							sheet.Cells[rowNum + 1, j].Value = null;
+						}
+					}
+
+					sheet = package.Workbook.Worksheets[1];
+					sheet.Cells[14, 1].Value = competition.Club;
+					sheet.Cells[15, 3].Value = competition.Place;
+					sheet.Cells[24, 4].Value = competition.Level;
+					sheet.Cells[27, 2].Value = competition.Judge;
+					sheet.Cells[32, 2].Value = competition.Secretary;
+					sheet.Cells[35, 1].Value = competition.Director;
+					sheet.Cells[37, 9].Value = competition.Date;
+					sheet.Cells[37, 9].Style.Numberformat.Format = "dd.MM.yyyy";
+
 					package.Save();
+					competition.ExcelName = fileName;
+					if (templateStream != null)
+						templateStream.Close();
+					if (resultStream != null)
+						resultStream.Close();
+					return true;
 				}
-				catch (Exception e)
-				{
-					Console.WriteLine(e.Message);
-				}
-				competition.ExcelName = fileName;
+			}
+			catch (Exception e)
+			{
+				LastError = e.Message;
+				return false;
 			}
 		}
+
+		public string LastError;
 	}
 }

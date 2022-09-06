@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.IO;
 using Xamarin.Forms;
 using ObedienceX.Views;
+using ObedienceX.Utils;
 
 namespace ObedienceX.Data
 {
@@ -13,8 +14,6 @@ namespace ObedienceX.Data
 		{
 			get 
 			{
-				if (_competition == null)
-					_competition = new Competition();
 				return _competition;
 			}
 			set 
@@ -23,20 +22,28 @@ namespace ObedienceX.Data
 			}
 		}
 
+		public static bool ChangeFolderMode;
+
+		public static ExcelProxy ExcelProxy = new ExcelProxy();
+
 		public static void ReSaveCurrent()
 		{
 			var competition = Model.Competition;
-			if (string.IsNullOrWhiteSpace(competition.FileName))
+			if (string.IsNullOrWhiteSpace(competition.ExcelName))
 			{
 				Shell.Current.GoToAsync($"{nameof(SaveAsPage)}");
 			}
 			else
 			{
-				SaveCurrentAs(competition.FileName);
+				string ext = Path.GetExtension(competition.ExcelName);
+				if (ext == ".xlsx")
+					ExcelProxy.WriteExcel(competition.ExcelName);
+				//else
+				//	SaveCurrentAs(competition.ExcelName);
 			}
 		}
 
-		public static bool SaveCurrentAs(string fileName)
+		/*public static bool SaveCurrentAs(string fileName)
 		{
 			var competition = Model.Competition;
 			try
@@ -51,7 +58,6 @@ namespace ObedienceX.Data
 				LastError = e.Message;
 				return false;
 			}
-		}
-		public static string LastError;
+		}*/
 	}
 }

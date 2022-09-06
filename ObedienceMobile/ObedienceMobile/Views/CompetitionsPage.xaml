@@ -2,14 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ObedienceX.Views.CompetitionsPage"
-			 Title="Файлы соревнований">
-	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Новый"
-                     Clicked="OnAddClicked" />
-	</ContentPage.ToolbarItems>
+			 Title="Открыть файл соревнований">
 
 	<StackLayout>
-		<Grid ColumnDefinitions="*,*,*" RowDefinitions="40, 50" Margin="10">
+		<Grid ColumnDefinitions="*,*,*" RowDefinitions="40, 50, Auto" Margin="10, 10, 10, 0">
 			<Button Text="Корень" Clicked="OnGoRootClick"/>
 			<Button Text="Выше" Clicked="OnGoUpClick" Grid.Column="1"/>
 			<Button Text="Домой" Clicked="OnGoHomeClick" Grid.Column="2"/>
@@ -17,6 +13,10 @@
 				   Padding="5,0"
 				   FontSize="Medium" VerticalTextAlignment="Center"
 				   BackgroundColor="LightGray"/>
+			<Label x:Name="Error" Grid.ColumnSpan="3" Grid.Row="2"
+				   Padding="0,0" BackgroundColor="White"
+				   FontSize="Small" VerticalOptions="CenterAndExpand"
+				   TextColor="Red" />
 		</Grid>
 		<ScrollView>
 			<CollectionView x:Name="collectionView"
@@ -30,19 +30,28 @@
 				<!-- Define the appearance of each item in the list -->
 				<CollectionView.ItemTemplate>
 					<DataTemplate>
-						<StackLayout Margin="0" Padding="5" Spacing="0" BackgroundColor="White">
-							<Label Text="{Binding ShortName}"
+						<Grid Margin="0" Padding="5" RowSpacing="0" BackgroundColor="White"
+							  RowDefinitions="40,20" ColumnDefinitions="40,*">
+							<Image Source="excel.png"
+								   IsVisible="{Binding IsExcel}"/>
+							<Image Source="xls.png"
+								   IsVisible="{Binding IsXls}"/>
+							<Image Source="folder.png"
+								   IsVisible="{Binding IsFolder}"/>
+							<Label Text="{Binding ShortName}" Grid.Column="1"
 								   Padding="5,10"
 								   FontSize="Medium"/>
-							<Label Text="{Binding DateStr}"
+							<Label Text="{Binding DateStr}" Grid.Row="1" Grid.Column="1"
 								   TextColor="Gray"
 								   BackgroundColor="AliceBlue"
 								   Padding="5,0"
 								   FontSize="Small" />
-						</StackLayout>
+						</Grid>
 					</DataTemplate>
 				</CollectionView.ItemTemplate>
 			</CollectionView>
 		</ScrollView>
+		<Button x:Name="OkButton" Text="Выбрано" Clicked="OnOkClicked"
+				Margin="10, 5, 10, 10"/>
 	</StackLayout>
 </ContentPage>

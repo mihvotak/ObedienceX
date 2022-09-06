@@ -8,6 +8,7 @@ namespace ObedienceX
 		public AppShell()
 		{
 			InitializeComponent();
+			Routing.RegisterRoute(nameof(CompetitionsPage), typeof(CompetitionsPage));
 			Routing.RegisterRoute(nameof(ExaminationsPage), typeof(ExaminationsPage));
 			Routing.RegisterRoute(nameof(PairsPage), typeof(PairsPage));
 			Routing.RegisterRoute(nameof(PairDetailsPage), typeof(PairDetailsPage));

@@ -23,6 +23,8 @@ namespace ObedienceX.Views
 		{
 			base.OnAppearing();
 
+			if (Model.Competition == null)
+				Model.Competition = new Competition();
 			var competition = Model.Competition;
 			competition.RecalculateResults();
 			for (int i = 0; i < competition.Pairs.Count; i++)
@@ -52,6 +54,11 @@ namespace ObedienceX.Views
 					AppShell.Current.GoToAsync(nameof(PairMarksPage));
 				}
 			}
+		}
+
+		void OnSaveClicked(object sender, EventArgs e)
+		{
+			Model.ReSaveCurrent();
 		}
 	}
 }

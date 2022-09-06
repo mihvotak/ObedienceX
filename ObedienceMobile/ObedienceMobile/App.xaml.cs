@@ -11,6 +11,7 @@ namespace ObedienceX
 	{
 		public static string FolderPath { get; set; }
 		public static string FileExtention { get; private set; }
+		public static string ExcelTemplate { get; private set; }
 
 		public App()
 		{
@@ -22,7 +23,7 @@ namespace ObedienceX
 			InitializeComponent();
 
 			FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
-			FileExtention = ".txt";
+			FileExtention = ".xlsx";
 
 			MainPage = new AppShell();
 		}
