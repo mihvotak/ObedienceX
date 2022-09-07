@@ -51,17 +51,20 @@ namespace ObedienceX.Views
 
 		async void OnDeleteButtonClicked(object sender, EventArgs e)
 		{
-			var competition = (Competition)BindingContext;
+			if (await Shell.Current.DisplayAlert("Удаление", "Текущий файл соревнований будет удален насовсем. Вы уверены?", "Удалить", "Отменить"))
+			{
+				var competition = (Competition)BindingContext;
 
-			// Delete the file.
-			//if (File.Exists(competition.FileName))
-			//	File.Delete(competition.FileName);
-			if (File.Exists(competition.ExcelName))
-				File.Delete(competition.ExcelName);
+				// Delete the file.
+				//if (File.Exists(competition.FileName))
+				//	File.Delete(competition.FileName);
+				if (File.Exists(competition.ExcelName))
+					File.Delete(competition.ExcelName);
 
-			// Navigate backwards
-			Model.Competition = null;
-			await Shell.Current.GoToAsync($"//{nameof(FirstPage)}");
+				// Navigate backwards
+				Model.Competition = null;
+				await Shell.Current.GoToAsync($"//{nameof(FirstPage)}");
+			}
 		}
 
 	}

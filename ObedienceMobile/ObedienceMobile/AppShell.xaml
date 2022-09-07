@@ -41,7 +41,7 @@
     <TabBar>
 		<ShellContent Title="Файлы" Icon="icon_about.png" Route="FirstPage" ContentTemplate="{DataTemplate local:FirstPage}" />
 		<ShellContent Title="Соревнование" Icon="icon_feed.png" Route="CompetitionPage" ContentTemplate="{DataTemplate local:CompetitionPage}" />
-		<ShellContent Title="Результаты" Icon="icon_about.png" Route="ResultsPage" ContentTemplate="{DataTemplate local:ResultsPage}" />
+		<ShellContent Title="Результаты" Icon="dog_and_handler.png" Route="ResultsPage" ContentTemplate="{DataTemplate local:ResultsPage}" />
 	</TabBar>
 
     <!--
