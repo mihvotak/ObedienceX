@@ -23,11 +23,33 @@ namespace ObedienceX.Views
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-			Label nameLabel = (Label)FindByName("FileName");
+			ReloadPage();
+		}
+
+		private void ReloadPage()
+		{
+			Competition prev = Model.Prev;
+			Label prevNameLabel = (Label)FindByName("PrevFileName");
+			prevNameLabel.Text = prev == null ? "Предыдущий файл не выбран" :
+				string.IsNullOrEmpty(prev.ExcelName) ? "Предыдущие соревнования не сохранены в файл" :
+				$"Предыдущий файл:\n{prev.Name}";
+			Label prevFolderLabel = (Label)FindByName("PrevFolder");
+			prevFolderLabel.Text = prev == null ? "-" :
+				string.IsNullOrEmpty(prev.ExcelName) ? "-" :
+				$"Папка:\n{Path.GetDirectoryName(prev.ExcelName)}";
+
 			Competition competition = Model.Competition;
-			nameLabel.Text = competition == null ? "Пока тут пусто" :
-				string.IsNullOrEmpty(competition.ExcelName) ? "Файл соревнований не сохранён" :
-				$"Файл:\n{competition.Name}\nиз папки:\n{Path.GetDirectoryName(competition.ExcelName)}";
+			Label currentNameLabel = (Label)FindByName("CurrentFileName");
+			currentNameLabel.Text = competition == null ? "Текущий файл не выбран" :
+				string.IsNullOrEmpty(competition.ExcelName) ? "Текущие соревнования не сохранены в файл" :
+				$"Текущий файл:\n{competition.Name}";
+			Label currentFolderLabel = (Label)FindByName("CurrentFolder");
+			currentFolderLabel.Text = competition == null ? "-" :
+				string.IsNullOrEmpty(competition.ExcelName) ? "-" :
+				$"Папка:\n{Path.GetDirectoryName(competition.ExcelName)}";
+
+			ToolbarItems[0].BindingContext = competition;
+			ToolbarItems[1].BindingContext = competition;
 		}
 
 		async void OnOpenClick(object sender, EventArgs args)
@@ -52,6 +74,26 @@ namespace ObedienceX.Views
 				Model.Competition = new Competition();
 				// Navigate to the CompetitionPage, without passing any data.
 				await Shell.Current.GoToAsync($"//{nameof(CompetitionPage)}");
+			}
+		}
+
+		void OnSaveClicked(object sender, EventArgs e)
+		{
+			Model.ReSaveCurrent();
+		}
+
+		async void OnExchangeClicked(object sender, EventArgs e)
+		{
+			if (Model.Prev != null)
+			{
+				bool force = true;
+				if (Model.Competition != null && !Model.Competition.Saved)
+					force = await DisplayAlert("Файл не сохранён.", "Всё равно продолжить?", "Да", "Нет");
+				if (force)
+				{
+					Model.Exchange();
+					ReloadPage();
+				}
 			}
 		}
 	}

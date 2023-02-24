@@ -30,7 +30,6 @@
             </Style>
 			<Style TargetType="Label">
 				<Setter Property="TextColor" Value="White"></Setter>
-				<Setter Property="Padding" Value="0 5"></Setter>
 				<Setter Property="BackgroundColor" Value="{StaticResource SubHeader}"></Setter>
 			</Style>
 		</ResourceDictionary>        

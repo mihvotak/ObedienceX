@@ -18,7 +18,31 @@ namespace ObedienceX.Data
 			}
 			set 
 			{
+				_prev = _competition;
 				_competition = value;
+			}
+		}
+
+		private static Competition _prev;
+		public static Competition Prev
+		{
+			get
+			{
+				return _prev;
+			}
+			set
+			{
+				_prev = value;
+			}
+		}
+
+		public static void Exchange()
+		{
+			if (_prev != null)
+			{
+				Competition current = _competition;
+				_competition = _prev;
+				_prev = current;
 			}
 		}
 

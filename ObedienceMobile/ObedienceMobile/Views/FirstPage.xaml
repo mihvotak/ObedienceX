@@ -2,14 +2,45 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ObedienceX.Views.FirstPage">
-    <ContentPage.Content>
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="{Binding ExchangeText}"
+                     Clicked="OnExchangeClicked" />
+		<ToolbarItem Text="{Binding SaveText}"
+                     Clicked="OnSaveClicked" />
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
         <StackLayout Spacing="30" VerticalOptions="Center" Padding="20">
-			<Label Text="Пока здесь пусто" x:Name="FileName"
+			<StackLayout Spacing="0" VerticalOptions="Center" Padding="0">
+				<Label x:Name="PrevFileName"
+					   FontSize="Medium"
+					   Padding="10"
+					   HorizontalOptions="Fill" 
+					   BackgroundColor="{StaticResource SubHeader}" 
+					   VerticalOptions="FillAndExpand" />
+				<Label x:Name="PrevFolder"
+					   FontSize="Small"
+					   Padding="5"
+					   HorizontalOptions="Fill" 
+					   BackgroundColor="White" 
+					   TextColor="Gray"
+					   VerticalOptions="FillAndExpand" />
+			</StackLayout>
+
+			<StackLayout Spacing="0" VerticalOptions="Center" Padding="0">
+				<Label x:Name="CurrentFileName"
 				   FontSize="Medium"
-				   Padding="20"
+				   Padding="10"
 				   HorizontalOptions="Fill" 
 				   BackgroundColor="{StaticResource SubHeader}" 
 				   VerticalOptions="FillAndExpand" />
+			<Label x:Name="CurrentFolder"
+				   FontSize="Small"
+				   Padding="5"
+				   HorizontalOptions="Fill" 
+				   BackgroundColor="White" 
+				   TextColor="Gray"
+				   VerticalOptions="FillAndExpand" />
+			</StackLayout>
 
 			<Button Text="Открыть файл..." Clicked="OnOpenClick"/>
 

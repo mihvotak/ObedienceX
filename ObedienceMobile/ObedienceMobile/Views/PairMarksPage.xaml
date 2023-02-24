@@ -123,7 +123,7 @@
 							<Picker Grid.Column="2" Grid.RowSpan="2"
 								ItemsSource="{Binding Values}" SelectedItem="{Binding ValueStr}"
 								FontSize="Large"  HorizontalTextAlignment="Center"
-								TextColor="Gray" Margin="-5"
+								TextColor="Gray" Margin="-5,0,-5,0"
 							/>
 							<Label Text="{Binding ExamMultiplier}" Grid.Column="3"
 									VerticalTextAlignment="Center"
@@ -156,7 +156,7 @@
 
 			<Label Grid.Column="0"
 								   Text="{Binding ExamNumber}"
-								   FontSize="Large"
+								   FontSize="Medium"
 								   VerticalTextAlignment="Center"
 									HorizontalTextAlignment="Center"
 									BackgroundColor="White" 
@@ -164,15 +164,15 @@
 			<Label Grid.Column="1"
 								   Text="Штраф"
 								   VerticalTextAlignment="Center"
-								   FontSize="Medium"
+								   FontSize="Small"
 									Margin="0"
 									BackgroundColor="White" 
 									TextColor="Gray"
 							   />
 			<Entry Grid.Column="2" Text="{Binding PenaltyStr}"
 									Keyboard="Numeric"
-									FontSize="Large"  HorizontalTextAlignment="Center"
-									TextColor="Gray" Margin="-5"
+									FontSize="Small"  HorizontalTextAlignment="Center"
+									TextColor="Gray" Margin="-5,0,-5,0"
 								/>
 			<Label Text="{Binding MultipliedValueStr}" Grid.Column="3"
 									   VerticalTextAlignment="Center"

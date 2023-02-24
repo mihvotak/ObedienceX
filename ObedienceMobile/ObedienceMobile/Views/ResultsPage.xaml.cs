@@ -22,7 +22,11 @@ namespace ObedienceX.Views
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-
+			ReloadPage();
+		}
+		
+		private void ReloadPage()
+		{
 			if (Model.Competition == null)
 				Model.Competition = new Competition();
 			var competition = Model.Competition;
@@ -35,6 +39,7 @@ namespace ObedienceX.Views
 			collectionView.SelectedItem = null;
 			Title = competition.Name;
 			ToolbarItems[0].BindingContext = competition;
+			ToolbarItems[1].BindingContext = competition;
 		}
 
 		void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -53,6 +58,22 @@ namespace ObedienceX.Views
 		void OnSaveClicked(object sender, EventArgs e)
 		{
 			Model.ReSaveCurrent();
+		}
+
+		async void OnExchangeClicked(object sender, EventArgs e)
+		{
+			if (Model.Prev != null)
+			{
+				bool force = true;
+				if (Model.Competition != null && !Model.Competition.Saved)
+					force = await DisplayAlert("Файл не сохранён.", "Всё равно продолжить?", "Да", "Нет");
+				if (force)
+				{
+					Model.Exchange();
+					ReloadPage();
+				}
+			}
+
 		}
 	}
 }

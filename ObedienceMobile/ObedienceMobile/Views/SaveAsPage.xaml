@@ -13,7 +13,7 @@
 					   HorizontalOptions="Fill" />
 				<Label Text="Папка" Grid.Row="1"
 					   FontSize="Medium"
-					   Padding="0 5"
+					   Padding="0,5,0,5"
 					   VerticalOptions="CenterAndExpand" 
 					   HorizontalOptions="Fill" BackgroundColor="{StaticResource SubHeader}" />
 				<Label Text="{Binding Folder}" Grid.Row="2"
@@ -27,7 +27,7 @@
 				<Label Text="Имя файла" Grid.Row="4"
 					   VerticalOptions="CenterAndExpand" 
 					   FontSize="Medium"
-					   Padding="0 5"
+					   Padding="0,5,0,5"
 					   HorizontalOptions="Fill" BackgroundColor="{StaticResource SubHeader}" />
 				<Entry Text="{Binding FileName}" Grid.Row="5"
 					   FontSize="Large"

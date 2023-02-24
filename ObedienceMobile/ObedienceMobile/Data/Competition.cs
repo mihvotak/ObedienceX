@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using ObedienceX.Data;
 
 [Serializable]
 public class Competition : INotifyPropertyChanged
@@ -36,6 +37,8 @@ public class Competition : INotifyPropertyChanged
 	}
 	[JsonIgnore]
 	public string SaveText => Saved ? "Сохранено" : "Сохранить";
+	[JsonIgnore]
+	public string ExchangeText => Model.Prev == null ? "............" : "<Смена>";
 
 	//[JsonIgnore]
 	//public string FileName { get; set; }
