@@ -10,9 +10,9 @@
 	<StackLayout Orientation="Vertical" Spacing="0">
 		<Grid Padding="10,10,10,0" RowSpacing="0">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="25" />
-				<RowDefinition Height="20" />
-				<RowDefinition Height="20" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
@@ -21,26 +21,31 @@
 
 			<Label Grid.Column="0" Grid.Row="0" 
 				   Text="{Binding Handler}"
-				   FontSize="Medium"/>
+				   FontSize="Medium"
+				   BackgroundColor="{StaticResource SubHeader}" />
 			<Label Grid.Column="0" Grid.Row="1" 
-				   Text="{Binding DogKind}"/>
+				   Text="{Binding DogKind}"
+				   BackgroundColor="{StaticResource SubHeader}" />
 			<Label Grid.Column="0" Grid.Row="2" 
-				   Text="{Binding DogName}"/>
+				   Text="{Binding DogName}"
+				   BackgroundColor="{StaticResource SubHeader}" />
 			<Label Grid.Column="1" 
 				   FontSize="Large" FontAttributes="Bold"
 				   Text="{Binding Sum}"
 				   Margin="0"
-				   HorizontalTextAlignment="Center"/>
+				   HorizontalTextAlignment="Center"
+				   BackgroundColor="{StaticResource SubHeader}" />
 			<Label Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
 				   FontSize="Small" FontAttributes="Bold"
 				   VerticalTextAlignment="Center"
 				   HorizontalTextAlignment="Center"
-				   Text="{Binding Result}"/>
+				   Text="{Binding Result}"
+				   BackgroundColor="{StaticResource SubHeader}" />
 		</Grid>
 
 		<Grid Padding="10,10,10,0">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="25" />
+				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="30" />
@@ -53,30 +58,36 @@
 				   Text="№"
 				   Margin="3,0,0,0"
 				   BackgroundColor="White"
-				   FontSize="Medium"  
+				   FontSize="Medium" 
+				   TextColor="Gray"
 						   />
 			<Label Grid.Column="1"
 				   Text="Испытание"
 				   Margin="3,0,0,0"
 				   BackgroundColor="White"
-				   FontSize="Medium"  
+				   FontSize="Medium" 
+				   TextColor="Gray"
 						   />
 			<Label Grid.Column="2"
 					Text="Оц."
 					Margin="3,0,0,0"
 				   BackgroundColor="White"
 					FontSize="Medium"  
+				   TextColor="Gray"
+				   LineBreakMode="NoWrap"
 							/>
 			<Label Grid.Column="3"
-					Text="xK-т"
+					Text="xK"
 					Margin="3,0,0,0"
 				   BackgroundColor="White"
 					FontSize="Medium"  
+				   TextColor="Gray"
+				   LineBreakMode="NoWrap"
 							/>
 		</Grid>
 
 		<ScrollView>
-			<CollectionView x:Name="collectionView">
+			<CollectionView x:Name="collectionView" >
 				<CollectionView.ItemsLayout>
 					<GridItemsLayout Orientation="Vertical"/>
 				</CollectionView.ItemsLayout>
@@ -85,44 +96,90 @@
 					<DataTemplate>
 						<Grid Padding="10,0,10,10" RowSpacing="0">
 							<Grid.RowDefinitions>
-								<RowDefinition Height="15" />
-								<RowDefinition Height="30" />
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
 							</Grid.RowDefinitions>
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="30" />
 								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="45" />
+								<ColumnDefinition Width="50" />
 								<ColumnDefinition Width="40" />
 							</Grid.ColumnDefinitions>
 
 							<Label Grid.Column="0" Grid.RowSpan="2"
-							   Text="{Binding ExamNumber}"
-							   FontSize="Large"
-							   VerticalTextAlignment="Center"
+								Text="{Binding ExamNumber}"
+								FontSize="Large"
+								VerticalTextAlignment="Center"
+								HorizontalTextAlignment="Center"
+								BackgroundColor="{StaticResource SubHeader}" 
 							/>
 							<Label Grid.Column="1" Grid.RowSpan="2"
-							   Text="{Binding ExamName}"
-							   VerticalTextAlignment="Center"
-							   FontSize="Medium"  
-						   />
+								Text="{Binding ExamName}"
+								VerticalTextAlignment="Center"
+								FontSize="Medium"
+								Margin="0"
+								BackgroundColor="{StaticResource SubHeader}" 
+							/>
 							<Picker Grid.Column="2" Grid.RowSpan="2"
 								ItemsSource="{Binding Values}" SelectedItem="{Binding ValueStr}"
 								FontSize="Large"  HorizontalTextAlignment="Center"
+								TextColor="Gray" Margin="-5"
 							/>
 							<Label Text="{Binding ExamMultiplier}" Grid.Column="3"
-								   VerticalTextAlignment="Center"
-								   HorizontalTextAlignment="End"
-								   Padding="0,0,3,0"
-								   TextColor="Silver"
-								   FontSize="Small" />
+									VerticalTextAlignment="Center"
+									HorizontalTextAlignment="End"
+									Padding="0,0,3,0"
+									BackgroundColor="{StaticResource SubHeader}" 
+									TextColor="AliceBlue"
+									FontSize="Small" />
 							<Label Text="{Binding MultipliedValueStr}" Grid.Column="3" Grid.Row="1"
-								   VerticalTextAlignment="Center"
-								   HorizontalTextAlignment="Center"
-								   FontSize="Medium" />
+									VerticalTextAlignment="Center"
+									HorizontalTextAlignment="Center"
+									Margin="0"
+									BackgroundColor="{StaticResource SubHeader}" 
+									FontSize="Medium" />
 						</Grid>
 					</DataTemplate>
 				</CollectionView.ItemTemplate>
 			</CollectionView>
 		</ScrollView>
+		<Grid Padding="10,0,10,10" RowSpacing="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="30" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="50" />
+				<ColumnDefinition Width="40" />
+			</Grid.ColumnDefinitions>
+
+			<Label Grid.Column="0"
+								   Text="{Binding ExamNumber}"
+								   FontSize="Large"
+								   VerticalTextAlignment="Center"
+									HorizontalTextAlignment="Center"
+									BackgroundColor="White" 
+								/>
+			<Label Grid.Column="1"
+								   Text="Штраф"
+								   VerticalTextAlignment="Center"
+								   FontSize="Medium"
+									Margin="0"
+									BackgroundColor="White" 
+									TextColor="Gray"
+							   />
+			<Entry Grid.Column="2" Text="{Binding PenaltyStr}"
+									Keyboard="Numeric"
+									FontSize="Large"  HorizontalTextAlignment="Center"
+									TextColor="Gray" Margin="-5"
+								/>
+			<Label Text="{Binding MultipliedValueStr}" Grid.Column="3"
+									   VerticalTextAlignment="Center"
+									   HorizontalTextAlignment="Center"
+									   Margin="0"
+									   BackgroundColor="White" 
+									   FontSize="Medium" />
+		</Grid>
 	</StackLayout>
 </ContentPage>

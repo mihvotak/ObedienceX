@@ -19,28 +19,31 @@
 			<DataTemplate>
 				<Grid Padding="5" Margin="0" RowSpacing="0">
 					<Grid.RowDefinitions>
-						<RowDefinition Height="30" />
-						<RowDefinition Height="35" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="30" />
+						<ColumnDefinition Width="40" />
 						<ColumnDefinition Width="*" />
 						<ColumnDefinition Width="40" />
 					</Grid.ColumnDefinitions>
 
 					<Label Grid.Column="0" Grid.RowSpan="2"
-							Text="{Binding Number}"
+							Text="{Binding Number}" 
 							FontSize="Medium"
 							VerticalTextAlignment="Center"
 							HorizontalTextAlignment="Center"
+						   BackgroundColor="{StaticResource SubHeader}" 
 						/>
 					<Label Grid.Column="1" Grid.Row="0"
 							Text="{Binding Handler}"
 							FontSize="Large" Padding="5,0,0,0"
+						   BackgroundColor="{StaticResource SubHeader}" 
 						/>
 					<Label Grid.Column="1" Grid.Row="1"	
 						   Text="{Binding DogKindAndName}"
 						   FontSize="Small" Padding="5,0,0,0"
+						   BackgroundColor="{StaticResource SubHeader}" 
 						   />
 					<Button Text="X" Grid.Column="2" Grid.RowSpan="2"
 							Clicked="OnRemoveClicked" 

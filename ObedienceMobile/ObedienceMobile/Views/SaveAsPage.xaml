@@ -4,7 +4,7 @@
              x:Class="ObedienceX.Views.SaveAsPage">
     <ContentPage.Content>
         <StackLayout >
-			<Grid  RowDefinitions="50,30,Auto,60,30,50,90,60" ColumnDefinitions="*" Margin="10" RowSpacing="0"> 
+			<Grid  RowDefinitions="50,Auto,Auto,60,Auto,Auto,90,60" ColumnDefinitions="*" Margin="10" RowSpacing="0"> 
 				<Label Text="{Binding Error}" Grid.Row="0"
 					   FontSize="Medium"
 					   BackgroundColor="White"
@@ -14,23 +14,23 @@
 				<Label Text="Папка" Grid.Row="1"
 					   FontSize="Medium"
 					   VerticalOptions="CenterAndExpand" 
-					   HorizontalOptions="Fill" />
+					   HorizontalOptions="Fill" BackgroundColor="{StaticResource SubHeader}" />
 				<Label Text="{Binding Folder}" Grid.Row="2"
 					   VerticalOptions="CenterAndExpand" 
 					   HorizontalOptions="Fill" 
 					   FontSize="Large"
-					   BackgroundColor="AliceBlue" Padding="10"/>
+					   BackgroundColor="AliceBlue" Padding="10" TextColor="Gray" />
 				<Button Text="Выбрать папку" Grid.Row="3"
 						Margin="0,0,0,20"
 						Clicked="OnBrowseClicked"	/>
 				<Label Text="Имя файла" Grid.Row="4"
 					   VerticalOptions="CenterAndExpand" 
 					   FontSize="Medium"
-					   HorizontalOptions="Fill" />
+					   HorizontalOptions="Fill" BackgroundColor="{StaticResource SubHeader}" />
 				<Entry Text="{Binding FileName}" Grid.Row="5"
 					   FontSize="Large"
 					   VerticalOptions="Fill" 
-					   HorizontalOptions="Fill" />
+					   HorizontalOptions="Fill" TextColor="Gray" />
 				<Button Text="Сохранить" Grid.Row="6"
 						Margin="10,20"
 						Clicked="OnSaveClicked"	/>

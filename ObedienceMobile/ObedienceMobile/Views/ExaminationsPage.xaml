@@ -9,7 +9,7 @@
 	<StackLayout Orientation="Vertical">
 		<Grid Padding="10,10,10,0">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="25" />
+				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="30" />
@@ -20,19 +20,23 @@
 			<Label Grid.Column="0"
 					Text="№"
 					Margin="3,0,0,0"
-				   BackgroundColor="White"
+				   BackgroundColor="White" 
+				   TextColor="Gray"
 					FontSize="Medium"  
 						   />
 			<Label Grid.Column="1"
 					Text="Испытание"
 					Margin="3,0,0,0"
 				   BackgroundColor="White"
+				   TextColor="Gray"
 					FontSize="Medium"  
 						   />
 			<Label Grid.Column="2"
-					Text="К-т"
+					Text="xК"
 					Margin="3,0,0,0"
 				   BackgroundColor="White"
+				   TextColor="Gray"
+				   LineBreakMode="NoWrap"
 					FontSize="Medium"  
 							/>
 		</Grid>
@@ -46,7 +50,7 @@
 				<DataTemplate>
 					<Grid Padding="10,0,10,10">
 						<Grid.RowDefinitions>
-							<RowDefinition Height="45" />
+							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="30" />
@@ -57,18 +61,21 @@
 						<Label Grid.Column="0"
 							   Text="{Binding Number}"
 							   FontSize="Medium"
+							   BackgroundColor="{StaticResource SubHeader}" 
 							   VerticalTextAlignment="Center"
 							   HorizontalTextAlignment="Center"
 							/>
 						<Entry Grid.Column="1"
 							   Text="{Binding Name}"
 							   BackgroundColor="AliceBlue"
+							   TextColor="Gray"
 							   FontSize="Large"  
 						   />
 						<Entry Grid.Column="2"
 							   Text="{Binding Multiplier}"
 							   Keyboard="Numeric"
 							   BackgroundColor="AliceBlue"
+							   TextColor="Gray"
 							   FontSize="Large"  
 							/>
 					</Grid>

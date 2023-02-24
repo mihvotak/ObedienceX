@@ -57,11 +57,19 @@ namespace ObedienceX.Utils
 						competition.Examinations.Add(new Examination() { Name = name, Multiplier = multiplier });
 						index++;
 					}
+					while (true)
+					{
+						var cell1 = sheet.Cells[1, startColumn + index];
+						if (cell1 == null || cell1.Value == null)
+							break;
+						index++;
+					}
 				}
 				catch (Exception e)
 				{
 					Console.WriteLine(e.Message);
 				}
+				int lastExamColNum = startColumn + index - 1;
 
 				int startRow = 4;
 				index = 0;
@@ -116,6 +124,15 @@ namespace ObedienceX.Utils
 							{
 								mark.Value = (double)(cell.Value);
 								mark.IsSet = mark.IsValid;
+							}
+						}
+						{
+							int rowIndex = lastExamColNum + 1;
+							var cell = sheet.Cells[startRow + index, rowIndex];
+							if (cell != null && cell.Value != null && cell.Value is double)
+							{
+								pair.PenaltyValue = (double)(cell.Value);
+								pair.PenaltyIsSet = pair.PenaltyValue >= 0;
 							}
 						}
 						pair.RecalculateSum();
@@ -195,7 +212,7 @@ namespace ObedienceX.Utils
 					{
 						if (sheet.Cells[1, startColumn + i].Value != null)
 						{
-							sheet.Cells[1, startColumn + i].Value = null;
+							sheet.Cells[1, startColumn + i].Value = i + 1;
 							sheet.Cells[2, startColumn + i].Value = null;
 							sheet.Cells[3, startColumn + i].Value = null;
 							lastColNum = startColumn + i;
@@ -267,6 +284,13 @@ namespace ObedienceX.Utils
 						{
 							sheet.Cells[rowNum + 0, j].Value = null;
 							sheet.Cells[rowNum + 1, j].Value = null;
+						}
+						{
+							int j = lastMarkColNum + 1;
+							if (pair.PenaltyIsSet)
+								sheet.Cells[rowNum, j].Value = pair.PenaltyValue;
+							else
+								sheet.Cells[rowNum, j].Value = null;
 						}
 					}
 

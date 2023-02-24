@@ -5,26 +5,26 @@
     <ContentPage.Content>
 		<ScrollView>
 			<StackLayout Margin="10">
-				<Label Text="Проводник" FontSize="Medium" />
-				<Entry Text="{Binding Handler, Mode=TwoWay}" FontSize="Medium" />
-				<Label Text="Порода собаки" FontSize="Medium" />
-				<Entry Text="{Binding DogKind, Mode=TwoWay}" />
-				<Label Text="Кличка собаки" FontSize="Medium" />
-				<Entry Text="{Binding DogName, Mode=TwoWay}" />
-				<Label Text="Пол собаки" FontSize="Medium" />
-				<Picker ItemsSource="{Binding GendersList}" SelectedItem="{Binding SelectedGender}"/>
-				<Label Text="Дата рождения собаки" FontSize="Medium" />
-				<DatePicker Date="{Binding BirthDate, Mode=TwoWay}" Format="dd.MM.yyyy"/>
-				<Label Text="Номер родословной" FontSize="Medium" />
-				<Entry Text="{Binding Pedigree, Mode=TwoWay}" FontSize="Medium" />
-				<Label Text="Квалификационная книжка" FontSize="Medium" />
-				<Entry Text="{Binding QualiBook, Mode=TwoWay}" />
-				<Label Text="Номер клейма / микрочипа" FontSize="Medium" />
-				<Entry Text="{Binding ChipNumber, Mode=TwoWay}" />
-				<Label Text="Владелец (им.падеж)" FontSize="Medium" />
-				<Entry Text="{Binding Owner, Mode=TwoWay}" />
-				<Label Text="Принадлежит кому (дат.падеж)" FontSize="Medium" />
-				<Entry Text="{Binding OwnedBy, Mode=TwoWay}" />
+				<Label Text="Проводник" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}"/>
+				<Entry Text="{Binding Handler, Mode=TwoWay}" FontSize="Medium" TextColor="Gray" />
+				<Label Text="Порода собаки" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}"/>
+				<Entry Text="{Binding DogKind, Mode=TwoWay}" TextColor="Gray" />
+				<Label Text="Кличка собаки" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}"/>
+				<Entry Text="{Binding DogName, Mode=TwoWay}" TextColor="Gray" />
+				<Label Text="Пол собаки" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
+				<Picker ItemsSource="{Binding GendersList}" SelectedItem="{Binding SelectedGender}" TextColor="Gray" />
+				<Label Text="Дата рождения собаки" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
+				<DatePicker Date="{Binding BirthDate, Mode=TwoWay}" Format="dd.MM.yyyy" TextColor="Gray" />
+				<Label Text="Номер родословной" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
+				<Entry Text="{Binding Pedigree, Mode=TwoWay}" FontSize="Medium" TextColor="Gray" />
+				<Label Text="Квалификационная книжка" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
+				<Entry Text="{Binding QualiBook, Mode=TwoWay}" TextColor="Gray" />
+				<Label Text="Номер клейма / микрочипа" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
+				<Entry Text="{Binding ChipNumber, Mode=TwoWay}" TextColor="Gray" />
+				<Label Text="Владелец (им.падеж)" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
+				<Entry Text="{Binding Owner, Mode=TwoWay}" TextColor="Gray" />
+				<Label Text="Принадлежит кому (дат.падеж)" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
+				<Entry Text="{Binding OwnedBy, Mode=TwoWay}" TextColor="Gray" />
 			</StackLayout>
 		</ScrollView>
 	</ContentPage.Content>

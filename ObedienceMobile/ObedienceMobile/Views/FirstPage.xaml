@@ -8,6 +8,7 @@
 				   FontSize="Medium"
 				   Padding="20"
 				   HorizontalOptions="Fill" 
+				   BackgroundColor="{StaticResource SubHeader}" 
 				   VerticalOptions="FillAndExpand" />
 
 			<Button Text="Открыть файл..." Clicked="OnOpenClick"/>

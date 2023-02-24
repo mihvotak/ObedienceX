@@ -5,14 +5,14 @@
 			 Title="Открыть файл соревнований">
 
 	<StackLayout>
-		<Grid ColumnDefinitions="*,*,*" RowDefinitions="40, 50, Auto" Margin="10, 10, 10, 0">
+		<Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto, Auto, Auto" Margin="10, 10, 10, 0">
 			<Button Text="Корень" Clicked="OnGoRootClick"/>
 			<Button Text="Выше" Clicked="OnGoUpClick" Grid.Column="1"/>
 			<Button Text="Домой" Clicked="OnGoHomeClick" Grid.Column="2"/>
 			<Label x:Name="CurrentPath" Grid.ColumnSpan="3" Grid.Row="1"
 				   Padding="5,0"
 				   FontSize="Medium" VerticalTextAlignment="Center"
-				   BackgroundColor="LightGray"/>
+				   BackgroundColor="Gray"/>
 			<Label x:Name="Error" Grid.ColumnSpan="3" Grid.Row="2"
 				   Padding="0,0" BackgroundColor="White"
 				   FontSize="Small" VerticalOptions="CenterAndExpand"
@@ -31,7 +31,7 @@
 				<CollectionView.ItemTemplate>
 					<DataTemplate>
 						<Grid Margin="0" Padding="5" RowSpacing="0" BackgroundColor="White"
-							  RowDefinitions="40,20" ColumnDefinitions="40,*">
+							  RowDefinitions="*,20" ColumnDefinitions="40,*">
 							<Image Source="excel.png"
 								   IsVisible="{Binding IsExcel}"/>
 							<Image Source="xls.png"
@@ -40,6 +40,7 @@
 								   IsVisible="{Binding IsFolder}"/>
 							<Label Text="{Binding ShortName}" Grid.Column="1"
 								   Padding="5,10"
+								   TextColor="Gray"
 								   FontSize="Medium"/>
 							<Label Text="{Binding DateStr}" Grid.Row="1" Grid.Column="1"
 								   TextColor="Gray"

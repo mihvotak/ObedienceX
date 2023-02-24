@@ -33,6 +33,12 @@ public class Pair: INotifyPropertyChanged
 	public string DogKindAndName { get { return DogKind + "\n" + DogName; } }
 
 	public ObservableCollection<Mark> Marks { get; set; }
+	public bool PenaltyIsSet;
+	public double PenaltyValue;
+	public string PenaltyStr { 
+		get { return PenaltyIsSet ? PenaltyValue.ToString() : ""; }
+		set { PenaltyIsSet = double.TryParse(value, out PenaltyValue) && PenaltyValue > 0; RecalculateSum(); } 
+	}
 	public double Sum { get; set; }
 	[JsonIgnore]
 	public string Result
@@ -106,6 +112,7 @@ public class Pair: INotifyPropertyChanged
 		double sum = 0;
 		for (int i = 0; i < Marks.Count; i++)
 			sum += Marks[i].MultipliedValue;
+		sum -= PenaltyIsSet ? PenaltyValue : 0;
 		Sum = sum;
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Sum)));
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Result)));
