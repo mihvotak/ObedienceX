@@ -16,13 +16,13 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
-                                </VisualState.Setters>
+									<Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+								</VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Disabled">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#332196F3" />
-                                </VisualState.Setters>
+									<Setter Property="BackgroundColor" Value="#332196F3" />
+								</VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
                     </VisualStateGroupList>
@@ -30,6 +30,7 @@
             </Style>
 			<Style TargetType="Label">
 				<Setter Property="TextColor" Value="White"></Setter>
+				<Setter Property="Padding" Value="0 5"></Setter>
 				<Setter Property="BackgroundColor" Value="{StaticResource SubHeader}"></Setter>
 			</Style>
 		</ResourceDictionary>        

@@ -13,7 +13,29 @@ public class Competition : INotifyPropertyChanged
 	public Competition()
 	{
 		Date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+		PropertyChanged += OnSelfPropertyChanged;
 	}
+
+	private void OnSelfPropertyChanged(object sender, PropertyChangedEventArgs e)
+	{
+		if (e.PropertyName != "SaveText")
+			Saved = false;
+	}
+
+	[JsonIgnore]
+	private bool _saved;
+	[JsonIgnore]
+	public bool Saved
+	{
+		get { return _saved; }
+		set
+		{
+			_saved = value;
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SaveText)));
+		}
+	}
+	[JsonIgnore]
+	public string SaveText => Saved ? "Сохранено" : "Сохранить";
 
 	//[JsonIgnore]
 	//public string FileName { get; set; }
@@ -23,7 +45,19 @@ public class Competition : INotifyPropertyChanged
 	[JsonIgnore]
 	public string Name { get { return string.IsNullOrEmpty(ExcelName) ? "" : Path.GetFileNameWithoutExtension(ExcelName); } }
 	public DateTime Date { get; set; }
-	public string Level { get; set; }
+	private string _level;
+	public string Level
+	{
+		get { return _level; }
+		set
+		{
+			if (_level != value)
+			{
+				_level = value;
+				Saved = false;
+			}
+		}
+	}
 	public string Club { get; set; }
 	public string Place { get; set; }
 	public string Director { get; set; }
@@ -53,12 +87,23 @@ public class Competition : INotifyPropertyChanged
 		int place = 0;
 		for (int i = 0; i < list.Count; i++)
 		{
+			bool unique = false;
 			if (i == 0 || list[i].Sum < list[i - 1].Sum)
+			{
 				place = i + 1;
-			if (list[i].Place != place)
+				unique = true;
+			}
+			if (list[i].Place != place || list[i].Unique != unique || (i > 0 && list[i - 1].Unique && !unique))
 			{
 				list[i].Place = place;
+				list[i].Unique = unique;
 				list[i].DispatchPlaceChanged();
+				if (i > 0 && list[i - 1].Unique && !unique)
+				{
+					list[i - 1].Unique = unique;
+					list[i - 1].DispatchPlaceChanged();
+
+				}
 			}
 		}
 	}

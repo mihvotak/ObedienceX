@@ -29,6 +29,7 @@ namespace ObedienceX.Views
 			collectionView.ItemsSource = Model.Competition.Examinations;
 			Title = Model.Competition.Name;
 			_selectedExamination = null;
+			ToolbarItems[0].BindingContext = Model.Competition;
 		}
 
 		public void OnAddClicked(object sender, EventArgs e)
@@ -36,6 +37,7 @@ namespace ObedienceX.Views
 			var exam = new Examination();
 			exam.SetNumber(Model.Competition.Examinations.Count + 1);
 			Model.Competition.Examinations.Add(exam);
+			Model.Competition.Saved = false;
 		}
 
 		void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -55,7 +57,10 @@ namespace ObedienceX.Views
 		public void OnRemoveClicked(object sender, EventArgs e)
 		{
 			if (Model.Competition.Examinations.Count > 0)
-			Model.Competition.Examinations.RemoveAt(Model.Competition.Examinations.Count - 1);
+			{
+				Model.Competition.Examinations.RemoveAt(Model.Competition.Examinations.Count - 1);
+				Model.Competition.Saved = false;
+			}
 		}
 
 		public void OnSaveClicked(object sender, EventArgs e)
@@ -68,5 +73,12 @@ namespace ObedienceX.Views
 			for (int i = 0; i < Model.Competition.Examinations.Count; i++)
 				Model.Competition.Examinations[i].SetNumber(i + 1);
 		}
+
+		void OnTextChanged(object sender, TextChangedEventArgs e)
+		{
+			if (e.OldTextValue != null && e.NewTextValue != null)
+				Model.Competition.Saved = false;
+		}
+
 	}
 }

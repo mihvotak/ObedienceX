@@ -48,12 +48,14 @@ namespace ObedienceX.Data
 			set
 			{
 				float newVal;
-				if (float.TryParse(value, out newVal))
+				bool isSet = float.TryParse(value, out newVal);
+				if (isSet && Value != newVal)
 				{
 					Value = newVal;
-					IsSet = true;
+					IsSet = isSet;
 					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MultipliedValueStr)));
 					Pair.RecalculateSum();
+					Pair.Competition.Saved = false;
 				}
 			}
 		}

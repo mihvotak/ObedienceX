@@ -4,7 +4,7 @@
              x:Class="ObedienceX.Views.CompetitionPage"
 			 Title="Описание соревнования">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Сохранить"
+		<ToolbarItem Text="{Binding SaveText}"
                      Clicked="OnSaveClicked" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
@@ -13,20 +13,27 @@
 				<StackLayout Padding="10,10,10,50" VerticalOptions="Fill" >
 					<Label Text="Имя файла" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
 					<Label Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" BackgroundColor="White" TextColor="Gray" />
+					
 					<Label Text="Уровень" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
 					<Picker ItemsSource="{Binding Levels}" SelectedItem="{Binding Level}" TextColor="Gray" />
+					
 					<Label Text="Дата проведения" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<DatePicker Date="{Binding Date, Mode=TwoWay}" Format="dd.MM.yyyy" TextColor="Gray" />
+					<DatePicker Date="{Binding Date, Mode=TwoWay}" Format="dd.MM.yyyy" TextColor="Gray" DateSelected="OnDateSelected" />
+					
 					<Label Text="Место проведения" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<Entry Text="{Binding Place, Mode=TwoWay}" TextColor="Gray" />
+					<Entry Text="{Binding Place, Mode=TwoWay}" TextColor="Gray" FontSize="Medium" TextChanged="OnTextChanged" />
+					
 					<Label Text="Наименование организации / клуба" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<Editor Text="{Binding Club, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" TextColor="Gray" />
+					<Editor Text="{Binding Club, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" TextColor="Gray" TextChanged="OnTextChanged" />
+					
 					<Label Text="Руководитель организации" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<Entry Text="{Binding Director, Mode=TwoWay}" TextColor="Gray" />
+					<Entry Text="{Binding Director, Mode=TwoWay}" TextColor="Gray" FontSize="Medium" TextChanged="OnTextChanged" />
+					
 					<Label Text="Судья" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<Entry Text="{Binding Judge, Mode=TwoWay}" TextColor="Gray" />
+					<Entry Text="{Binding Judge, Mode=TwoWay}" TextColor="Gray" FontSize="Medium" TextChanged="OnTextChanged" />
+					
 					<Label Text="Секретарь" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<Entry Text="{Binding Secretary, Mode=TwoWay}" TextColor="Gray" />
+					<Entry Text="{Binding Secretary, Mode=TwoWay}" TextColor="Gray" FontSize="Medium" TextChanged="OnTextChanged" />
 					<Label Text="" Margin="100" />
 				</StackLayout>
 			</ScrollView>

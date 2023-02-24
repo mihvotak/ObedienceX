@@ -26,7 +26,7 @@ namespace ObedienceX.Data
 
 		public static ExcelProxy ExcelProxy = new ExcelProxy();
 
-		public static void ReSaveCurrent()
+		public static bool ReSaveCurrent()
 		{
 			var competition = Model.Competition;
 			if (string.IsNullOrWhiteSpace(competition.ExcelName))
@@ -37,10 +37,11 @@ namespace ObedienceX.Data
 			{
 				string ext = Path.GetExtension(competition.ExcelName);
 				if (ext == ".xlsx")
-					ExcelProxy.WriteExcel(competition.ExcelName);
+					return ExcelProxy.WriteExcel(competition.ExcelName);
 				//else
 				//	SaveCurrentAs(competition.ExcelName);
 			}
+			return false;
 		}
 
 		/*public static bool SaveCurrentAs(string fileName)

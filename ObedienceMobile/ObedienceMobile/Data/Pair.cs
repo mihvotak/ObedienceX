@@ -37,7 +37,17 @@ public class Pair: INotifyPropertyChanged
 	public double PenaltyValue;
 	public string PenaltyStr { 
 		get { return PenaltyIsSet ? PenaltyValue.ToString() : ""; }
-		set { PenaltyIsSet = double.TryParse(value, out PenaltyValue) && PenaltyValue > 0; RecalculateSum(); } 
+		set {
+			double val = 0;
+			bool isSet = double.TryParse(value, out val) && val > 0;
+			if (val != PenaltyValue || isSet != PenaltyIsSet)
+			{
+				PenaltyIsSet = isSet;
+				PenaltyValue = val;
+				Competition.Saved = false; 
+				RecalculateSum();
+			}
+		} 
 	}
 	public double Sum { get; set; }
 	[JsonIgnore]
@@ -56,6 +66,8 @@ public class Pair: INotifyPropertyChanged
 		} 
 	}
 	public int Place { get; set; }
+	public bool Unique { get; set; }
+	public string PlaceStr { get { return Place.ToString() + (Unique ? "" : "*"); } }
 
 	static public List<string> AllGendersList
 	{
@@ -77,10 +89,12 @@ public class Pair: INotifyPropertyChanged
 		}
 		set
 		{
-			if (value == GendersList[0])
-				Gender = Pair.DogGender.Male;
-			else
-				Gender = Pair.DogGender.Female;
+			DogGender newGender = value == GendersList[0] ? DogGender.Male : DogGender.Female;
+			if (newGender != Gender)
+			{
+				Gender = newGender;
+				Competition.Saved = false;
+			}
 		}
 	}
 
@@ -104,7 +118,7 @@ public class Pair: INotifyPropertyChanged
 
 	public void DispatchPlaceChanged()
 	{
-		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Place)));
+		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PlaceStr)));
 	}
 
 	public void RecalculateSum()
@@ -119,4 +133,5 @@ public class Pair: INotifyPropertyChanged
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Place)));
 		//Competition.RecalculateResults();
 	}
+
 }

@@ -34,13 +34,7 @@ namespace ObedienceX.Views
 				competition.Pairs[competition.LastPairIndex].DispatchNamesChanged();
 			collectionView.SelectedItem = null;
 			Title = competition.Name;
-		}
-
-		public void OnAddClicked(object sender, EventArgs e)
-		{
-			var pair = new Pair();
-			Model.Competition.Pairs.Add(pair);
-			pair.SetNumber(Model.Competition.Pairs.Count);
+			ToolbarItems[0].BindingContext = competition;
 		}
 
 		void OnSelectionChanged(object sender, SelectionChangedEventArgs e)

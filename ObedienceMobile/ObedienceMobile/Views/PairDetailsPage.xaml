@@ -2,29 +2,42 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ObedienceX.Views.PairDetailsPage">
-    <ContentPage.Content>
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="{Binding SaveText}"
+                     Clicked="OnSaveClicked" />
+	</ContentPage.ToolbarItems>
+	<ContentPage.Content>
 		<ScrollView>
 			<StackLayout Margin="10">
 				<Label Text="Проводник" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}"/>
-				<Entry Text="{Binding Handler, Mode=TwoWay}" FontSize="Medium" TextColor="Gray" />
+				<Entry Text="{Binding Handler, Mode=TwoWay}" FontSize="Medium" TextColor="Gray" TextChanged="OnTextChanged" />
+				
 				<Label Text="Порода собаки" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}"/>
-				<Entry Text="{Binding DogKind, Mode=TwoWay}" TextColor="Gray" />
+				<Entry Text="{Binding DogKind, Mode=TwoWay}" TextColor="Gray" TextChanged="OnTextChanged" />
+				
 				<Label Text="Кличка собаки" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}"/>
-				<Entry Text="{Binding DogName, Mode=TwoWay}" TextColor="Gray" />
+				<Entry Text="{Binding DogName, Mode=TwoWay}" TextColor="Gray" TextChanged="OnTextChanged" />
+				
 				<Label Text="Пол собаки" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
 				<Picker ItemsSource="{Binding GendersList}" SelectedItem="{Binding SelectedGender}" TextColor="Gray" />
+				
 				<Label Text="Дата рождения собаки" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-				<DatePicker Date="{Binding BirthDate, Mode=TwoWay}" Format="dd.MM.yyyy" TextColor="Gray" />
+				<DatePicker Date="{Binding BirthDate, Mode=TwoWay}" Format="dd.MM.yyyy" TextColor="Gray" DateSelected="OnDateSelected" />
+				
 				<Label Text="Номер родословной" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-				<Entry Text="{Binding Pedigree, Mode=TwoWay}" FontSize="Medium" TextColor="Gray" />
+				<Entry Text="{Binding Pedigree, Mode=TwoWay}" FontSize="Medium" TextColor="Gray" TextChanged="OnTextChanged" />
+				
 				<Label Text="Квалификационная книжка" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-				<Entry Text="{Binding QualiBook, Mode=TwoWay}" TextColor="Gray" />
+				<Entry Text="{Binding QualiBook, Mode=TwoWay}" TextColor="Gray" TextChanged="OnTextChanged" />
+				
 				<Label Text="Номер клейма / микрочипа" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-				<Entry Text="{Binding ChipNumber, Mode=TwoWay}" TextColor="Gray" />
+				<Entry Text="{Binding ChipNumber, Mode=TwoWay}" TextColor="Gray" TextChanged="OnTextChanged" />
+				
 				<Label Text="Владелец (им.падеж)" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-				<Entry Text="{Binding Owner, Mode=TwoWay}" TextColor="Gray" />
+				<Entry Text="{Binding Owner, Mode=TwoWay}" TextColor="Gray" TextChanged="OnTextChanged" />
+				
 				<Label Text="Принадлежит кому (дат.падеж)" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-				<Entry Text="{Binding OwnedBy, Mode=TwoWay}" TextColor="Gray" />
+				<Entry Text="{Binding OwnedBy, Mode=TwoWay}" TextColor="Gray" TextChanged="OnTextChanged" />
 			</StackLayout>
 		</ScrollView>
 	</ContentPage.Content>

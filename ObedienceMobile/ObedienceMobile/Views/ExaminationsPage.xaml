@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ObedienceX.Views.ExaminationsPage">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Сохранить"
+		<ToolbarItem Text="{Binding SaveText}"
                      Clicked="OnSaveClicked" />
 	</ContentPage.ToolbarItems>
 	<StackLayout Orientation="Vertical">
@@ -69,14 +69,16 @@
 							   Text="{Binding Name}"
 							   BackgroundColor="AliceBlue"
 							   TextColor="Gray"
-							   FontSize="Large"  
+							   FontSize="Large"
+							   TextChanged="OnTextChanged"
 						   />
 						<Entry Grid.Column="2"
 							   Text="{Binding Multiplier}"
 							   Keyboard="Numeric"
 							   BackgroundColor="AliceBlue"
 							   TextColor="Gray"
-							   FontSize="Large"  
+							   FontSize="Large"
+							   TextChanged="OnTextChanged"
 							/>
 					</Grid>
 				</DataTemplate>

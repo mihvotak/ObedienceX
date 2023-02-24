@@ -1,5 +1,5 @@
 ﻿using ObedienceX.Data;
-using ObedienceX.Utils;
+using System.ComponentModel;
 using System;
 using System.IO;
 
@@ -21,9 +21,24 @@ namespace ObedienceX.Views
 
 			if (Model.Competition == null)
 				Model.Competition = new Competition();
+			bool saved = Model.Competition.Saved;
 			BindingContext = Model.Competition;
+			Model.Competition.Saved = saved;
+			ToolbarItems[0].BindingContext = Model.Competition;
 		}
 
+		void OnTextChanged(object sender, TextChangedEventArgs e)
+		{
+			if (e.OldTextValue != null && e.NewTextValue != null)
+				Model.Competition.Saved = false;
+		}
+
+		void OnDateSelected(object sender, DateChangedEventArgs e)
+		{
+			if (e.OldDate != null && e.NewDate != null)
+				Model.Competition.Saved = false;
+		}
+		
 		void OnSaveClicked(object sender, EventArgs e)
 		{
 			Model.ReSaveCurrent();

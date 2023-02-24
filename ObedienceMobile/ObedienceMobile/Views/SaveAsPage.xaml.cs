@@ -39,6 +39,7 @@ namespace ObedienceX.Views
 			{
 				await Shell.Current.GoToAsync("..");
 				Model.Competition.DispatchNameChanged();
+				Model.Competition.Saved = true;
 			}
 			else
 			{

@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ObedienceX.Views.PairMarksPage">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Сохранить"
-                     Clicked="OnSaveClicked" />
+		<ToolbarItem Clicked="OnSaveClicked" Text="{Binding SaveText}" />
 	</ContentPage.ToolbarItems>
 
 	<StackLayout Orientation="Vertical" Spacing="0">
@@ -16,12 +15,12 @@
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="70" />
+				<ColumnDefinition Width="90" />
 			</Grid.ColumnDefinitions>
 
 			<Label Grid.Column="0" Grid.Row="0" 
 				   Text="{Binding Handler}"
-				   FontSize="Medium"
+				   FontSize="Medium" LineBreakMode="TailTruncation"
 				   BackgroundColor="{StaticResource SubHeader}" />
 			<Label Grid.Column="0" Grid.Row="1" 
 				   Text="{Binding DogKind}"
@@ -50,8 +49,8 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="30" />
 				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="45" />
-				<ColumnDefinition Width="40" />
+				<ColumnDefinition Width="50" />
+				<ColumnDefinition Width="55" />
 			</Grid.ColumnDefinitions>
 
 			<Label Grid.Column="0"
@@ -103,7 +102,7 @@
 								<ColumnDefinition Width="30" />
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="50" />
-								<ColumnDefinition Width="40" />
+								<ColumnDefinition Width="55" />
 							</Grid.ColumnDefinitions>
 
 							<Label Grid.Column="0" Grid.RowSpan="2"
@@ -118,6 +117,7 @@
 								VerticalTextAlignment="Center"
 								FontSize="Medium"
 								Margin="0"
+								MaxLines="2"
 								BackgroundColor="{StaticResource SubHeader}" 
 							/>
 							<Picker Grid.Column="2" Grid.RowSpan="2"
@@ -151,7 +151,7 @@
 				<ColumnDefinition Width="30" />
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="50" />
-				<ColumnDefinition Width="40" />
+				<ColumnDefinition Width="55" />
 			</Grid.ColumnDefinitions>
 
 			<Label Grid.Column="0"

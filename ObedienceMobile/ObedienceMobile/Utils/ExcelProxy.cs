@@ -84,7 +84,7 @@ namespace ObedienceX.Utils
 						int num = Convert.ToInt32((double)(cell1.Value));
 						if (num <= 0)
 							break;
-						Pair pair = new Pair();
+						Pair pair = new Pair() { Competition = competition };
 						competition.Pairs.Add(pair);
 
 						DateTime date = DateTime.Now;
@@ -163,6 +163,7 @@ namespace ObedienceX.Utils
 				}
 			}
 			competition.RecalculateResults();
+			competition.Saved = true;
 			return competition;
 		}
 
@@ -198,6 +199,11 @@ namespace ObedienceX.Utils
 
 				using (var package = templateStream == null ? new ExcelPackage(fileName) : new ExcelPackage(resultStream, templateStream))
 				{
+					if (package.Workbook.Worksheets.Count == 0)
+					{
+						File.Delete(fileName);
+						throw new Exception("Попытка сохранить в пустой файл. Попробуйте снова.");
+					}
 					var sheet = package.Workbook.Worksheets[0];
 					int startColumn = 12;
 					int lastColNum = 12;
@@ -310,6 +316,7 @@ namespace ObedienceX.Utils
 						templateStream.Close();
 					if (resultStream != null)
 						resultStream.Close();
+					competition.Saved = true;
 					return true;
 				}
 			}

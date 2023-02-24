@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ObedienceX.Views.ResultsPage">
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Text="Сохранить"
+		<ToolbarItem Text="{Binding SaveText}"
                      Clicked="OnSaveClicked" />
 	</ContentPage.ToolbarItems>
 
@@ -15,8 +15,8 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="30" />
 				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="55" />
-				<ColumnDefinition Width="30" />
+				<ColumnDefinition Width="80" />
+				<ColumnDefinition Width="40" />
 			</Grid.ColumnDefinitions>
 
 			<Label Grid.Column="0"
@@ -72,8 +72,8 @@
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="30" />
 								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="55" />
-								<ColumnDefinition Width="30" />
+								<ColumnDefinition Width="80" />
+								<ColumnDefinition Width="40" />
 							</Grid.ColumnDefinitions>
 
 							<Label Grid.Column="0" Grid.RowSpan="2"
@@ -87,7 +87,8 @@
 							Text="{Binding Handler}"
 							BackgroundColor="{StaticResource SubHeader}" 
 						   Padding="5,0,5,0"
-							FontSize="Large"  
+							LineBreakMode="TailTruncation"
+							FontSize="Medium" FontAttributes="Bold" MaxLines="2"  
 						/>
 							<Label Grid.Column="1" Grid.Row="1"	
 						   Text="{Binding DogKindAndName}"
@@ -97,15 +98,20 @@
 						   />
 							<Label Text="{Binding Sum}" Grid.Column="2" Grid.Row="0"
 						   HorizontalTextAlignment="Center"
-						   FontSize="Large" BackgroundColor="{StaticResource SubHeader}" />
+							VerticalTextAlignment="Center"
+						   FontSize="Medium" FontAttributes="Bold" 
+							BackgroundColor="{StaticResource SubHeader}" />
 							<Label Text="{Binding Result}" Grid.Column="2" Grid.Row="1" 
 						   HorizontalTextAlignment="Center"
 						   VerticalTextAlignment="Center"
-						   FontSize="Small" BackgroundColor="{StaticResource SubHeader}" />
-							<Label Text="{Binding Place}" Grid.Column="3" Grid.RowSpan="2"
+						   FontSize="Small" 
+							FontAttributes="Bold"
+							BackgroundColor="{StaticResource SubHeader}" />
+							<Label Text="{Binding PlaceStr}" Grid.Column="3" Grid.RowSpan="2"
 						   HorizontalTextAlignment="Center"
 						   VerticalTextAlignment="Center"
-						   FontSize="Large" FontAttributes="Bold" BackgroundColor="{StaticResource SubHeader}" />
+						   FontSize="Large" FontAttributes="Bold" 
+							BackgroundColor="{StaticResource SubHeader}" />
 						</Grid>
 					</DataTemplate>
 				</CollectionView.ItemTemplate>

@@ -1,10 +1,7 @@
-﻿using ObedienceX;
-using ObedienceX.Data;
+﻿using ObedienceX.Data;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -34,9 +31,10 @@ namespace ObedienceX.Views
 
 		public void OnAddClicked(object sender, EventArgs e)
 		{
-			var pair = new Pair();
+			var pair = new Pair() { Competition = Model.Competition, Marks = new ObservableCollection<Mark>() };
 			Model.Competition.Pairs.Add(pair);
 			pair.SetNumber(Model.Competition.Pairs.Count);
+			Model.Competition.Saved = false;
 		}
 
 		void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -56,7 +54,10 @@ namespace ObedienceX.Views
 		{
 			int index = (int)((Button)sender).CommandParameter - 1;
 			if (index >= 0 && index <= Model.Competition.Pairs.Count - 1)
+			{
 				Model.Competition.Pairs.RemoveAt(index);
+				Model.Competition.Saved = false;
+			}
 			UpdateNumbers();
 		}
 

@@ -1,6 +1,7 @@
 ﻿using ObedienceX.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System;
 
 namespace ObedienceX.Views
 {
@@ -29,7 +30,24 @@ namespace ObedienceX.Views
 
 			Title = "Пара #" + (Model.Competition.LastPairIndex + 1);
 			BindingContext = CurrentPair;
+			ToolbarItems[0].BindingContext = Model.Competition;
 		}
 
+		void OnSaveClicked(object sender, EventArgs e)
+		{
+			Model.ReSaveCurrent();
+		}
+
+		void OnTextChanged(object sender, TextChangedEventArgs e)
+		{
+			if (e.OldTextValue != null && e.NewTextValue != null)
+				Model.Competition.Saved = false;
+		}
+
+		void OnDateSelected(object sender, DateChangedEventArgs e)
+		{
+			if (e.OldDate != null && e.NewDate != null && e.OldDate != DateTime.Now.Date)
+				Model.Competition.Saved = false;
+		}
 	}
 }

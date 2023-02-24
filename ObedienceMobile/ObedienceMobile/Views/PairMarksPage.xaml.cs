@@ -53,6 +53,7 @@ namespace ObedienceX.Views
 
 			BindingContext = pair;
 			collectionView.ItemsSource = pair.Marks;
+			ToolbarItems[0].BindingContext = competition;
 		}
 
 		void OnSaveClicked(object sender, EventArgs e)

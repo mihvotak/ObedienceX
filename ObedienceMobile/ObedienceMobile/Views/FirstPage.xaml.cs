@@ -32,15 +32,27 @@ namespace ObedienceX.Views
 
 		async void OnOpenClick(object sender, EventArgs args)
 		{
-			Model.ChangeFolderMode = false;
-			await Shell.Current.GoToAsync($"{nameof(CompetitionsPage)}");
+			bool force = true;
+			if (Model.Competition != null && !Model.Competition.Saved)
+				force = await DisplayAlert("Файл не сохранён.", "Всё равно продолжить?", "Да", "Нет");
+			if (force)
+			{
+				Model.ChangeFolderMode = false;
+				await Shell.Current.GoToAsync($"{nameof(CompetitionsPage)}");
+			}
 		}
 
 		async void OnAddClicked(object sender, EventArgs e)
 		{
-			Model.Competition = new Competition();
-			// Navigate to the CompetitionPage, without passing any data.
-			await Shell.Current.GoToAsync($"//{nameof(CompetitionPage)}");
+			bool force = true;
+			if (Model.Competition != null && !Model.Competition.Saved)
+				force = await DisplayAlert("Файл не сохранён.", "Всё равно продолжить?", "Да", "Нет");
+			if (force)
+			{
+				Model.Competition = new Competition();
+				// Navigate to the CompetitionPage, without passing any data.
+				await Shell.Current.GoToAsync($"//{nameof(CompetitionPage)}");
+			}
 		}
 	}
 }
