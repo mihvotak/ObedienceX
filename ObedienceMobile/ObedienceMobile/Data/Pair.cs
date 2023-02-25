@@ -39,6 +39,7 @@ public class Pair: INotifyPropertyChanged
 		get { return PenaltyIsSet ? PenaltyValue.ToString() : ""; }
 		set {
 			double val = 0;
+			value = value.Replace(',', '.');
 			bool isSet = double.TryParse(value, out val) && val > 0;
 			if (val != PenaltyValue || isSet != PenaltyIsSet)
 			{
@@ -55,7 +56,9 @@ public class Pair: INotifyPropertyChanged
 	{ 
 		get 
 		{
-			if (Sum >= 256)
+			if (!string.IsNullOrEmpty(SpecialStatus))
+				return SpecialStatus;
+			else if (Sum >= 256)
 				return "Отлично";
 			else if (Sum >= 224)
 				return "Очень хорошо";
@@ -67,7 +70,33 @@ public class Pair: INotifyPropertyChanged
 	}
 	public int Place { get; set; }
 	public bool Unique { get; set; }
-	public string PlaceStr { get { return Place.ToString() + (Unique ? "" : "*"); } }
+	public string PlaceStr { get { return !string.IsNullOrEmpty(SpecialStatus) || Sum == 0 ? "-" : 
+				Place.ToString() + (Unique ? "" : "*"); } }
+
+	static public List<string> AllStatusesList
+	{
+		get
+		{
+			return new List<string> { "", "ВнеЗачёта", "Неявка", "Снятие", "СнятСИзв", "Дисквал" };
+		}
+	}
+
+	[JsonIgnore]
+	public List<string> StatusesList { get { return AllStatusesList; } }
+
+	private string _specialStatus = "";
+	[JsonIgnore]
+	public string SpecialStatus {
+		get { return _specialStatus; }
+		set { 
+			if (_specialStatus != value)
+			{
+				_specialStatus = value;
+				Competition.Saved = false;
+				RecalculateSum();
+			}
+		}
+	}
 
 	static public List<string> AllGendersList
 	{
@@ -127,6 +156,8 @@ public class Pair: INotifyPropertyChanged
 		for (int i = 0; i < Marks.Count; i++)
 			sum += Marks[i].MultipliedValue;
 		sum -= PenaltyIsSet ? PenaltyValue : 0;
+		if (!string.IsNullOrEmpty(SpecialStatus))
+			sum = 0;
 		Sum = sum;
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Sum)));
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Result)));

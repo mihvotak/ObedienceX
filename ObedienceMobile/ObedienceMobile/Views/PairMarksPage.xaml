@@ -148,38 +148,32 @@
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="30" />
 				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="50" />
-				<ColumnDefinition Width="55" />
+				<ColumnDefinition Width="40" />
+				<ColumnDefinition Width="20" />
+				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 
 			<Label Grid.Column="0"
-								   Text="{Binding ExamNumber}"
-								   FontSize="Medium"
-								   VerticalTextAlignment="Center"
-									HorizontalTextAlignment="Center"
-									BackgroundColor="White" 
-								/>
-			<Label Grid.Column="1"
-								   Text="Штраф"
-								   VerticalTextAlignment="Center"
-								   FontSize="Small"
-									Margin="0"
-									BackgroundColor="White" 
-									TextColor="Gray"
-							   />
-			<Entry Grid.Column="2" Text="{Binding PenaltyStr}"
-									Keyboard="Numeric"
-									FontSize="Small"  HorizontalTextAlignment="Center"
-									TextColor="Gray" Margin="-5,0,-5,0"
-								/>
-			<Label Text="{Binding MultipliedValueStr}" Grid.Column="3"
-									   VerticalTextAlignment="Center"
-									   HorizontalTextAlignment="Center"
-									   Margin="0"
-									   BackgroundColor="White" 
-									   FontSize="Medium" />
+				Text="Штраф"
+				VerticalTextAlignment="Center"
+				FontSize="Medium"
+				Margin="0"
+				BackgroundColor="{StaticResource SubHeader}"
+				TextColor="White"
+			/>
+			<Entry Grid.Column="1" Text="{Binding PenaltyStr}"
+				Keyboard="Numeric"
+				FontSize="Medium"  HorizontalTextAlignment="Center"
+				TextColor="Gray" Margin="-5,0,-5,0"
+			/>
+			<Picker Grid.Column="3"
+				ItemsSource="{Binding StatusesList}" 
+				SelectedItem="{Binding SpecialStatus}" 
+				BackgroundColor="{StaticResource SubHeader}" 
+					TextColor="Yellow"
+				
+			/>
 		</Grid>
 	</StackLayout>
 </ContentPage>

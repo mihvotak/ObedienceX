@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -146,7 +144,10 @@ namespace ObedienceX.Views
 					Competition competition = Model.ExcelProxy.ReadExcel(file.FileName);
 					if (competition != null)
 					{
+						Competition savedPrev = Model.Prev;
 						Model.Competition = competition;
+						if (Model.Prev!= null && !string.IsNullOrEmpty(Model.Prev.ExcelName) && !string.IsNullOrEmpty(Model.Competition.ExcelName) && Model.Prev.ExcelName == Model.Competition.ExcelName)
+							Model.Prev = savedPrev;
 						await Shell.Current.GoToAsync("..");
 						await Shell.Current.GoToAsync($"//{nameof(CompetitionPage)}");
 					}

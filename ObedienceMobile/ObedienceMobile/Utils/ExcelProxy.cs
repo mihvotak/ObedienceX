@@ -127,12 +127,17 @@ namespace ObedienceX.Utils
 							}
 						}
 						{
-							int rowIndex = lastExamColNum + 1;
-							var cell = sheet.Cells[startRow + index, rowIndex];
+							int colIndex = lastExamColNum + 1;
+							var cell = sheet.Cells[startRow + index, colIndex];
 							if (cell != null && cell.Value != null && cell.Value is double)
 							{
 								pair.PenaltyValue = (double)(cell.Value);
 								pair.PenaltyIsSet = pair.PenaltyValue >= 0;
+							}
+							var cellS = sheet.Cells[startRow + index + 1, colIndex];
+							if (cellS != null && cellS.Value != null && cellS.Value is string)
+							{
+								pair.SpecialStatus = (string)(cellS.Value);
 							}
 						}
 						pair.RecalculateSum();
@@ -297,6 +302,10 @@ namespace ObedienceX.Utils
 								sheet.Cells[rowNum, j].Value = pair.PenaltyValue;
 							else
 								sheet.Cells[rowNum, j].Value = null;
+							if (!string.IsNullOrEmpty(pair.SpecialStatus))
+								sheet.Cells[rowNum + 1, j].Value = pair.SpecialStatus;
+							else
+								sheet.Cells[rowNum + 1, j].Value = null;
 						}
 					}
 
