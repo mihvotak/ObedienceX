@@ -49,7 +49,7 @@ namespace ObedienceX.Data
 			{
 				float newVal;
 				bool isSet = float.TryParse(value, out newVal);
-				if (isSet && Value != newVal)
+				if (isSet && (Value != newVal || !IsSet))
 				{
 					Value = newVal;
 					IsSet = isSet;
