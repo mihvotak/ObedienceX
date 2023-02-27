@@ -50,22 +50,28 @@ namespace ObedienceX.Data
 
 		public static ExcelProxy ExcelProxy = new ExcelProxy();
 
-		public static bool ReSaveCurrent()
+		public static async void ReSaveCurrent()
 		{
 			var competition = Model.Competition;
 			if (string.IsNullOrWhiteSpace(competition.ExcelName))
 			{
-				Shell.Current.GoToAsync($"{nameof(SaveAsPage)}");
+				var checker = DependencyService.Get<IPermissionChecker>();
+				if (checker.CheckAllFilesPermission())
+					await Shell.Current.GoToAsync($"{nameof(SaveAsPage)}");
+				else
+				{
+					if (await Shell.Current.DisplayAlert(checker.GetConfirmCaption(), checker.GetConfirmSaveText(), checker.GetAgreeButton(), checker.GetCancelButton()))
+						checker.ShowSettingsAllFilesPermission();
+				}
 			}
 			else
 			{
 				string ext = Path.GetExtension(competition.ExcelName);
 				if (ext == ".xlsx")
-					return ExcelProxy.WriteExcel(competition.ExcelName);
+					ExcelProxy.WriteExcel(competition.ExcelName);
 				//else
 				//	SaveCurrentAs(competition.ExcelName);
 			}
-			return false;
 		}
 
 		/*public static bool SaveCurrentAs(string fileName)

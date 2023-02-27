@@ -45,11 +45,6 @@
 							Clicked="OnPairsClicked" />
 					<Button Text="Результаты" Grid.ColumnSpan="2"  Grid.Row="1"
 							Clicked="OnResultsClicked" />
-					<Button Text="Сохранить как..." Grid.Row="2"
-						Clicked="OnSaveAsClicked" />
-					<Button Grid.Column="1" Grid.Row="2"
-						Text="Удалить"
-						Clicked="OnDeleteButtonClicked"/>
 				</Grid>
 			</StackLayout>
 		</Grid>

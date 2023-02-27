@@ -1,22 +1,23 @@
 ﻿using ObedienceX.Data;
+using ObedienceX.Utils;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace ObedienceX.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class FirstPage : ContentPage
 	{
+		private PermissionService _permissionService;
+
 		public FirstPage()
 		{
+			_permissionService = new PermissionService();
 			InitializeComponent();
 		}
 
@@ -50,6 +51,32 @@ namespace ObedienceX.Views
 
 			ToolbarItems[0].BindingContext = competition;
 			ToolbarItems[1].BindingContext = competition;
+
+			Button saveAsButton = (Button)FindByName("SaveAsButton");
+			saveAsButton.IsVisible = competition != null;
+			Button deleteButton = (Button)FindByName("DeleteButton");
+			deleteButton.IsVisible = competition != null;
+		}
+
+		private async Task<bool> CheckPermissions()
+		{
+			/*var status = await _permissionService.CheckAndRequestPermissionAsync(new Permissions.StorageWrite());
+			if (status != PermissionStatus.Granted)
+			{
+				await App.Current.MainPage.DisplayAlert("Error", "You do not have writing permissions", "Ok");
+				return false;
+			}
+			else*/
+			{
+				var checker = DependencyService.Get<IPermissionChecker>();
+				if (!checker.CheckAllFilesPermission())
+				{
+					if (await Shell.Current.DisplayAlert(checker.GetConfirmCaption(), checker.GetConfirmReadText(), checker.GetAgreeButton(), checker.GetCancelButton()))
+						checker.ShowSettingsAllFilesPermission();
+					return false;
+				}
+			}
+			return true;
 		}
 
 		async void OnOpenClick(object sender, EventArgs args)
@@ -59,8 +86,11 @@ namespace ObedienceX.Views
 				force = await DisplayAlert("Файл не сохранён.", "Всё равно продолжить?", "Да", "Нет");
 			if (force)
 			{
-				Model.ChangeFolderMode = false;
-				await Shell.Current.GoToAsync($"{nameof(CompetitionsPage)}");
+				if (await CheckPermissions())
+				{
+					Model.ChangeFolderMode = false;
+					await Shell.Current.GoToAsync($"{nameof(CompetitionsPage)}");
+				}
 			}
 		}
 
@@ -94,6 +124,37 @@ namespace ObedienceX.Views
 					Model.Exchange();
 					ReloadPage();
 				}
+			}
+		}
+
+		async void OnDeleteButtonClicked(object sender, EventArgs e)
+		{
+			if (await Shell.Current.DisplayAlert("Удаление", "Текущий файл соревнований будет удален насовсем. Вы уверены?", "Удалить", "Отменить"))
+			{
+				var competition = Model.Competition;
+
+				// Delete the file.
+				//if (File.Exists(competition.FileName))
+				//	File.Delete(competition.FileName);
+				if (competition != null && File.Exists(competition.ExcelName))
+					File.Delete(competition.ExcelName);
+
+				Competition savedPrev = Model.Prev;
+				Model.Competition = null;
+				Model.Prev = savedPrev;
+				ReloadPage();
+			}
+		}
+
+		async void OnSaveAsClicked(object sender, EventArgs e)
+		{
+			var checker = DependencyService.Get<IPermissionChecker>();
+			if (checker.CheckAllFilesPermission())
+				await Shell.Current.GoToAsync($"{nameof(SaveAsPage)}");
+			else
+			{
+				if (await Shell.Current.DisplayAlert(checker.GetConfirmCaption(), checker.GetConfirmSaveText(), checker.GetAgreeButton(), checker.GetCancelButton()))
+					checker.ShowSettingsAllFilesPermission();
 			}
 		}
 	}

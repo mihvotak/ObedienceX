@@ -42,9 +42,12 @@
 				   VerticalOptions="FillAndExpand" />
 			</StackLayout>
 
-			<Button Text="Открыть файл..." Clicked="OnOpenClick"/>
+			<Button Text="Открыть файл..." Clicked="OnOpenClick" />
 
-			<Button Text="Создать новый" Clicked="OnAddClicked"/>
+			<Button Text="Создать новый" Clicked="OnAddClicked" />
+
+			<Button Text="Сохранить как..." Clicked="OnSaveAsClicked" x:Name="SaveAsButton" />
+			<Button Text="Удалить" Clicked="OnDeleteButtonClicked" x:Name="DeleteButton" />
 		</StackLayout>
     </ContentPage.Content>
 </ContentPage>

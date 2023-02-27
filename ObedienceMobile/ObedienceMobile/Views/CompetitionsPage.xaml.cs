@@ -1,12 +1,8 @@
-﻿using Newtonsoft.Json;
-using ObedienceX.Data;
-using ObedienceX.Utils;
+﻿using ObedienceX.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,7 +11,6 @@ namespace ObedienceX.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CompetitionsPage : ContentPage
 	{
-		private PermissionService _permissionService;
 		private Label _pathLabel;
 		private Label _errorLabel;
 		private Button _okButton;
@@ -23,7 +18,6 @@ namespace ObedienceX.Views
 		public CompetitionsPage()
 		{
 			InitializeComponent();
-			_permissionService = new PermissionService();
 			_pathLabel = (Label)FindByName("CurrentPath");
 			_errorLabel = (Label)FindByName("Error");
 			_okButton = (Button)FindByName("OkButton");
@@ -38,23 +32,11 @@ namespace ObedienceX.Views
 			_okButton.IsVisible = Model.ChangeFolderMode;
 		}
 
-		private async Task<bool> CheckPermissions()
-		{
-			var status = await _permissionService.CheckAndRequestPermissionAsync(new Permissions.StorageWrite());
-			if (status != PermissionStatus.Granted)
-			{
-				await App.Current.MainPage.DisplayAlert("Error", "You do not have writing permissions", "Ok");
-				return false;
-			}
-			return true;
-		}
-
 		async private void UpdateList()
 		{
 			_pathLabel.Text = App.FolderPath;
 			_errorLabel.IsVisible = false;
 			_errorLabel.Text = "";
-			if (await CheckPermissions())
 			{
 				try
 				{
