@@ -79,7 +79,7 @@
 							</Grid.ColumnDefinitions>
 
 							<Label Grid.Column="0" Grid.RowSpan="2"
-							Text="{Binding Number}"
+							Text="{Binding StartNumber}"
 							FontSize="Medium"
 							HorizontalTextAlignment="Center"
 							BackgroundColor="{StaticResource SubHeader}" 

@@ -9,6 +9,9 @@
 	<ContentPage.Content>
 		<ScrollView>
 			<StackLayout Margin="10">
+				<Label Text="Стартовый номер" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}"/>
+				<Entry Grid.Column="1" Text="{Binding StartNumStr}" Keyboard="Numeric" FontSize="Medium" TextColor="Gray" />
+
 				<Label Text="Проводник" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}"/>
 				<Entry Text="{Binding Handler, Mode=TwoWay}" FontSize="Medium" TextColor="Gray" TextChanged="OnTextChanged" />
 				

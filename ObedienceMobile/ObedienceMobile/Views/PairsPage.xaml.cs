@@ -34,6 +34,7 @@ namespace ObedienceX.Views
 			var pair = new Pair() { Competition = Model.Competition, Marks = new ObservableCollection<Mark>() };
 			Model.Competition.Pairs.Add(pair);
 			pair.SetNumber(Model.Competition.Pairs.Count);
+			pair.StartNumber = pair.Number;
 			Model.Competition.Saved = false;
 		}
 
@@ -64,7 +65,10 @@ namespace ObedienceX.Views
 		private void UpdateNumbers()
 		{
 			for (int i = 0; i < Model.Competition.Pairs.Count; i++)
+			{
 				Model.Competition.Pairs[i].SetNumber(i + 1);
+				Model.Competition.Pairs[i].StartNumber = i + 1;
+			}
 		}
 	}
 }

@@ -137,6 +137,19 @@ public class Pair: INotifyPropertyChanged
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Number)));
 	}
 
+	public int StartNumber { get; set; }
+	public string StartNumStr { 
+		get 
+		{
+			return StartNumber.ToString();
+		}
+		set
+		{
+			if (int.TryParse(value, out int newValue) && StartNumber > 0)
+				StartNumber = newValue;
+		}
+	}
+
 	public void DispatchNamesChanged()
 	{
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Handler)));
