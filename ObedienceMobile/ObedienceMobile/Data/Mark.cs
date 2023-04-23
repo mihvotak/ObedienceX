@@ -49,11 +49,21 @@ namespace ObedienceX.Data
 			{
 				float newVal;
 				bool isSet = float.TryParse(value, out newVal);
-				if (isSet && (Value != newVal || !IsSet))
+				if (value == "")
+				{
+					Value = 0;
+					IsSet = false;
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MultipliedValueStr)));
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ValueStr)));
+					Pair.RecalculateSum();
+					Pair.Competition.Saved = false;
+				}
+				else if (isSet && (Value != newVal || !IsSet))
 				{
 					Value = newVal;
 					IsSet = isSet;
 					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MultipliedValueStr)));
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ValueStr)));
 					Pair.RecalculateSum();
 					Pair.Competition.Saved = false;
 				}

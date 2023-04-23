@@ -19,7 +19,7 @@ namespace ObedienceX.Views
 
 		protected override void OnAppearing()
 		{
-			UpdateNumbers();
+			UpdateNumbers(false);
 			base.OnAppearing();
 
 			collectionView.ItemsSource = Model.Competition.Pairs;
@@ -59,15 +59,16 @@ namespace ObedienceX.Views
 				Model.Competition.Pairs.RemoveAt(index);
 				Model.Competition.Saved = false;
 			}
-			UpdateNumbers();
+			UpdateNumbers(true);
 		}
 
-		private void UpdateNumbers()
+		private void UpdateNumbers(bool resetStartNums)
 		{
 			for (int i = 0; i < Model.Competition.Pairs.Count; i++)
 			{
 				Model.Competition.Pairs[i].SetNumber(i + 1);
-				Model.Competition.Pairs[i].StartNumber = i + 1;
+				if (resetStartNums)
+					Model.Competition.Pairs[i].StartNumber = i + 1;
 			}
 		}
 	}

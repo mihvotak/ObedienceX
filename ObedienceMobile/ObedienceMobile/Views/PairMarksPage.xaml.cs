@@ -30,6 +30,8 @@ namespace ObedienceX.Views
 			}
 		}
 
+		private Layout _marksSelectionLayout;
+
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
@@ -54,11 +56,30 @@ namespace ObedienceX.Views
 			BindingContext = pair;
 			collectionView.ItemsSource = pair.Marks;
 			ToolbarItems[0].BindingContext = competition;
+			_marksSelectionLayout = (Layout)FindByName("MarkSelector");
+			_marksSelectionLayout.IsVisible = false;
 		}
 
 		void OnSaveClicked(object sender, EventArgs e)
 		{
 			Model.ReSaveCurrent();
+		}
+
+		public void OnMarkClicked(object sender, EventArgs e)
+		{
+			int index = (int)((Button)sender).CommandParameter - 1;
+			if (index >= 0 && index <= CurrentPair.Marks.Count - 1)
+			{
+				CurrentPair.CurrentMarkIndex = index;
+				_marksSelectionLayout.IsVisible = true;
+			}
+		}
+
+		public void OnMarkSelected(object sender, EventArgs e)
+		{
+			string val = (string)((Button)sender).CommandParameter;
+			CurrentPair.Marks[CurrentPair.CurrentMarkIndex].ValueStr = val;
+			_marksSelectionLayout.IsVisible = false;
 		}
 	}
 }

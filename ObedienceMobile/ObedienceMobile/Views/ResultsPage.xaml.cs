@@ -32,7 +32,7 @@ namespace ObedienceX.Views
 			var competition = Model.Competition;
 			{
 				List<Pair> pairs = new List<Pair>(competition.Pairs);
-				pairs.Sort((p1, p2) => p2.StartNumber.CompareTo(p1.StartNumber));
+				pairs.Sort((p1, p2) => p1.StartNumber.CompareTo(p2.StartNumber));
 				competition.Pairs = new System.Collections.ObjectModel.ObservableCollection<Pair>(pairs);
 			}
 			competition.RecalculateResults();

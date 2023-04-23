@@ -33,6 +33,9 @@ public class Pair: INotifyPropertyChanged
 	public string DogKindAndName { get { return DogKind + "\n" + DogName; } }
 
 	public ObservableCollection<Mark> Marks { get; set; }
+	[JsonIgnore]
+	public int CurrentMarkIndex { get; set; }
+
 	public bool PenaltyIsSet;
 	public double PenaltyValue;
 	public string PenaltyStr { 
@@ -137,7 +140,10 @@ public class Pair: INotifyPropertyChanged
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Number)));
 	}
 
-	public int StartNumber { get; set; }
+	public int StartNumber { 
+		get; 
+		set; 
+	}
 	public string StartNumStr { 
 		get 
 		{
@@ -145,8 +151,13 @@ public class Pair: INotifyPropertyChanged
 		}
 		set
 		{
-			if (int.TryParse(value, out int newValue) && StartNumber > 0)
+			if (int.TryParse(value, out int newValue) && newValue > 0)
+			{
 				StartNumber = newValue;
+				Competition.Saved = false;
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(StartNumber)));
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(StartNumStr)));
+			}
 		}
 	}
 

@@ -6,68 +6,71 @@
 		<ToolbarItem Clicked="OnSaveClicked" Text="{Binding SaveText}" />
 	</ContentPage.ToolbarItems>
 
-	<StackLayout Orientation="Vertical" Spacing="0">
-		<Grid Padding="10,10,10,0" RowSpacing="0">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition Height="Auto" />
-				<RowDefinition Height="Auto" />
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="90" />
-			</Grid.ColumnDefinitions>
+	<AbsoluteLayout Margin="0" Padding="0">
+		<StackLayout Orientation="Vertical" Spacing="0" VerticalOptions="Fill" 
+					 AbsoluteLayout.LayoutBounds="0, 0, 1, 1"  
+                     AbsoluteLayout.LayoutFlags="All" Margin="0">
+			<Grid Padding="10,10,10,0" RowSpacing="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="90" />
+				</Grid.ColumnDefinitions>
 
-			<Label Grid.Column="0" Grid.Row="0" 
+				<Label Grid.Column="0" Grid.Row="0" 
 				   Text="{Binding Handler}"
 				   FontSize="Medium" LineBreakMode="TailTruncation"
 				   BackgroundColor="{StaticResource SubHeader}" />
-			<Label Grid.Column="0" Grid.Row="1" 
+				<Label Grid.Column="0" Grid.Row="1" 
 				   Text="{Binding DogKind}"
 				   BackgroundColor="{StaticResource SubHeader}" />
-			<Label Grid.Column="0" Grid.Row="2" 
+				<Label Grid.Column="0" Grid.Row="2" 
 				   Text="{Binding DogName}"
 				   BackgroundColor="{StaticResource SubHeader}" />
-			<Label Grid.Column="1" 
+				<Label Grid.Column="1" 
 				   FontSize="Large" FontAttributes="Bold"
 				   Text="{Binding Sum}"
 				   Margin="0"
 				   HorizontalTextAlignment="Center"
 				   BackgroundColor="{StaticResource SubHeader}" />
-			<Label Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
+				<Label Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
 				   FontSize="Small" FontAttributes="Bold"
 				   VerticalTextAlignment="Center"
 				   HorizontalTextAlignment="Center"
 				   Text="{Binding Result}"
 				   BackgroundColor="{StaticResource SubHeader}" />
-		</Grid>
+			</Grid>
 
-		<Grid Padding="10,10,10,0">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="30" />
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="50" />
-				<ColumnDefinition Width="55" />
-			</Grid.ColumnDefinitions>
+			<Grid Padding="10,10,10,0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="30" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="50" />
+					<ColumnDefinition Width="55" />
+				</Grid.ColumnDefinitions>
 
-			<Label Grid.Column="0"
+				<Label Grid.Column="0"
 				   Text="№"
 				   Margin="3,0,0,0"
 				   BackgroundColor="White"
 				   FontSize="Medium" 
 				   TextColor="Gray"
 						   />
-			<Label Grid.Column="1"
+				<Label Grid.Column="1"
 				   Text="Испытание"
 				   Margin="3,0,0,0"
 				   BackgroundColor="White"
 				   FontSize="Medium" 
 				   TextColor="Gray"
 						   />
-			<Label Grid.Column="2"
+				<Label Grid.Column="2"
 					Text="Оц."
 					Margin="3,0,0,0"
 				   BackgroundColor="White"
@@ -75,7 +78,7 @@
 				   TextColor="Gray"
 				   LineBreakMode="NoWrap"
 							/>
-			<Label Grid.Column="3"
+				<Label Grid.Column="3"
 					Text="xK"
 					Margin="3,0,0,0"
 				   BackgroundColor="White"
@@ -83,36 +86,36 @@
 				   TextColor="Gray"
 				   LineBreakMode="NoWrap"
 							/>
-		</Grid>
+			</Grid>
 
-		<ScrollView>
-			<CollectionView x:Name="collectionView" >
-				<CollectionView.ItemsLayout>
-					<GridItemsLayout Orientation="Vertical"/>
-				</CollectionView.ItemsLayout>
-				
-				<CollectionView.ItemTemplate>
-					<DataTemplate>
-						<Grid Padding="10,0,10,10" RowSpacing="0">
-							<Grid.RowDefinitions>
-								<RowDefinition Height="Auto" />
-								<RowDefinition Height="Auto" />
-							</Grid.RowDefinitions>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="30" />
-								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="50" />
-								<ColumnDefinition Width="55" />
-							</Grid.ColumnDefinitions>
+			<ScrollView>
+				<CollectionView x:Name="collectionView" >
+					<CollectionView.ItemsLayout>
+						<GridItemsLayout Orientation="Vertical"/>
+					</CollectionView.ItemsLayout>
 
-							<Label Grid.Column="0" Grid.RowSpan="2"
+					<CollectionView.ItemTemplate>
+						<DataTemplate>
+							<Grid Padding="10,0,10,10" RowSpacing="0">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="30" />
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="50" />
+									<ColumnDefinition Width="55" />
+								</Grid.ColumnDefinitions>
+
+								<Label Grid.Column="0" Grid.RowSpan="2"
 								Text="{Binding ExamNumber}"
 								FontSize="Large"
 								VerticalTextAlignment="Center"
 								HorizontalTextAlignment="Center"
 								BackgroundColor="{StaticResource SubHeader}" 
 							/>
-							<Label Grid.Column="1" Grid.RowSpan="2"
+								<Label Grid.Column="1" Grid.RowSpan="2"
 								Text="{Binding ExamName}"
 								VerticalTextAlignment="Center"
 								FontSize="Medium"
@@ -120,41 +123,42 @@
 								MaxLines="2"
 								BackgroundColor="{StaticResource SubHeader}" 
 							/>
-							<Picker Grid.Column="2" Grid.RowSpan="2"
-								ItemsSource="{Binding Values}" SelectedItem="{Binding ValueStr}"
-								FontSize="Large"  HorizontalTextAlignment="Center"
-								TextColor="Gray" Margin="-5,0,-5,0"
+								<Button Grid.Column="2" Grid.RowSpan="2"
+								Text="{Binding ValueStr}"
+								FontSize="Large"  BackgroundColor="AliceBlue"
+								TextColor="Gray" Margin="-12,0,-10,0" Padding="0"
+								Clicked="OnMarkClicked" CommandParameter="{Binding ExamNumber}"
 							/>
-							<Label Text="{Binding ExamMultiplier}" Grid.Column="3"
+								<Label Text="{Binding ExamMultiplier}" Grid.Column="3"
 									VerticalTextAlignment="Center"
 									HorizontalTextAlignment="End"
 									Padding="0,0,3,0"
 									BackgroundColor="{StaticResource SubHeader}" 
 									TextColor="AliceBlue"
 									FontSize="Small" />
-							<Label Text="{Binding MultipliedValueStr}" Grid.Column="3" Grid.Row="1"
+								<Label Text="{Binding MultipliedValueStr}" Grid.Column="3" Grid.Row="1"
 									VerticalTextAlignment="Center"
 									HorizontalTextAlignment="Center"
 									Margin="0"
 									BackgroundColor="{StaticResource SubHeader}" 
 									FontSize="Medium" />
-						</Grid>
-					</DataTemplate>
-				</CollectionView.ItemTemplate>
-			</CollectionView>
-		</ScrollView>
-		<Grid Padding="10,0,10,10" RowSpacing="0">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="40" />
-				<ColumnDefinition Width="20" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
+							</Grid>
+						</DataTemplate>
+					</CollectionView.ItemTemplate>
+				</CollectionView>
+			</ScrollView>
+			<Grid Padding="10,0,10,10" RowSpacing="0" Margin="0,5,0,-5">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="40" />
+					<ColumnDefinition Width="20" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
 
-			<Label Grid.Column="0"
+				<Label Grid.Column="0"
 				Text="Штраф"
 				VerticalTextAlignment="Center"
 				FontSize="Medium"
@@ -162,18 +166,63 @@
 				BackgroundColor="{StaticResource SubHeader}"
 				TextColor="White"
 			/>
-			<Entry Grid.Column="1" Text="{Binding PenaltyStr}"
+				<Entry Grid.Column="1" Text="{Binding PenaltyStr}"
 				Keyboard="Numeric"
 				FontSize="Medium"  HorizontalTextAlignment="Center"
 				TextColor="Gray" Margin="-5,0,-5,0"
 			/>
-			<Picker Grid.Column="3"
+				<Picker Grid.Column="3"
 				ItemsSource="{Binding StatusesList}" 
 				SelectedItem="{Binding SpecialStatus}" 
 				BackgroundColor="{StaticResource SubHeader}" 
 					TextColor="Yellow"
 				
 			/>
-		</Grid>
-	</StackLayout>
+			</Grid>
+		</StackLayout>
+		<FlexLayout VerticalOptions="Fill" HorizontalOptions="FillAndExpand"
+					AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"
+				BackgroundColor="White" Direction="Column" IsVisible="False" x:Name="MarkSelector">
+			<FlexLayout.Resources>
+				<Style  x:Key="btnStyle" TargetType="Button">
+					<Setter Property="WidthRequest" Value="500" />
+					<Setter Property="Margin" Value="10, 0" />
+					<Setter Property="FontSize" Value="Large" />
+					<Setter Property="BackgroundColor" Value="{StaticResource SubHeader}" />
+					<Setter Property="TextColor" Value="White" />
+				</Style>
+				<Style  x:Key="flexStyle" TargetType="FlexLayout">
+					<Setter Property="HeightRequest" Value="500" />
+					<Setter Property="Margin" Value="0, 10" />
+				</Style>
+			</FlexLayout.Resources>
+			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}">
+				<Button Text="0" CommandParameter="0" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+				<Button Text="-" CommandParameter="" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			</FlexLayout>
+			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}">
+				<Button Text="5" CommandParameter="5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+				<Button Text="5.5" CommandParameter="5.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			</FlexLayout>
+			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}">
+				<Button Text="6" CommandParameter="6" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+				<Button Text="6.5" CommandParameter="6.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			</FlexLayout>
+			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}">
+				<Button Text="7" CommandParameter="7" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+				<Button Text="7.5" CommandParameter="7.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			</FlexLayout>
+			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}">
+				<Button Text="8" CommandParameter="8" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+				<Button Text="8.5" CommandParameter="8.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			</FlexLayout>
+			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}">
+				<Button Text="9" CommandParameter="9" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+				<Button Text="9.5" CommandParameter="9.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			</FlexLayout>
+			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}">
+				<Button Text="10" CommandParameter="10" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			</FlexLayout>
+		</FlexLayout>
+	</AbsoluteLayout>
 </ContentPage>

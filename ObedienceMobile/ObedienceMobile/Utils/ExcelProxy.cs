@@ -88,13 +88,33 @@ namespace ObedienceX.Utils
 						competition.Pairs.Add(pair);
 
 						DateTime date = DateTime.Now;
-						for (int i = 2; i <= 11; i++)
+						pair.StartNumber = competition.Pairs.Count;
+						for (int i = 1; i <= 11; i++)
 						{
 							var cell = sheet.Cells[startRow + index, i];
-							if (i == 6)
+							if (i == 1)
 							{
-								if (cell != null && cell.Value != null)
+								try
+								{
+									var doubleValue = (double)cell.Value;
+									pair.StartNumber = (int)doubleValue;
+								}
+								catch (Exception e) 
+								{
+									Console.WriteLine(e.Message);
+								}
+							}
+							else if (i == 6)
+							{
+								try
+								{
+									if (cell != null && cell.Value != null)
 									date = (DateTime)cell.Value;
+								}
+								catch (Exception e)
+								{
+									Console.WriteLine(e.Message);
+								}
 							}
 							else
 							{
