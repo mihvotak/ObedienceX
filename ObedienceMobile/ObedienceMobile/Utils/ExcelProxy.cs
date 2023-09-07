@@ -33,7 +33,11 @@ namespace ObedienceX.Utils
 				}	
 				var sheet = package.Workbook.Worksheets[0];
 				int index = 0;
-				int startColumn = 12;
+				int startColumn12 = 12;
+				int startColumn = startColumn12;
+				int startRow = 4;
+				int judgesCount = 1;
+				bool started = false;
 				try
 				{
 					while (true)
@@ -41,18 +45,28 @@ namespace ObedienceX.Utils
 						var cell1 = sheet.Cells[1, startColumn + index];
 						var cell2 = sheet.Cells[2, startColumn + index];
 						var cell3 = sheet.Cells[3, startColumn + index];
-						if (cell1 == null || cell1.Value == null
-							|| cell2 == null || cell2.Value == null
-							|| cell3 == null || cell3.Value == null)
+						if (cell1 == null
+							|| cell2 == null
+							|| cell3 == null)
 							break;
-						int num = Convert.ToInt32((double)(cell1.Value));
+						int num = cell1.Value == null ? 0 : Convert.ToInt32((double)(cell1.Value));
+						string name = cell2.Value == null ? "" : (string)cell2.Value;
+						int multiplier = cell3.Value == null ? 0 : Convert.ToInt32((double)cell3.Value);
+						if (!started && num == 0)
+						{
+							startColumn++;
+							if (startColumn > 32)
+							{
+								startColumn = startColumn12;
+								break;
+							}
+							continue;
+						}
+						else
+							started = true;
 						if (num <= 0)
 							break;
-						string name = (string)cell2.Value;
 						if (string.IsNullOrEmpty(name) || name.Length < 2)
-							break;
-						int multiplier = Convert.ToInt32((double)cell3.Value);
-						if (multiplier < 2 || multiplier > 4)
 							break;
 						competition.Examinations.Add(new Examination() { Name = name, Multiplier = multiplier });
 						index++;
@@ -64,6 +78,48 @@ namespace ObedienceX.Utils
 							break;
 						index++;
 					}
+					int down = 1;
+					if (startColumn > startColumn12)
+					{
+						while (true)
+						{
+							var cell1 = sheet.Cells[startRow + down, 1];
+							if (cell1 == null)
+								break;
+							if (cell1.Value != null)
+							{
+								int num = Convert.ToInt32((double)(cell1.Value));
+								if (num > 0)
+								{
+									if (down > 1)
+										judgesCount = down - 1;
+									break;
+								}
+							}
+							down++;
+							if (down - 1 > Competition.MaxJudgesCount)
+								break;
+						}
+						var cell3 = sheet.Cells[3, startColumn - 1];
+						if (cell3 != null && cell3.Value != null)
+						{
+							int num = Convert.ToInt32((double)(cell3.Value));
+							if (num > 0)
+							{
+								judgesCount = num;
+							}
+						}
+						for (int i = 0; i < judgesCount; i++)
+						{
+							var cellJ = sheet.Cells[startRow, startColumn - 1];
+							string name = cellJ?.Value as string;
+							Judge judge = new Judge() { Name = name };
+							if (i > competition.Judges.Count - 1)
+								competition.Judges.Add(judge);
+                            else
+								competition.Judges[i] = judge;
+						}
+					}
 				}
 				catch (Exception e)
 				{
@@ -71,7 +127,6 @@ namespace ObedienceX.Utils
 				}
 				int lastExamColNum = startColumn + index - 1;
 
-				int startRow = 4;
 				index = 0;
 				try
 				{
@@ -132,19 +187,26 @@ namespace ObedienceX.Utils
 						pair.ChipNumber = values[9] ?? "";
 						pair.Owner = values[10] ?? "";
 						pair.OwnedBy = values[11] ?? "";
-						pair.Marks = new ObservableCollection<Mark>();
+						pair.Marks = new ObservableCollection<MarksSet>();
 
-						for (int i = 12; i < 12 + competition.Examinations.Count; i++)
+						for (int i = startColumn; i < startColumn + competition.Examinations.Count; i++)
 						{
-							var cell = sheet.Cells[startRow + index, i];
-							Mark mark = new Mark();
-							mark.Examination = competition.Examinations[pair.Marks.Count];
-							pair.Marks.Add(mark);
-							if (cell != null && cell.Value != null && cell.Value is double)
+							MarksSet marksSet = new MarksSet();
+							marksSet.Examination = competition.Examinations[pair.Marks.Count];
+							pair.Marks.Add(marksSet);
+							for (int j = 0; j < competition.JudgesCount; j++)
 							{
-								mark.Value = (double)(cell.Value);
-								mark.IsSet = mark.IsValid;
+								var cell = sheet.Cells[startRow + index + j, i];
+								Mark mark = new Mark();
+								marksSet.Marks.Add(mark);
+								if (cell != null && cell.Value != null && cell.Value is double)
+								{
+									mark.Value = (double)(cell.Value);
+									mark.IsSet = mark.IsValid;
+									marksSet.IsSet |= mark.IsSet;
+								}
 							}
+							marksSet.RecalculateMidValue(false);
 						}
 						{
 							int colIndex = lastExamColNum + 1;
@@ -162,7 +224,7 @@ namespace ObedienceX.Utils
 						}
 						pair.RecalculateSum();
 
-						index += 2;
+						index += judgesCount + 1;
 					}
 				}
 				catch (Exception e)
@@ -213,10 +275,12 @@ namespace ObedienceX.Utils
 			{
 				Stream templateStream = null;
 				Stream resultStream = null;
+				int judgesCount = competition.JudgesCount;
 				if (!File.Exists(fileName))
 				{
 					var assembly = Assembly.GetExecutingAssembly();
-					var resName = assembly.GetName().Name.ToString() + ".Res.Template.xlsx";
+					string name = judgesCount > 1 ? "Template" + judgesCount : "Template";
+					var resName = assembly.GetName().Name.ToString() + ".Res." + name + ".xlsx";
 					templateStream = assembly.GetManifestResourceStream(resName);
 					resultStream = File.Create(fileName);
 				}
@@ -230,8 +294,8 @@ namespace ObedienceX.Utils
 						throw new Exception("Попытка сохранить в пустой файл. Попробуйте снова.");
 					}
 					var sheet = package.Workbook.Worksheets[0];
-					int startColumn = 12;
-					int lastColNum = 12;
+					int startColumn = judgesCount > 1 ? 13 : 12;
+					int lastColNum = startColumn;
 					for (int i = 0; i < competition.Examinations.Count; i++)
 					{
 						sheet.Cells[1, startColumn + i].Value = i + 1;
@@ -258,37 +322,40 @@ namespace ObedienceX.Utils
 						else
 							break;
 					}
-					ExcelStyle[] styles = new ExcelStyle[12];
 					double rowHeight1 = 0;
 					double rowHeight2 = 0;
 					ExcelStyle style1 = null;
 					ExcelStyle style2 = null;
 					string formula = null;
+					ExcelStyle[] styles = new ExcelStyle[startColumn];
+					int delta = judgesCount + 1;
 					for (int i = 0; i < competition.Pairs.Count; i++)
 					{
-						int rowNum = 4 + i * 2;
+						int rowNum = 4 + i * (judgesCount + 1);
 						if (i == 0)
 						{
 							rowHeight1 = sheet.Rows[rowNum + 0].Height;
-							rowHeight2 = sheet.Rows[rowNum + 1].Height;
-							style1 = sheet.Cells[rowNum + 0, 12].Style;
-							style2 = sheet.Cells[rowNum + 1, 12].Style;
-							for (int j = 1; j <= 11; j++)
+							rowHeight2 = sheet.Rows[rowNum + judgesCount].Height;
+							style1 = sheet.Cells[rowNum + 0, startColumn].Style;
+							style2 = sheet.Cells[rowNum + judgesCount, startColumn].Style;
+							for (int j = 1; j <= startColumn - 1; j++)
 								styles[j] = sheet.Cells[rowNum, j].Style;
-							formula = sheet.Cells[rowNum + 1, 12].Formula;
+							formula = sheet.Cells[rowNum + judgesCount, startColumn].Formula;
 						}
 						else
 						{
 							sheet.Rows[rowNum].Height = rowHeight1;
-							for (int j = 1; j <= 11; j++)
+							for (int j = 1; j <= startColumn - 1; j++)
 								CopyStyle(sheet.Cells[rowNum, j], styles[j]);
 							sheet.Cells[rowNum + 0, 6].Style.Numberformat.Format = styles[6].Numberformat.Format;
 							for (int j = 12; j <= lastColNum; j++)
 							{
-								CopyStyle(sheet.Cells[rowNum + 0, j], sheet.Cells[rowNum - 2 + 0, j].Style);
-								CopyStyle(sheet.Cells[rowNum + 1, j], sheet.Cells[rowNum - 2 + 1, j].Style);
-								sheet.Cells[rowNum + 0, j].FormulaR1C1 = sheet.Cells[rowNum - 2 + 0, j].FormulaR1C1;
-								sheet.Cells[rowNum + 1, j].FormulaR1C1 = sheet.Cells[rowNum - 2 + 1, j].FormulaR1C1;
+								for (int k = 0; k < judgesCount; k++)
+									CopyStyle(sheet.Cells[rowNum + k, j], sheet.Cells[rowNum - delta + k, j].Style);
+								CopyStyle(sheet.Cells[rowNum + judgesCount, j], sheet.Cells[rowNum - delta + judgesCount, j].Style);
+								for (int k = 0; k < judgesCount; k++)
+									sheet.Cells[rowNum + k, j].FormulaR1C1 = sheet.Cells[rowNum - delta + k, j].FormulaR1C1;
+								sheet.Cells[rowNum + judgesCount, j].FormulaR1C1 = sheet.Cells[rowNum - delta + judgesCount, j].FormulaR1C1;
 							}
 						}
 						Pair pair = competition.Pairs[i];
@@ -303,18 +370,25 @@ namespace ObedienceX.Utils
 						sheet.Cells[rowNum, 9].Value = pair.ChipNumber;
 						sheet.Cells[rowNum, 10].Value = pair.Owner;
 						sheet.Cells[rowNum, 11].Value = pair.OwnedBy;
-						for (int j = 12; j < 12 + pair.Marks.Count; j++)
+						if (judgesCount > 1)
+							for (int j = 0; j < judgesCount; j++)
+								sheet.Cells[rowNum + j, 12].Value = competition.Judges[j].Name;
+						for (int j = startColumn; j < startColumn + pair.Marks.Count; j++)
 						{
-							Mark mark = pair.Marks[j - 12];
-							if (mark.IsSet)
-								sheet.Cells[rowNum, j].Value = mark.Value;
-							else
-								sheet.Cells[rowNum, j].Value = null;
+							var marksSet = pair.Marks[j - startColumn];
+							for (int k = 0; k < judgesCount; k++)
+							{
+								Mark mark = marksSet.Marks[k];
+								if (mark.IsSet)
+									sheet.Cells[rowNum + k, j].Value = mark.Value;
+								else
+									sheet.Cells[rowNum + k, j].Value = null;
+							}
 						}
-						for (int j = 12 + pair.Marks.Count; j <= lastMarkColNum; j++)
+						for (int j = startColumn + pair.Marks.Count; j <= lastMarkColNum; j++)
 						{
-							sheet.Cells[rowNum + 0, j].Value = null;
-							sheet.Cells[rowNum + 1, j].Value = null;
+							for (int k = 0; k < judgesCount + 1; k++)
+								sheet.Cells[rowNum + k, j].Value = null;
 						}
 						{
 							int j = lastMarkColNum + 1;
@@ -323,9 +397,9 @@ namespace ObedienceX.Utils
 							else
 								sheet.Cells[rowNum, j].Value = null;
 							if (!string.IsNullOrEmpty(pair.SpecialStatus))
-								sheet.Cells[rowNum + 1, j].Value = pair.SpecialStatus;
+								sheet.Cells[rowNum + judgesCount, j].Value = pair.SpecialStatus;
 							else
-								sheet.Cells[rowNum + 1, j].Value = null;
+								sheet.Cells[rowNum + judgesCount, j].Value = null;
 						}
 					}
 

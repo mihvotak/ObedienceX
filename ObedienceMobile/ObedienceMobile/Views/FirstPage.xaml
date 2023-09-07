@@ -9,45 +9,65 @@
                      Clicked="OnSaveClicked" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
-        <StackLayout Spacing="30" VerticalOptions="Center" Padding="20">
-			<StackLayout Spacing="0" VerticalOptions="Center" Padding="0">
-				<Label x:Name="PrevFileName"
-					   FontSize="Medium"
-					   Padding="10"
-					   HorizontalOptions="Fill" 
-					   BackgroundColor="{StaticResource SubHeader}" 
-					   VerticalOptions="FillAndExpand" />
-				<Label x:Name="PrevFolder"
-					   FontSize="Small"
-					   Padding="5"
-					   HorizontalOptions="Fill" 
-					   BackgroundColor="White" 
-					   TextColor="Gray"
-					   VerticalOptions="FillAndExpand" />
+		<StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource PageBackground}">
+			<StackLayout Spacing="30" VerticalOptions="Center" Padding="20">
+				<StackLayout Spacing="0" VerticalOptions="Center" Padding="0">
+					<Label Text="Предыдущий файл" FontSize="Small"
+						   Padding="5"
+						   HorizontalOptions="Fill" 
+						   BackgroundColor="{StaticResource Primary}" 
+						   VerticalOptions="FillAndExpand" />
+					<Label x:Name="PrevFileName"
+						   FontSize="Medium"
+						   Padding="5"
+						   HorizontalOptions="Fill" 
+						   BackgroundColor="{StaticResource SubHeader}" 
+						   VerticalOptions="FillAndExpand" />
+					<Label Text="Папка" FontSize="Small"
+						   Padding="5"
+						   HorizontalOptions="Fill" 
+						   BackgroundColor="{StaticResource Primary}" 
+						   VerticalOptions="FillAndExpand" />
+					<Label x:Name="PrevFolder"
+						   FontSize="Small"
+						   Padding="5"
+						   HorizontalOptions="Fill" 
+						   BackgroundColor="{StaticResource SubHeader}" 
+						   VerticalOptions="FillAndExpand" />
+				</StackLayout>
+
+				<StackLayout Spacing="0" VerticalOptions="Center" Padding="0">
+					<Label Text="Текущий файл" FontSize="Small"
+						   Padding="5"
+						   HorizontalOptions="Fill" 
+						   BackgroundColor="{StaticResource Primary}" 
+						   VerticalOptions="FillAndExpand" />
+					<Label x:Name="CurrentFileName"
+						   FontSize="Medium"
+						   Padding="5"
+						   HorizontalOptions="Fill" 
+						   BackgroundColor="{StaticResource SubHeader}" 
+						   VerticalOptions="FillAndExpand" />
+					<Label Text="Папка" FontSize="Small"
+						   Padding="5"
+						   HorizontalOptions="Fill" 
+						   BackgroundColor="{StaticResource Primary}" 
+						   VerticalOptions="FillAndExpand" />
+					<Label x:Name="CurrentFolder"
+						   FontSize="Small"
+						   Padding="5"
+						   HorizontalOptions="Fill" 
+						   BackgroundColor="{StaticResource SubHeader}" 
+						   VerticalOptions="FillAndExpand" />
+				</StackLayout>
+
+				<Button Text="Открыть файл..." Clicked="OnOpenClick" />
+
+				<Button Text="Создать новый" Clicked="OnAddClicked" />
+
+				<Button Text="Сохранить как..." Clicked="OnSaveAsClicked" x:Name="SaveAsButton" />
+				<Button Text="Удалить" Clicked="OnDeleteButtonClicked" x:Name="DeleteButton" />
 			</StackLayout>
-
-			<StackLayout Spacing="0" VerticalOptions="Center" Padding="0">
-				<Label x:Name="CurrentFileName"
-				   FontSize="Medium"
-				   Padding="10"
-				   HorizontalOptions="Fill" 
-				   BackgroundColor="{StaticResource SubHeader}" 
-				   VerticalOptions="FillAndExpand" />
-			<Label x:Name="CurrentFolder"
-				   FontSize="Small"
-				   Padding="5"
-				   HorizontalOptions="Fill" 
-				   BackgroundColor="White" 
-				   TextColor="Gray"
-				   VerticalOptions="FillAndExpand" />
-			</StackLayout>
-
-			<Button Text="Открыть файл..." Clicked="OnOpenClick" />
-
-			<Button Text="Создать новый" Clicked="OnAddClicked" />
-
-			<Button Text="Сохранить как..." Clicked="OnSaveAsClicked" x:Name="SaveAsButton" />
-			<Button Text="Удалить" Clicked="OnDeleteButtonClicked" x:Name="DeleteButton" />
 		</StackLayout>
-    </ContentPage.Content>
+	</ContentPage.Content>
 </ContentPage>

@@ -4,7 +4,7 @@
              x:Class="ObedienceX.Views.CompetitionsPage"
 			 Title="Открыть файл соревнований">
 
-	<StackLayout>
+	<StackLayout BackgroundColor="{StaticResource PageBackground}">
 		<Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto, Auto, Auto" Margin="10, 10, 10, 0">
 			<Button Text="Корень" Clicked="OnGoRootClick"/>
 			<Button Text="Выше" Clicked="OnGoUpClick" Grid.Column="1"/>
@@ -12,13 +12,13 @@
 			<Label x:Name="CurrentPath" Grid.ColumnSpan="3" Grid.Row="1"
 				   Padding="5,0"
 				   FontSize="Medium" VerticalTextAlignment="Center"
-				   BackgroundColor="Gray"/>
+				   BackgroundColor="{StaticResource SubHeader}"/>
 			<Label x:Name="Error" Grid.ColumnSpan="3" Grid.Row="2"
-				   Padding="0,0" BackgroundColor="White"
+				   Padding="0,0" BackgroundColor="{StaticResource SubHeader}"
 				   FontSize="Small" VerticalOptions="CenterAndExpand"
 				   TextColor="Red" />
 		</Grid>
-		<ScrollView>
+		<ScrollView x:Name="MainScrollView">
 			<CollectionView x:Name="collectionView"
                     Margin="10"
                     SelectionMode="Single"
@@ -30,7 +30,7 @@
 				<!-- Define the appearance of each item in the list -->
 				<CollectionView.ItemTemplate>
 					<DataTemplate>
-						<Grid Margin="0" Padding="5" RowSpacing="0" BackgroundColor="White"
+						<Grid Margin="0" Padding="5" RowSpacing="0" BackgroundColor="{StaticResource LabelBg}"
 							  RowDefinitions="*,20" ColumnDefinitions="40,*">
 							<Image Source="excel.png"
 								   IsVisible="{Binding IsExcel}"/>
@@ -39,12 +39,11 @@
 							<Image Source="folder.png"
 								   IsVisible="{Binding IsFolder}"/>
 							<Label Text="{Binding ShortName}" Grid.Column="1"
-								   Padding="5,10"
-								   TextColor="Gray"
+								   Padding="5,10" BackgroundColor="{StaticResource SubHeader}"
+								   TextColor="{StaticResource TextColor}"
 								   FontSize="Medium"/>
 							<Label Text="{Binding DateStr}" Grid.Row="1" Grid.Column="1"
-								   TextColor="Gray"
-								   BackgroundColor="AliceBlue"
+								   BackgroundColor="{StaticResource SubHeader}"
 								   Padding="5,0"
 								   FontSize="Small" />
 						</Grid>

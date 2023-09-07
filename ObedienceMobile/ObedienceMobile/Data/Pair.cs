@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using Xamarin.Forms;
 
 [Serializable]
 public class Pair: INotifyPropertyChanged
@@ -32,9 +33,11 @@ public class Pair: INotifyPropertyChanged
 	[JsonIgnore]
 	public string DogKindAndName { get { return DogKind + "\n" + DogName; } }
 
-	public ObservableCollection<Mark> Marks { get; set; }
+	public ObservableCollection<MarksSet> Marks { get; set; }
 	[JsonIgnore]
-	public int CurrentMarkIndex { get; set; }
+	public int CurrentExamIndex { get; set; }
+	[JsonIgnore]
+	public int CurrentJudgeIndex { get; set; }
 
 	public bool PenaltyIsSet;
 	public double PenaltyValue;
@@ -139,6 +142,10 @@ public class Pair: INotifyPropertyChanged
 		Number = value;
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Number)));
 	}
+
+	public GridLength Width0 { get { return (GridLength)50; } }
+	public GridLength Width1 { get { return (GridLength)(Model.Competition.JudgesCount > 1 ? 50 : 0); } }
+	public GridLength Width2 { get { return (GridLength)(Model.Competition.JudgesCount > 2 ? 50 : 0); } }
 
 	public int StartNumber { 
 		get; 

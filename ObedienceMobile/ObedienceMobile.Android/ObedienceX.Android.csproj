@@ -54,7 +54,7 @@
     <MandroidI18n />
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AndroidKeyStore>true</AndroidKeyStore>
-    <AndroidSigningKeyStore>C:\Users\kmv\AppData\Local\Xamarin\Mono for Android\Keystore\obikey\obikey.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyStore>D:\workspace\Obedience\obikey.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>obipass</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>obikey</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>obipass</AndroidSigningKeyPass>

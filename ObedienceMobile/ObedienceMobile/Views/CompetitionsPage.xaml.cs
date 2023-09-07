@@ -14,6 +14,7 @@ namespace ObedienceX.Views
 		private Label _pathLabel;
 		private Label _errorLabel;
 		private Button _okButton;
+		private ScrollView _scrollView;
 
 		public CompetitionsPage()
 		{
@@ -21,6 +22,7 @@ namespace ObedienceX.Views
 			_pathLabel = (Label)FindByName("CurrentPath");
 			_errorLabel = (Label)FindByName("Error");
 			_okButton = (Button)FindByName("OkButton");
+			_scrollView = (ScrollView)FindByName("MainScrollView");
 		}
 
 		protected override void OnAppearing()
@@ -32,7 +34,7 @@ namespace ObedienceX.Views
 			_okButton.IsVisible = Model.ChangeFolderMode;
 		}
 
-		async private void UpdateList()
+		private void UpdateList()
 		{
 			_pathLabel.Text = App.FolderPath;
 			_errorLabel.IsVisible = false;
@@ -68,6 +70,7 @@ namespace ObedienceX.Views
 					collectionView.ItemsSource = competitionFiles
 						.OrderBy(d => d.Date)
 						.ToList();
+					_scrollView.ScrollToAsync(0, 0, false);
 				}
 				catch (Exception )
 				{

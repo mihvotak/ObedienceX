@@ -6,7 +6,7 @@
 		<ToolbarItem Clicked="OnSaveClicked" Text="{Binding SaveText}" />
 	</ContentPage.ToolbarItems>
 
-	<AbsoluteLayout Margin="0" Padding="0">
+	<AbsoluteLayout Margin="0" Padding="0" BackgroundColor="{StaticResource PageBackground}">
 		<StackLayout Orientation="Vertical" Spacing="0" VerticalOptions="Fill" 
 					 AbsoluteLayout.LayoutBounds="0, 0, 1, 1"  
                      AbsoluteLayout.LayoutFlags="All" Margin="0">
@@ -52,38 +52,44 @@
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="30" />
 					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="50" />
+					<ColumnDefinition Width="{Binding Width0}" />
+					<ColumnDefinition Width="{Binding Width1}" />
+					<ColumnDefinition Width="{Binding Width2}" />
 					<ColumnDefinition Width="55" />
 				</Grid.ColumnDefinitions>
 
 				<Label Grid.Column="0"
 				   Text="№"
 				   Margin="3,0,0,0"
-				   BackgroundColor="White"
 				   FontSize="Medium" 
-				   TextColor="Gray"
 						   />
 				<Label Grid.Column="1"
 				   Text="Испытание"
 				   Margin="3,0,0,0"
-				   BackgroundColor="White"
 				   FontSize="Medium" 
-				   TextColor="Gray"
 						   />
 				<Label Grid.Column="2"
-					Text="Оц."
+					Text="Оц1"
 					Margin="3,0,0,0"
-				   BackgroundColor="White"
 					FontSize="Medium"  
-				   TextColor="Gray"
 				   LineBreakMode="NoWrap"
 							/>
 				<Label Grid.Column="3"
+					Text="Оц2"
+					Margin="3,0,0,0"
+					FontSize="Medium"  
+				   LineBreakMode="NoWrap"
+							/>
+				<Label Grid.Column="4"
+					Text="Оц3"
+					Margin="3,0,0,0"
+					FontSize="Medium"  
+				   LineBreakMode="NoWrap"
+							/>
+				<Label Grid.Column="5"
 					Text="xK"
 					Margin="3,0,0,0"
-				   BackgroundColor="White"
 					FontSize="Medium"  
-				   TextColor="Gray"
 				   LineBreakMode="NoWrap"
 							/>
 			</Grid>
@@ -104,7 +110,9 @@
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="30" />
 									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="50" />
+									<ColumnDefinition Width="{Binding Width0}" />
+									<ColumnDefinition Width="{Binding Width1}" />
+									<ColumnDefinition Width="{Binding Width2}" />
 									<ColumnDefinition Width="55" />
 								</Grid.ColumnDefinitions>
 
@@ -124,19 +132,31 @@
 								BackgroundColor="{StaticResource SubHeader}" 
 							/>
 								<Button Grid.Column="2" Grid.RowSpan="2"
-								Text="{Binding ValueStr}"
-								FontSize="Large"  BackgroundColor="AliceBlue"
-								TextColor="Gray" Margin="-12,0,-10,0" Padding="0"
-								Clicked="OnMarkClicked" CommandParameter="{Binding ExamNumber}"
+								Text="{Binding ValueStr0}"
+								FontSize="Large"  BackgroundColor="{StaticResource MarkBg}"
+								TextColor="{StaticResource TextColor}" Margin="-4,0,-2,0" Padding="0"
+								Clicked="OnMarkClicked" CommandParameter="{Binding ExamAndJudgeNumber0}"
 							/>
-								<Label Text="{Binding ExamMultiplier}" Grid.Column="3"
+								<Button Grid.Column="3" Grid.RowSpan="2"
+								Text="{Binding ValueStr1}"
+								FontSize="Large"  BackgroundColor="{StaticResource MarkBg}"
+								TextColor="{StaticResource TextColor}" Margin="-4,0,-2,0" Padding="0"
+								Clicked="OnMarkClicked" CommandParameter="{Binding ExamAndJudgeNumber1}"
+							/>
+								<Button Grid.Column="4" Grid.RowSpan="2"
+								Text="{Binding ValueStr2}"
+								FontSize="Large"  BackgroundColor="{StaticResource MarkBg}"
+								TextColor="{StaticResource TextColor}" Margin="-4,0,-2,0" Padding="0"
+								Clicked="OnMarkClicked" CommandParameter="{Binding ExamAndJudgeNumber2}"
+							/>
+								<Label Text="{Binding ExamMultiplier}" Grid.Column="5"
 									VerticalTextAlignment="Center"
 									HorizontalTextAlignment="End"
 									Padding="0,0,3,0"
 									BackgroundColor="{StaticResource SubHeader}" 
 									TextColor="AliceBlue"
 									FontSize="Small" />
-								<Label Text="{Binding MultipliedValueStr}" Grid.Column="3" Grid.Row="1"
+								<Label Text="{Binding MultipliedValueStr}" Grid.Column="5" Grid.Row="1"
 									VerticalTextAlignment="Center"
 									HorizontalTextAlignment="Center"
 									Margin="0"
@@ -164,12 +184,11 @@
 				FontSize="Medium"
 				Margin="0"
 				BackgroundColor="{StaticResource SubHeader}"
-				TextColor="White"
 			/>
 				<Entry Grid.Column="1" Text="{Binding PenaltyStr}"
 				Keyboard="Numeric"
 				FontSize="Medium"  HorizontalTextAlignment="Center"
-				TextColor="Gray" Margin="-5,0,-5,0"
+				Margin="-5,0,-5,0"
 			/>
 				<Picker Grid.Column="3"
 				ItemsSource="{Binding StatusesList}" 
@@ -182,7 +201,7 @@
 		</StackLayout>
 		<FlexLayout VerticalOptions="Fill" HorizontalOptions="FillAndExpand"
 					AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"
-				BackgroundColor="White" Direction="Column" IsVisible="False" x:Name="MarkSelector">
+				BackgroundColor="{StaticResource PageBackground}" Direction="Column" IsVisible="False" x:Name="MarkSelector">
 			<FlexLayout.Resources>
 				<Style  x:Key="btnStyle" TargetType="Button">
 					<Setter Property="WidthRequest" Value="500" />

@@ -10,6 +10,7 @@ using ObedienceX.Data;
 public class Competition : INotifyPropertyChanged
 {
 	public const int MaxExamsCount = 11;
+	public const int MaxJudgesCount = 3;
 
 	public Competition()
 	{
@@ -64,8 +65,13 @@ public class Competition : INotifyPropertyChanged
 	public string Club { get; set; }
 	public string Place { get; set; }
 	public string Director { get; set; }
-	public string Judge { get; set; }
 	public string Secretary { get; set; }
+	public string Judge { get; set; }
+	public int JudgesCount
+	{
+		get { return Judges.Count; }
+	}
+	public ObservableCollection<Judge> Judges { get; set; } = new ObservableCollection<Judge>() { new Judge() };
 	public ObservableCollection<Examination> Examinations = new ObservableCollection<Examination>();
 	public ObservableCollection<Pair> Pairs = new ObservableCollection<Pair>();
 	public int LastPairIndex { get; set; }
@@ -79,6 +85,10 @@ public class Competition : INotifyPropertyChanged
 	public void DispatchNameChanged()
 	{
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
+	}
+	public void DispatchJudgesChanged()
+	{
+		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(JudgesCount)));
 	}
 
 	public void RecalculateResults()

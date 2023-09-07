@@ -49,6 +49,11 @@ namespace ObedienceX.Views
 			await Shell.Current.GoToAsync($"{nameof(ExaminationsPage)}");
 		}
 
+		async void OnJudgesClicked(object sender, EventArgs e)
+		{
+			await Shell.Current.GoToAsync($"{nameof(JudgesPage)}");
+		}
+
 		async void OnPairsClicked(object sender, EventArgs e)
 		{
 			await Shell.Current.GoToAsync($"{nameof(PairsPage)}");

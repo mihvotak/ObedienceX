@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ObedienceX.Views.SaveAsPage">
+             x:Class="ObedienceX.Views.SaveAsPage" BackgroundColor="{StaticResource PageBackground}">
     <ContentPage.Content>
         <StackLayout >
 			<Grid  RowDefinitions="Auto,Auto,Auto,60,Auto,Auto,90,60" ColumnDefinitions="*" Margin="10" RowSpacing="0"> 
 				<Label Text="{Binding Error}" Grid.Row="0"
 					   FontSize="Small"
-					   BackgroundColor="White"
 					   TextColor="Red"
 					   VerticalOptions="CenterAndExpand" 
 					   HorizontalOptions="Fill" />
@@ -20,7 +19,7 @@
 					   VerticalOptions="CenterAndExpand" 
 					   HorizontalOptions="Fill" 
 					   FontSize="Medium"
-					   BackgroundColor="AliceBlue" Padding="10" TextColor="Gray" />
+					   Padding="10" />
 				<Button Text="Выбрать папку" Grid.Row="3"
 						Margin="0,0,0,20"
 						Clicked="OnBrowseClicked"	/>
@@ -32,7 +31,7 @@
 				<Entry Text="{Binding FileName}" Grid.Row="5"
 					   FontSize="Large"
 					   VerticalOptions="Fill" 
-					   HorizontalOptions="Fill" TextColor="Gray" />
+					   HorizontalOptions="Fill" />
 				<Button Text="Сохранить" Grid.Row="6"
 						Margin="10,20"
 						Clicked="OnSaveClicked"	/>

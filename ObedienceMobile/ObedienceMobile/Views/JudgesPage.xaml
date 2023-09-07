@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ObedienceX.Views.ExaminationsPage">
+             x:Class="ObedienceX.Views.JudgesPage">
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="{Binding SaveText}"
                      Clicked="OnSaveClicked" />
@@ -23,16 +23,10 @@
 					FontSize="Medium"  
 						   />
 			<Label Grid.Column="1"
-					Text="Испытание"
+					Text="Судья"
 					Margin="3,0,0,0"
 					FontSize="Medium"  
 						   />
-			<Label Grid.Column="2"
-					Text="xК"
-					Margin="3,0,0,0"
-				   LineBreakMode="NoWrap"
-					FontSize="Medium"  
-							/>
 		</Grid>
 	
 		<CollectionView x:Name="collectionView">
@@ -49,7 +43,6 @@
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="30" />
 							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="40" />
 						</Grid.ColumnDefinitions>
 
 						<Label Grid.Column="0"
@@ -64,12 +57,6 @@
 							   FontSize="Large"
 							   TextChanged="OnTextChanged"
 						   />
-						<Entry Grid.Column="2"
-							   Text="{Binding Multiplier}"
-							   Keyboard="Numeric"
-							   FontSize="Large"
-							   TextChanged="OnTextChanged"
-							/>
 					</Grid>
 				</DataTemplate>
 			</CollectionView.ItemTemplate>

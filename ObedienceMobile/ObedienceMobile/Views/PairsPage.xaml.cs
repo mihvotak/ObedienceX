@@ -31,7 +31,7 @@ namespace ObedienceX.Views
 
 		public void OnAddClicked(object sender, EventArgs e)
 		{
-			var pair = new Pair() { Competition = Model.Competition, Marks = new ObservableCollection<Mark>() };
+			var pair = new Pair() { Competition = Model.Competition, Marks = new ObservableCollection<MarksSet>() };
 			Model.Competition.Pairs.Add(pair);
 			pair.SetNumber(Model.Competition.Pairs.Count);
 			pair.StartNumber = pair.Number;

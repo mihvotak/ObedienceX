@@ -9,41 +9,46 @@
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<Grid RowDefinitions="*, Auto" Padding="0" Margin="0" >
-			<ScrollView>
+			<ScrollView BackgroundColor="{StaticResource PageBackground}">
 				<StackLayout Padding="10,10,10,50" VerticalOptions="Fill" >
 					<Label Text="Имя файла" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<Label Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" BackgroundColor="White" TextColor="Gray" />
+					<Label Text="{Binding Name}" FontSize="Medium" />
 					
 					<Label Text="Уровень" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<Picker ItemsSource="{Binding Levels}" SelectedItem="{Binding Level}" TextColor="Gray" />
+					<Picker ItemsSource="{Binding Levels}" SelectedItem="{Binding Level}" TextColor="{StaticResource TextColor}" />
 					
 					<Label Text="Дата проведения" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<DatePicker Date="{Binding Date, Mode=TwoWay}" Format="dd.MM.yyyy" TextColor="Gray" DateSelected="OnDateSelected" />
+					<DatePicker Date="{Binding Date, Mode=TwoWay}" Format="dd.MM.yyyy" DateSelected="OnDateSelected" />
 					
 					<Label Text="Место проведения" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<Entry Text="{Binding Place, Mode=TwoWay}" TextColor="Gray" FontSize="Medium" TextChanged="OnTextChanged" />
+					<Entry Text="{Binding Place, Mode=TwoWay}" FontSize="Medium" TextChanged="OnTextChanged" />
 					
 					<Label Text="Наименование организации / клуба" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<Editor Text="{Binding Club, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" TextColor="Gray" TextChanged="OnTextChanged" />
+					<Editor Text="{Binding Club, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" TextChanged="OnTextChanged" />
 					
 					<Label Text="Руководитель организации" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<Entry Text="{Binding Director, Mode=TwoWay}" TextColor="Gray" FontSize="Medium" TextChanged="OnTextChanged" />
-					
-					<Label Text="Судья" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<Entry Text="{Binding Judge, Mode=TwoWay}" TextColor="Gray" FontSize="Medium" TextChanged="OnTextChanged" />
-					
+					<Entry Text="{Binding Director, Mode=TwoWay}" FontSize="Medium" TextChanged="OnTextChanged" />
+
 					<Label Text="Секретарь" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<Entry Text="{Binding Secretary, Mode=TwoWay}" TextColor="Gray" FontSize="Medium" TextChanged="OnTextChanged" />
-					<Label Text="" Margin="100" />
+					<Entry Text="{Binding Secretary, Mode=TwoWay}" FontSize="Medium" TextChanged="OnTextChanged" />
+
+					<Label Text="Главный судья" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
+					<Entry Text="{Binding Judge, Mode=TwoWay}" FontSize="Medium" TextChanged="OnTextChanged" />
+
+					<Label Text="Количество судей" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
+					<Label Text="{Binding JudgesCount}" FontSize="Medium" Margin="0, 0, 0, 80"/>
+
 				</StackLayout>
 			</ScrollView>
-			<StackLayout VerticalOptions="End" BackgroundColor="White" Padding="20,10" Margin="-10">
+			<StackLayout VerticalOptions="End" BackgroundColor="{StaticResource PageBackground}" Padding="20,10" Margin="-10">
 				<Grid ColumnDefinitions="*,*" RowDefinitions="Auto, Auto">
 					<Button Text="Испытания" 
 							Clicked="OnExaminationsClicked" />
 					<Button Text="Спортсмены" Grid.Column="1"
 							Clicked="OnPairsClicked" />
-					<Button Text="Результаты" Grid.ColumnSpan="2"  Grid.Row="1"
+					<Button Text="Судьи" Grid.Row="1"
+							Clicked="OnJudgesClicked" />
+					<Button Text="Результаты" Grid.Row="1" Grid.Column="1"
 							Clicked="OnResultsClicked" />
 				</Grid>
 			</StackLayout>

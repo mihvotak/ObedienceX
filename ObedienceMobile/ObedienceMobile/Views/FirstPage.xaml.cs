@@ -31,23 +31,23 @@ namespace ObedienceX.Views
 		{
 			Competition prev = Model.Prev;
 			Label prevNameLabel = (Label)FindByName("PrevFileName");
-			prevNameLabel.Text = prev == null ? "Предыдущий файл не выбран" :
-				string.IsNullOrEmpty(prev.ExcelName) ? "Предыдущие соревнования не сохранены в файл" :
-				$"Предыдущий файл:\n{prev.Name}";
+			prevNameLabel.Text = prev == null ? "(не выбран)" :
+				string.IsNullOrEmpty(prev.ExcelName) ? "Соревнования не сохранены в файл" :
+				$"{prev.Name}";
 			Label prevFolderLabel = (Label)FindByName("PrevFolder");
 			prevFolderLabel.Text = prev == null ? "-" :
 				string.IsNullOrEmpty(prev.ExcelName) ? "-" :
-				$"Папка:\n{Path.GetDirectoryName(prev.ExcelName)}";
+				$"{Path.GetDirectoryName(prev.ExcelName)}";
 
 			Competition competition = Model.Competition;
 			Label currentNameLabel = (Label)FindByName("CurrentFileName");
-			currentNameLabel.Text = competition == null ? "Текущий файл не выбран" :
-				string.IsNullOrEmpty(competition.ExcelName) ? "Текущие соревнования не сохранены в файл" :
-				$"Текущий файл:\n{competition.Name}";
+			currentNameLabel.Text = competition == null ? "не выбран" :
+				string.IsNullOrEmpty(competition.ExcelName) ? "Соревнования не сохранены в файл" :
+				$"{competition.Name}";
 			Label currentFolderLabel = (Label)FindByName("CurrentFolder");
 			currentFolderLabel.Text = competition == null ? "-" :
 				string.IsNullOrEmpty(competition.ExcelName) ? "-" :
-				$"Папка:\n{Path.GetDirectoryName(competition.ExcelName)}";
+				$"{Path.GetDirectoryName(competition.ExcelName)}";
 
 			ToolbarItems[0].BindingContext = competition;
 			ToolbarItems[1].BindingContext = competition;

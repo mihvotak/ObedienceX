@@ -7,9 +7,15 @@
     -->
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#2196F3</Color>
-			<Color x:Key="SubHeader">#81C6F3</Color>
-            <Style TargetType="Button">
+            <Color x:Key="Primary">#1456aa</Color>
+			<Color x:Key="SubHeader">#114683</Color>
+			<Color x:Key="PageBackground">#111111</Color>
+			<Color x:Key="TextColor">#ffffff</Color>
+			<Color x:Key="LabelBg">#111111</Color>
+			<Color x:Key="LabelColor">#cccccc</Color>
+			<Color x:Key="MarkBg">#000000</Color>
+			<Color x:Key="EntryBg">#000000</Color>
+			<Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>

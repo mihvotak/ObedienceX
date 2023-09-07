@@ -9,7 +9,7 @@
                      Clicked="OnSaveClicked" />
 	</ContentPage.ToolbarItems>
 
-	<StackLayout Orientation="Vertical" Spacing="0">
+	<StackLayout Orientation="Vertical" Spacing="0" BackgroundColor="{StaticResource PageBackground}">
 		<Grid Padding="10,5,10,0">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto"/>
@@ -24,38 +24,30 @@
 			<Label Grid.Column="0"
 				   Text="№"
 				   Margin="3,0,0,0"
-				   BackgroundColor="White"
-				   TextColor="Gray"
 				   VerticalOptions="End"
 				   FontSize="Medium"  
 						   />
 			<Label Grid.Column="1"
 				   Text="Пара"
 				   Margin="3,0,0,0"
-				   BackgroundColor="White"
-				   TextColor="Gray"
 				   VerticalOptions="End"
 				   FontSize="Medium"  
 						   />
 			<Label Grid.Column="2"
 					Text="Балл"
 					Margin="3,0,0,0"
-				   BackgroundColor="White"
-				   TextColor="Gray"
 				   VerticalOptions="End"
 					FontSize="Small"  
 							/>
 			<Label Grid.Column="3"
 					Text="Место"
 					Margin="3,0,0,0"
-				   BackgroundColor="White"
-				   TextColor="Gray"
 				   VerticalOptions="End"
 					FontSize="Small"  
 							/>
 		</Grid>
 
-		<ScrollView>
+		<ScrollView BackgroundColor="{StaticResource PageBackground}">
 			<CollectionView x:Name="collectionView"
 					SelectionMode="Single"
 					SelectionChanged="OnSelectionChanged" Margin="5">
