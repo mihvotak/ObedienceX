@@ -3,15 +3,10 @@ using OfficeOpenXml;
 using OfficeOpenXml.Core;
 using OfficeOpenXml.Style;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace ObedienceX.Utils
 {
@@ -111,7 +106,7 @@ namespace ObedienceX.Utils
 						}
 						for (int i = 0; i < judgesCount; i++)
 						{
-							var cellJ = sheet.Cells[startRow, startColumn - 1];
+							var cellJ = sheet.Cells[startRow + i, startColumn - 1];
 							string name = cellJ?.Value as string;
 							Judge judge = new Judge() { Name = name };
 							if (i > competition.Judges.Count - 1)
@@ -327,7 +322,7 @@ namespace ObedienceX.Utils
 					ExcelStyle style1 = null;
 					ExcelStyle style2 = null;
 					string formula = null;
-					ExcelStyle[] styles = new ExcelStyle[startColumn];
+					ExcelStyle[,] styles = new ExcelStyle[startColumn, judgesCount];
 					int delta = judgesCount + 1;
 					for (int i = 0; i < competition.Pairs.Count; i++)
 					{
@@ -339,16 +334,21 @@ namespace ObedienceX.Utils
 							style1 = sheet.Cells[rowNum + 0, startColumn].Style;
 							style2 = sheet.Cells[rowNum + judgesCount, startColumn].Style;
 							for (int j = 1; j <= startColumn - 1; j++)
-								styles[j] = sheet.Cells[rowNum, j].Style;
+								for (int k = 0; k < judgesCount; k++)
+									styles[j, k] = sheet.Cells[rowNum + k, j].Style;
 							formula = sheet.Cells[rowNum + judgesCount, startColumn].Formula;
 						}
 						else
 						{
-							sheet.Rows[rowNum].Height = rowHeight1;
-							for (int j = 1; j <= startColumn - 1; j++)
-								CopyStyle(sheet.Cells[rowNum, j], styles[j]);
-							sheet.Cells[rowNum + 0, 6].Style.Numberformat.Format = styles[6].Numberformat.Format;
-							for (int j = 12; j <= lastColNum; j++)
+							for (int k = 0; k < judgesCount; k++)
+							{
+								sheet.Rows[rowNum + k].Height = rowHeight1;
+								for (int j = 1; j <= startColumn - 1; j++)
+									CopyStyle(sheet.Cells[rowNum + k, j], styles[j, k]);
+							}
+							sheet.Rows[rowNum + judgesCount].Height = rowHeight2;
+							sheet.Cells[rowNum + 0, 6].Style.Numberformat.Format = styles[6, 0].Numberformat.Format;
+							for (int j = startColumn; j <= lastColNum; j++)
 							{
 								for (int k = 0; k < judgesCount; k++)
 									CopyStyle(sheet.Cells[rowNum + k, j], sheet.Cells[rowNum - delta + k, j].Style);
@@ -378,8 +378,8 @@ namespace ObedienceX.Utils
 							var marksSet = pair.Marks[j - startColumn];
 							for (int k = 0; k < judgesCount; k++)
 							{
-								Mark mark = marksSet.Marks[k];
-								if (mark.IsSet)
+								Mark mark = marksSet.Marks.Count > k ? marksSet.Marks[k] : null;
+								if (mark != null && mark.IsSet)
 									sheet.Cells[rowNum + k, j].Value = mark.Value;
 								else
 									sheet.Cells[rowNum + k, j].Value = null;

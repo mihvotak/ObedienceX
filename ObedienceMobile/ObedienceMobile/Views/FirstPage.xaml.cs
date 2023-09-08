@@ -31,7 +31,7 @@ namespace ObedienceX.Views
 		{
 			Competition prev = Model.Prev;
 			Label prevNameLabel = (Label)FindByName("PrevFileName");
-			prevNameLabel.Text = prev == null ? "(не выбран)" :
+			prevNameLabel.Text = prev == null ? "<не выбран>" :
 				string.IsNullOrEmpty(prev.ExcelName) ? "Соревнования не сохранены в файл" :
 				$"{prev.Name}";
 			Label prevFolderLabel = (Label)FindByName("PrevFolder");
@@ -41,7 +41,7 @@ namespace ObedienceX.Views
 
 			Competition competition = Model.Competition;
 			Label currentNameLabel = (Label)FindByName("CurrentFileName");
-			currentNameLabel.Text = competition == null ? "не выбран" :
+			currentNameLabel.Text = competition == null ? "<не выбран>" :
 				string.IsNullOrEmpty(competition.ExcelName) ? "Соревнования не сохранены в файл" :
 				$"{competition.Name}";
 			Label currentFolderLabel = (Label)FindByName("CurrentFolder");

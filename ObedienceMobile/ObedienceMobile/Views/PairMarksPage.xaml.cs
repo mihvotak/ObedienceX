@@ -87,6 +87,22 @@ namespace ObedienceX.Views
 			}
 		}
 
+		public void OnMarkUpClicked(object sender, EventArgs e)
+		{
+			int index = (int)((Button)sender).CommandParameter - 1;
+			index = index % 100;
+			if (index == CurrentPair.Marks.Count - 1 && Model.Competition.JudgesCount == 1)
+			{
+				MarksSet marksSet = CurrentPair.Marks[index];
+				Mark mark = marksSet.Marks[0];
+				if (mark.IsSet && mark.Value < 10)
+				{
+					mark.ValueStr = (mark.Value + 0.25).ToString();
+					marksSet.DispatchValueChanged(0);
+				}
+			}
+		}
+
 		public void OnMarkSelected(object sender, EventArgs e)
 		{
 			string val = (string)((Button)sender).CommandParameter;

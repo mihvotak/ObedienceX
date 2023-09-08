@@ -15,7 +15,7 @@ namespace ObedienceX.Data
 		public MarksSet MarksSet { get; set; }
 
 		[JsonIgnore]
-		public bool IsValid { get { return Value == 0 || (Value % .5 == 0 && Value >= 5 && Value <= 10); } }
+		public bool IsValid { get { return Value == 0 || (Value % .25 == 0 && Value >= 5 && Value <= 10); } }
 
 
 		static private List<string> AllValues
