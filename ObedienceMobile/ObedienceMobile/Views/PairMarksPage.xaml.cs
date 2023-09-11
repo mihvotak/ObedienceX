@@ -91,7 +91,7 @@ namespace ObedienceX.Views
 		{
 			int index = (int)((Button)sender).CommandParameter - 1;
 			index = index % 100;
-			if (index == CurrentPair.Marks.Count - 1 && Model.Competition.JudgesCount == 1)
+			if (Model.Competition.JudgesCount == 1)
 			{
 				MarksSet marksSet = CurrentPair.Marks[index];
 				Mark mark = marksSet.Marks[0];
