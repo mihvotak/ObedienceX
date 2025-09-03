@@ -2,8 +2,10 @@
 using System;
 using System.Globalization;
 using System.IO;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui.Controls.Xaml;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace ObedienceX
 {

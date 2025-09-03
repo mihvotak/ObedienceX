@@ -6,7 +6,10 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
-using Xamarin.Forms;
+using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace ObedienceX.Utils
 {
@@ -256,7 +259,7 @@ namespace ObedienceX.Utils
 			range.Style.Font.Family = style.Font.Family;
 			range.Style.Border.BorderAround(style.Border.Top.Style);
 			range.Style.Fill.PatternType = style.Fill.PatternType;
-			range.Style.Fill.SetBackground(Color.White);
+			range.Style.Fill.SetBackground(OfficeOpenXml.Drawing.eThemeSchemeColor.Background1);
 		}
 
 		public bool WriteExcel(string fileName)

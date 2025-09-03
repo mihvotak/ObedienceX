@@ -1,9 +1,11 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.IO;
-using Xamarin.Forms;
 using ObedienceX.Views;
 using ObedienceX.Utils;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace ObedienceX.Data
 {

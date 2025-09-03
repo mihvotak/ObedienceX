@@ -1,7 +1,9 @@
 ﻿using ObedienceX.Data;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui.Controls.Xaml;
 using System;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace ObedienceX.Views
 {

@@ -1,21 +1,28 @@
-﻿using ObedienceX.Droid;
-using Xamarin.Forms;
+﻿using Android.OS;
+using Android.Content;
+using Android.Provider;
+using Android.Net;
+using Android.App;
+using ObedienceX.Droid;
 
-[assembly: Dependency(typeof(PermissionCheckerServise))]
+[assembly: Microsoft.Maui.Controls.Dependency(typeof(PermissionCheckerServise))]
 namespace ObedienceX.Droid
 {
 	public class PermissionCheckerServise : IPermissionChecker
 	{
-		public static MainActivity MainActivity;
-
 		public bool CheckAllFilesPermission()
 		{
-			return Android.OS.Environment.IsExternalStorageManager;
+			return Environment.IsExternalStorageManager;				
 		}
 
 		public void ShowSettingsAllFilesPermission()
 		{
-			MainActivity.StartActivityForResult(new Android.Content.Intent(Android.Provider.Settings.ActionManageAllFilesAccessPermission), 3);
+			if (!Environment.IsExternalStorageManager)
+			{
+				var intent = new Intent(Settings.ActionManageAllFilesAccessPermission);
+				intent.SetData(Uri.Parse($"package:{Application.Context.PackageName}"));
+				Application.Context.StartActivity(intent);
+			}
 		}
 
 		public string GetConfirmCaption()

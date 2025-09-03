@@ -1,9 +1,11 @@
 ﻿using ObedienceX.Views;
-using Xamarin.Forms;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace ObedienceX
 {
-	public partial class AppShell : Xamarin.Forms.Shell
+	public partial class AppShell : Microsoft.Maui.Controls.Shell
 	{
 		public AppShell()
 		{

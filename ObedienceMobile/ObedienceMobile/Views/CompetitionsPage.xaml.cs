@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui.Controls.Xaml;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace ObedienceX.Views
 {
