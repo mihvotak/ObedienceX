@@ -68,7 +68,12 @@ namespace ObedienceX.Views
 			}
 			else*/
 			{
-				var checker = DependencyService.Get<IPermissionChecker>();
+				var checker = this.Handler.MauiContext.Services.GetService<IPermissionChecker>();//DependencyService.Get<IPermissionChecker>();
+				if (checker == null)
+				{
+					await Shell.Current.DisplayAlert("Error", "checker == null", "cancel");
+					return false;
+				}
 				if (!checker.CheckAllFilesPermission())
 				{
 					if (await Shell.Current.DisplayAlert(checker.GetConfirmCaption(), checker.GetConfirmReadText(), checker.GetAgreeButton(), checker.GetCancelButton()))
@@ -109,7 +114,7 @@ namespace ObedienceX.Views
 
 		void OnSaveClicked(object sender, EventArgs e)
 		{
-			Model.ReSaveCurrent();
+			Model.ReSaveCurrent(this.Handler.MauiContext);
 		}
 
 		async void OnExchangeClicked(object sender, EventArgs e)
@@ -148,7 +153,7 @@ namespace ObedienceX.Views
 
 		async void OnSaveAsClicked(object sender, EventArgs e)
 		{
-			var checker = DependencyService.Get<IPermissionChecker>();
+			var checker = this.Handler.MauiContext.Services.GetService<IPermissionChecker>();
 			if (checker.CheckAllFilesPermission())
 				await Shell.Current.GoToAsync($"{nameof(SaveAsPage)}");
 			else

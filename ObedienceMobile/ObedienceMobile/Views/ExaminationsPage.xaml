@@ -6,8 +6,17 @@
 		<ToolbarItem Text="{Binding SaveText}"
                      Clicked="OnSaveClicked" />
 	</ContentPage.ToolbarItems>
-	<StackLayout Orientation="Vertical" BackgroundColor="{StaticResource PageBackground}">
-		<Grid Padding="10,10,10,0">
+	<Grid Padding="0,0,0,0" BackgroundColor="{StaticResource PageBackground}" VerticalOptions="FillAndExpand">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<Grid Padding="10,10,10,0" Grid.Row="0">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
@@ -34,50 +43,51 @@
 					FontSize="Medium"  
 							/>
 		</Grid>
-	
-		<CollectionView x:Name="collectionView">
-			<CollectionView.ItemsLayout>
-				<GridItemsLayout Orientation="Vertical"/>
-			</CollectionView.ItemsLayout>
-			<!-- Define the appearance of each item in the list -->
-			<CollectionView.ItemTemplate>
-				<DataTemplate>
-					<Grid Padding="10,0,10,10">
-						<Grid.RowDefinitions>
-							<RowDefinition Height="Auto" />
-						</Grid.RowDefinitions>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="30" />
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="40" />
-						</Grid.ColumnDefinitions>
+		<ScrollView VerticalScrollBarVisibility="Always" Grid.Row="1">
+			<CollectionView x:Name="collectionView">
+				<CollectionView.ItemsLayout>
+					<GridItemsLayout Orientation="Vertical"/>
+				</CollectionView.ItemsLayout>
+				<!-- Define the appearance of each item in the list -->
+				<CollectionView.ItemTemplate>
+					<DataTemplate>
+						<Grid Padding="10,0,10,10">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="30" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="40" />
+							</Grid.ColumnDefinitions>
 
-						<Label Grid.Column="0"
-							   Text="{Binding Number}"
-							   FontSize="Medium"
-							   BackgroundColor="{StaticResource SubHeader}" 
-							   VerticalTextAlignment="Center"
-							   HorizontalTextAlignment="Center"
-							/>
-						<Entry Grid.Column="1"
-							   Text="{Binding Name}"
-							   FontSize="Large"
-							   TextChanged="OnTextChanged"
-						   />
-						<Entry Grid.Column="2"
-							   Text="{Binding Multiplier}"
-							   Keyboard="Numeric"
-							   FontSize="Large"
-							   TextChanged="OnTextChanged"
-							/>
-					</Grid>
-				</DataTemplate>
-			</CollectionView.ItemTemplate>
-		</CollectionView>
-		<Grid ColumnDefinitions="*,*" RowDefinitions="40" Margin="10">
+							<Label Grid.Column="0"
+								   Text="{Binding Number}"
+								   FontSize="Medium"
+								   BackgroundColor="{StaticResource SubHeader}" 
+								   VerticalTextAlignment="Center"
+								   HorizontalTextAlignment="Center"
+								/>
+							<Entry Grid.Column="1"
+								   Text="{Binding Name}"
+								   FontSize="Large"
+								   TextChanged="OnTextChanged"
+							   />
+							<Entry Grid.Column="2"
+								   Text="{Binding Multiplier}"
+								   Keyboard="Numeric"
+								   FontSize="Large"
+								   TextChanged="OnTextChanged"
+								/>
+						</Grid>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
+		</ScrollView>
+		<Grid ColumnDefinitions="*,*" RowDefinitions="40" Margin="10" Grid.Row="2">
 			<Button Text="Добавить" Clicked="OnAddClicked" />
 			<Button Grid.Column="1"
 				Text="Уменьшить" Clicked="OnRemoveClicked" />
 		</Grid>
-	</StackLayout>
+	</Grid>
 </ContentPage>

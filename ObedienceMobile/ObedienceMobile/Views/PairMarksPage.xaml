@@ -7,10 +7,21 @@
 	</ContentPage.ToolbarItems>
 
 	<AbsoluteLayout Margin="0" Padding="0" BackgroundColor="{StaticResource PageBackground}">
-		<StackLayout Orientation="Vertical" Spacing="0" VerticalOptions="Fill" 
-					 AbsoluteLayout.LayoutBounds="0, 0, 1, 1"  
-                     AbsoluteLayout.LayoutFlags="All" Margin="0">
-			<Grid Padding="5,10,5,0" RowSpacing="0">
+		<Grid Padding="0,0,0,0" BackgroundColor="{StaticResource PageBackground}" 
+			  AbsoluteLayout.LayoutBounds="0, 0, 1, 1"  
+              AbsoluteLayout.LayoutFlags="All" Margin="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<Grid Padding="5,10,5,0" RowSpacing="0" Grid.Row="0">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
@@ -22,30 +33,30 @@
 				</Grid.ColumnDefinitions>
 
 				<Label Grid.Column="0" Grid.Row="0" 
-				   Text="{Binding Handler}"
-				   FontSize="Medium" LineBreakMode="TailTruncation"
-				   BackgroundColor="{StaticResource SubHeader}" />
+					Text="{Binding Handler}"
+					FontSize="Medium" LineBreakMode="TailTruncation"
+					BackgroundColor="{StaticResource SubHeader}" />
 				<Label Grid.Column="0" Grid.Row="1" 
-				   Text="{Binding DogKind}"
-				   BackgroundColor="{StaticResource SubHeader}" />
+					Text="{Binding DogKind}"
+					BackgroundColor="{StaticResource SubHeader}" />
 				<Label Grid.Column="0" Grid.Row="2" 
-				   Text="{Binding DogName}"
-				   BackgroundColor="{StaticResource SubHeader}" />
+					Text="{Binding DogName}"
+					BackgroundColor="{StaticResource SubHeader}" />
 				<Label Grid.Column="1" 
-				   FontSize="Large" FontAttributes="Bold"
-				   Text="{Binding Sum}"
-				   Margin="0"
-				   HorizontalTextAlignment="Center"
-				   BackgroundColor="{StaticResource SubHeader}" />
+					FontSize="Large" FontAttributes="Bold"
+					Text="{Binding Sum}"
+					Margin="0"
+					HorizontalTextAlignment="Center"
+					BackgroundColor="{StaticResource SubHeader}" />
 				<Label Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
-				   FontSize="Small" FontAttributes="Bold"
-				   VerticalTextAlignment="Center"
-				   HorizontalTextAlignment="Center"
-				   Text="{Binding Result}"
-				   BackgroundColor="{StaticResource SubHeader}" />
+					FontSize="Small" FontAttributes="Bold"
+					VerticalTextAlignment="Center"
+					HorizontalTextAlignment="Center"
+					Text="{Binding Result}"
+					BackgroundColor="{StaticResource SubHeader}" />
 			</Grid>
 
-			<Grid Padding="5,10,5,0">
+			<Grid Padding="5,10,5,0"  Grid.Row="1">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
 				</Grid.RowDefinitions>
@@ -59,43 +70,43 @@
 				</Grid.ColumnDefinitions>
 
 				<Label Grid.Column="0"
-				   Text="№"
-				   Margin="3,0,0,0"
-				   FontSize="Medium" 
-						   />
+					Text="№"
+					Margin="3,0,0,0"
+					FontSize="Medium" 
+							/>
 				<Label Grid.Column="1"
-				   Text="Испытание"
-				   Margin="0,0,0,0"
-				   FontSize="Medium"
-				   LineBreakMode="TailTruncation"
-						   />
+					Text="Испытание"
+					Margin="0,0,0,0"
+					FontSize="Medium"
+					LineBreakMode="TailTruncation"
+							/>
 				<Label Grid.Column="2"
 					Text="Балл"
 					Margin="0,0,-2,0"
 					FontSize="Small" VerticalTextAlignment="Center"  
-				   LineBreakMode="NoWrap"
+					LineBreakMode="NoWrap"
 							/>
 				<Label Grid.Column="3"
 					Text="Балл2"
 					Margin="1,0,6,0"
 					FontSize="Small" VerticalTextAlignment="Center"
-				   LineBreakMode="NoWrap"
+					LineBreakMode="NoWrap"
 							/>
 				<Label Grid.Column="4"
 					Text="Балл3"
 					Margin="1,0,-1,0"
 					FontSize="Small" VerticalTextAlignment="Center"
-				   LineBreakMode="NoWrap"
+					LineBreakMode="NoWrap"
 							/>
 				<Label Grid.Column="5"
 					Text="xK"
 					Margin="3,0,0,0"
 					FontSize="Medium"  
-				   LineBreakMode="NoWrap"
+					LineBreakMode="NoWrap"
 							/>
 			</Grid>
 
-			<ScrollView>
+			<ScrollView  Grid.Row="2">
 				<CollectionView x:Name="collectionView" >
 					<CollectionView.ItemsLayout>
 						<GridItemsLayout Orientation="Vertical"/>
@@ -169,7 +180,7 @@
 					</CollectionView.ItemTemplate>
 				</CollectionView>
 			</ScrollView>
-			<Grid Padding="5,0,5,10" RowSpacing="0" Margin="0,5,0,-5">
+			<Grid Padding="5,0,5,10" RowSpacing="0" Margin="0,5,0,-5"  Grid.Row="3">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
 				</Grid.RowDefinitions>
@@ -200,8 +211,8 @@
 				
 			/>
 			</Grid>
-		</StackLayout>
-		<FlexLayout VerticalOptions="Fill" HorizontalOptions="FillAndExpand"
+		</Grid>
+		<FlexLayout VerticalOptions="Fill" HorizontalOptions="FillAndExpand"  Grid.Row="4"
 					AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"
 				BackgroundColor="{StaticResource PageBackground}" Direction="Column" IsVisible="False" x:Name="MarkSelector">
 			<FlexLayout.Resources>

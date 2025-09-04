@@ -52,12 +52,12 @@ namespace ObedienceX.Data
 
 		public static ExcelProxy ExcelProxy = new ExcelProxy();
 
-		public static async void ReSaveCurrent()
+		public static async void ReSaveCurrent(IMauiContext mauiContext)
 		{
 			var competition = Model.Competition;
 			if (string.IsNullOrWhiteSpace(competition.ExcelName))
 			{
-				var checker = DependencyService.Get<IPermissionChecker>();
+				var checker = mauiContext.Services.GetService<IPermissionChecker>();
 				if (checker.CheckAllFilesPermission())
 					await Shell.Current.GoToAsync($"{nameof(SaveAsPage)}");
 				else

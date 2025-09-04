@@ -71,7 +71,7 @@ namespace ObedienceX.Views
 
 		public void OnSaveClicked(object sender, EventArgs e)
 		{
-			Model.ReSaveCurrent();
+			Model.ReSaveCurrent(this.Handler.MauiContext);
 		}
 
 		private void UpdateNumbers()

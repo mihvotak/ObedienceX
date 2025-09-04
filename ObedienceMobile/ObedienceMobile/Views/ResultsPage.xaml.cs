@@ -63,7 +63,7 @@ namespace ObedienceX.Views
 
 		void OnSaveClicked(object sender, EventArgs e)
 		{
-			Model.ReSaveCurrent();
+			Model.ReSaveCurrent(this.Handler.MauiContext);
 		}
 
 		async void OnExchangeClicked(object sender, EventArgs e)

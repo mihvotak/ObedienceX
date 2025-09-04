@@ -37,7 +37,7 @@ namespace ObedienceX.Views
 
 		void OnSaveClicked(object sender, EventArgs e)
 		{
-			Model.ReSaveCurrent();
+			Model.ReSaveCurrent(this.Handler.MauiContext);
 		}
 
 		void OnTextChanged(object sender, TextChangedEventArgs e)

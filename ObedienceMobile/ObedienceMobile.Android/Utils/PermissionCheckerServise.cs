@@ -1,8 +1,10 @@
-﻿using Android.OS;
+﻿using Android.App;
 using Android.Content;
-using Android.Provider;
 using Android.Net;
-using Android.App;
+using Android.OS;
+using Android.Provider;
+using Java.Lang;
+using Microsoft.Maui.Controls.PlatformConfiguration;
 using ObedienceX.Droid;
 
 [assembly: Microsoft.Maui.Controls.Dependency(typeof(PermissionCheckerServise))]
@@ -19,9 +21,20 @@ namespace ObedienceX.Droid
 		{
 			if (!Environment.IsExternalStorageManager)
 			{
-				var intent = new Intent(Settings.ActionManageAllFilesAccessPermission);
-				intent.SetData(Uri.Parse($"package:{Application.Context.PackageName}"));
-				Application.Context.StartActivity(intent);
+				try
+				{
+					var intent = new Intent(Settings.ActionManageAllFilesAccessPermission);
+					intent.SetData(Uri.Parse($"package:{Application.Context.PackageName}"));
+					intent.SetFlags(ActivityFlags.NewTask);
+					Application.Context.StartActivity(intent);
+				}
+				catch(Exception _)
+				{
+					Intent intent = new Intent();
+					intent.SetAction(Settings.ActionManageAllFilesAccessPermission);
+					intent.SetFlags(ActivityFlags.NewTask);
+					Application.Context.StartActivity(intent);
+				}
 			}
 		}
 

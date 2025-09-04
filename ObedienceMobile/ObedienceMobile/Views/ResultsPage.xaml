@@ -9,8 +9,16 @@
                      Clicked="OnSaveClicked" />
 	</ContentPage.ToolbarItems>
 
-	<StackLayout Orientation="Vertical" Spacing="0" BackgroundColor="{StaticResource PageBackground}">
-		<Grid Padding="10,5,10,0">
+	<Grid Padding="0,0,0,0" BackgroundColor="{StaticResource PageBackground}" VerticalOptions="FillAndExpand">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<Grid Padding="10,5,10,0" Grid.Row="0">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
@@ -47,7 +55,7 @@
 							/>
 		</Grid>
 
-		<ScrollView BackgroundColor="{StaticResource PageBackground}">
+		<ScrollView BackgroundColor="{StaticResource PageBackground}" Grid.Row="1">
 			<CollectionView x:Name="collectionView"
 					SelectionMode="Single"
 					SelectionChanged="OnSelectionChanged" Margin="5">
@@ -111,5 +119,5 @@
 				</CollectionView.ItemTemplate>
 			</CollectionView>
 		</ScrollView>
-	</StackLayout>
+	</Grid>
 </ContentPage>
