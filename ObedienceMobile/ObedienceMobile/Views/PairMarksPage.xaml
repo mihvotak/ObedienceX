@@ -212,27 +212,27 @@
 			/>
 			</Grid>
 		</Grid>
-		<FlexLayout VerticalOptions="Fill" HorizontalOptions="FillAndExpand"  Grid.Row="4"
+		<FlexLayout VerticalOptions="Fill" 
 					AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"
 				BackgroundColor="{StaticResource PageBackground}" Direction="Column" IsVisible="False" x:Name="MarkSelector">
 			<FlexLayout.Resources>
 				<Style  x:Key="btnStyle" TargetType="Button">
-					<Setter Property="WidthRequest" Value="500" />
+					<Setter Property="WidthRequest" Value="170" />
 					<Setter Property="Margin" Value="10, 0" />
 					<Setter Property="FontSize" Value="Large" />
 					<Setter Property="BackgroundColor" Value="{StaticResource SubHeader}" />
 					<Setter Property="TextColor" Value="White" />
 				</Style>
 				<Style  x:Key="flexStyle" TargetType="FlexLayout">
-					<Setter Property="HeightRequest" Value="500" />
+					<Setter Property="HeightRequest" Value="80" />
 					<Setter Property="Margin" Value="0, 10" />
 				</Style>
 			</FlexLayout.Resources>
-			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}">
+			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}" VerticalOptions="Fill">
 				<Button Text="0" CommandParameter="0" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
 				<Button Text="-" CommandParameter="" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
 			</FlexLayout>
-			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}">
+			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}" VerticalOptions="Fill">
 				<Button Text="5" CommandParameter="5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
 				<Button Text="5.5" CommandParameter="5.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
 			</FlexLayout>
