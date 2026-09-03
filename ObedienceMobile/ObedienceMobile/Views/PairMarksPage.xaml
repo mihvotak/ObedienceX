@@ -21,7 +21,7 @@
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 
-			<Grid Padding="5,10,5,0" RowSpacing="0" Grid.Row="0">
+			<Grid Padding="5,10,5,0" RowSpacing="1" ColumnSpacing="1" Grid.Row="0">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
@@ -78,7 +78,7 @@
 					Text="Испытание"
 					Margin="0,0,0,0"
 					FontSize="Medium"
-					LineBreakMode="TailTruncation"
+					LineBreakMode="TailTruncation" HorizontalTextAlignment="Center"
 							/>
 				<Label Grid.Column="2"
 					Text="Балл"
@@ -99,10 +99,10 @@
 					LineBreakMode="NoWrap"
 							/>
 				<Label Grid.Column="5"
-					Text="xK"
+					Text="*K"
 					Margin="3,0,0,0"
 					FontSize="Medium"  
-					LineBreakMode="NoWrap"
+					LineBreakMode="NoWrap" HorizontalTextAlignment="Center"					  
 							/>
 			</Grid>
 
@@ -212,49 +212,35 @@
 			/>
 			</Grid>
 		</Grid>
-		<FlexLayout VerticalOptions="Fill" 
-					AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"
-				BackgroundColor="{StaticResource PageBackground}" Direction="Column" IsVisible="False" x:Name="MarkSelector">
-			<FlexLayout.Resources>
+		<Grid x:Name="MarkSelector" IsVisible="False" ZIndex="1"
+			  Padding="10" RowSpacing="10" ColumnSpacing="10"
+			  AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"
+			  BackgroundColor="{StaticResource PageBackground}"
+			  RowDefinitions="Auto,*,*,*,*,*,*,*" ColumnDefinitions="*,*">
+			<Grid.Resources>
 				<Style  x:Key="btnStyle" TargetType="Button">
-					<Setter Property="WidthRequest" Value="170" />
-					<Setter Property="Margin" Value="10, 0" />
+					<Setter Property="Margin" Value="0" />
 					<Setter Property="FontSize" Value="Large" />
 					<Setter Property="BackgroundColor" Value="{StaticResource SubHeader}" />
 					<Setter Property="TextColor" Value="White" />
 				</Style>
-				<Style  x:Key="flexStyle" TargetType="FlexLayout">
-					<Setter Property="HeightRequest" Value="80" />
-					<Setter Property="Margin" Value="0, 10" />
-				</Style>
-			</FlexLayout.Resources>
-			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}" VerticalOptions="Fill">
-				<Button Text="0" CommandParameter="0" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
-				<Button Text="-" CommandParameter="" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
-			</FlexLayout>
-			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}" VerticalOptions="Fill">
-				<Button Text="5" CommandParameter="5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
-				<Button Text="5.5" CommandParameter="5.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
-			</FlexLayout>
-			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}">
-				<Button Text="6" CommandParameter="6" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
-				<Button Text="6.5" CommandParameter="6.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
-			</FlexLayout>
-			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}">
-				<Button Text="7" CommandParameter="7" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
-				<Button Text="7.5" CommandParameter="7.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
-			</FlexLayout>
-			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}">
-				<Button Text="8" CommandParameter="8" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
-				<Button Text="8.5" CommandParameter="8.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
-			</FlexLayout>
-			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}">
-				<Button Text="9" CommandParameter="9" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
-				<Button Text="9.5" CommandParameter="9.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
-			</FlexLayout>
-			<FlexLayout Direction="Row" Style="{StaticResource Key=flexStyle}">
-				<Button Text="10" CommandParameter="10" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
-			</FlexLayout>
-		</FlexLayout>
+			</Grid.Resources>
+			<Label x:Name="MarkSelectorTitle" Grid.ColumnSpan="2"
+				   Padding="5" FontSize="Medium" FontAttributes="Bold"
+				   MaxLines="1" LineBreakMode="TailTruncation" HorizontalTextAlignment="Center" />
+			<Button Grid.Row="1" Grid.ColumnSpan="2" Text="10" CommandParameter="10" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			<Button Grid.Row="2" Text="9" CommandParameter="9" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			<Button Grid.Row="2" Grid.Column="1" Text="9.5" CommandParameter="9.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			<Button Grid.Row="3" Text="8" CommandParameter="8" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			<Button Grid.Row="3" Grid.Column="1" Text="8.5" CommandParameter="8.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			<Button Grid.Row="4" Text="7" CommandParameter="7" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			<Button Grid.Row="4" Grid.Column="1" Text="7.5" CommandParameter="7.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			<Button Grid.Row="5" Text="6" CommandParameter="6" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			<Button Grid.Row="5" Grid.Column="1" Text="6.5" CommandParameter="6.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			<Button Grid.Row="6" Text="5" CommandParameter="5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			<Button Grid.Row="6" Grid.Column="1" Text="5.5" CommandParameter="5.5" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			<Button Grid.Row="7" Text="0" CommandParameter="0" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+			<Button Grid.Row="7" Grid.Column="1" Text="-" CommandParameter="" Style="{StaticResource Key=btnStyle}" Clicked="OnMarkSelected" />
+		</Grid>
 	</AbsoluteLayout>
 </ContentPage>

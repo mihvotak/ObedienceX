@@ -39,19 +39,17 @@
 				   Text="Пара"
 				   Margin="3,0,0,0"
 				   VerticalOptions="End"
-				   FontSize="Medium"  
+				   FontSize="Medium" HorizontalTextAlignment="Center" 
 						   />
 			<Label Grid.Column="2"
 					Text="Балл"
 					Margin="3,0,0,0"
 				   VerticalOptions="End"
-					FontSize="Small"  
+					FontSize="Small" HorizontalTextAlignment="Center"
 							/>
-			<Label Grid.Column="3"
-					Text="Место"
-					Margin="3,0,0,0"
-				   VerticalOptions="End"
-					FontSize="Small"  
+			<Label Grid.Column="3" Text="Место"
+					Margin="3,0,0,0" VerticalOptions="End" MaxLines="1"
+					LineBreakMode="NoWrap" FontSize="Small" 
 							/>
 		</Grid>
 
@@ -66,7 +64,7 @@
 				<!-- Define the appearance of each item in the list -->
 				<CollectionView.ItemTemplate>
 					<DataTemplate>
-						<Grid Padding="5" Margin="0" RowSpacing="0">
+						<Grid Padding="5" Margin="0" RowSpacing="1" ColumnSpacing="1">
 							<Grid.RowDefinitions>
 								<RowDefinition Height="Auto" />
 								<RowDefinition Height="Auto" />

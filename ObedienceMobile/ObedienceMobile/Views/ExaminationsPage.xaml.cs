@@ -31,6 +31,7 @@ namespace ObedienceX.Views
 			Title = Model.Competition.Name;
 			_selectedExamination = null;
 			ToolbarItems[0].BindingContext = Model.Competition;
+			UpdateSummary();
 		}
 
 		public void OnAddClicked(object sender, EventArgs e)
@@ -39,6 +40,7 @@ namespace ObedienceX.Views
 			exam.SetNumber(Model.Competition.Examinations.Count + 1);
 			Model.Competition.Examinations.Add(exam);
 			Model.Competition.Saved = false;
+			UpdateSummary();
 		}
 
 		void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -61,6 +63,7 @@ namespace ObedienceX.Views
 			{
 				Model.Competition.Examinations.RemoveAt(Model.Competition.Examinations.Count - 1);
 				Model.Competition.Saved = false;
+				UpdateSummary();
 			}
 		}
 
@@ -79,6 +82,26 @@ namespace ObedienceX.Views
 		{
 			if (e.OldTextValue != null && e.NewTextValue != null)
 				Model.Competition.Saved = false;
+		}
+
+		void OnMultiplierChanged(object sender, TextChangedEventArgs e)
+		{
+			OnTextChanged(sender, e);
+
+			Examination examination = ((Entry)sender).BindingContext as Examination;
+			if (examination != null && int.TryParse(e.NewTextValue, out int multiplier))
+				UpdateSummary(examination, multiplier);
+			else
+				UpdateSummary();
+		}
+
+		private void UpdateSummary(Examination editedExamination = null, int? multiplier = null)
+		{
+			int sum = Model.Competition.Examinations.Sum(examination => examination.Multiplier);
+			if (editedExamination != null && multiplier.HasValue)
+				sum += multiplier.Value - editedExamination.Multiplier;
+
+			SummaryLabel.Text = $"Испытаний {Model.Competition.Examinations.Count}, сумма {sum}";
 		}
 
 	}

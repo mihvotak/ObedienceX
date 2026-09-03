@@ -17,7 +17,7 @@
 		<!-- Define the appearance of each item in the list -->
 		<CollectionView.ItemTemplate>
 			<DataTemplate>
-				<Grid Padding="5" Margin="0" RowSpacing="0">
+				<Grid Padding="5" Margin="0" RowSpacing="1" ColumnSpacing="1">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto" />
 						<RowDefinition Height="Auto" />

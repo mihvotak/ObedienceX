@@ -9,8 +9,8 @@
                      Clicked="OnSaveClicked" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
-		<StackLayout VerticalOptions="FillAndExpand">
-			<ScrollView>
+		<Grid RowDefinitions="*">
+			<ScrollView Grid.Row="0">
 				<StackLayout Spacing="30" VerticalOptions="Center" Padding="20">
 					<StackLayout Spacing="0" VerticalOptions="Center" Padding="0">
 						<Label Text="Предыдущий файл" FontSize="Small"
@@ -70,6 +70,6 @@
 					<Button Text="Удалить" Clicked="OnDeleteButtonClicked" x:Name="DeleteButton" />
 				</StackLayout>
 			</ScrollView>
-		</StackLayout>
+		</Grid>
 	</ContentPage.Content>
 </ContentPage>

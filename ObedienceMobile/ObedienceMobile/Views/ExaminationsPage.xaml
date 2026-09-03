@@ -37,7 +37,7 @@
 					FontSize="Medium"  
 						   />
 			<Label Grid.Column="2"
-					Text="xК"
+					Text="*К"
 					Margin="3,0,0,0"
 				   LineBreakMode="NoWrap"
 					FontSize="Medium"  
@@ -77,17 +77,21 @@
 								   Text="{Binding Multiplier}"
 								   Keyboard="Numeric"
 								   FontSize="Large"
-								   TextChanged="OnTextChanged"
+								   TextChanged="OnMultiplierChanged"
+								   HorizontalTextAlignment="Center"
 								/>
 						</Grid>
 					</DataTemplate>
 				</CollectionView.ItemTemplate>
 			</CollectionView>
 		</ScrollView>
-		<Grid ColumnDefinitions="*,*" RowDefinitions="40" Margin="10" Grid.Row="2">
-			<Button Text="Добавить" Clicked="OnAddClicked" />
-			<Button Grid.Column="1"
-				Text="Уменьшить" Clicked="OnRemoveClicked" />
+		<Grid RowDefinitions="*,*" ColumnDefinitions="*,*" Margin="5" Grid.Row="2" ColumnSpacing="2">
+			<Label x:Name="SummaryLabel" Grid.ColumnSpan="2"
+				Padding="0, 5" FontSize="Medium" />
+			<Button Grid.Row="1" Grid.Column="0"
+				Text="Добавить" Clicked="OnAddClicked" Padding="0, 5" FontSize="Medium"/>
+			<Button Grid.Row="1" Grid.Column="1"
+				Text="Уменьшить" Clicked="OnRemoveClicked" Padding="0, 5" FontSize="Medium" />
 		</Grid>
 	</Grid>
 </ContentPage>

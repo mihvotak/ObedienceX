@@ -15,10 +15,10 @@
 					<Label Text="{Binding Name}" FontSize="Medium" />
 					
 					<Label Text="Уровень" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<Picker ItemsSource="{Binding Levels}" SelectedItem="{Binding Level}" TextColor="{StaticResource TextColor}" />
+					<Picker ItemsSource="{Binding Levels}" FontSize="Medium" SelectedItem="{Binding Level}" TextColor="{StaticResource TextColor}" />
 					
 					<Label Text="Дата проведения" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
-					<DatePicker Date="{Binding Date, Mode=TwoWay}" Format="dd.MM.yyyy" DateSelected="OnDateSelected" />
+					<DatePicker Date="{Binding Date, Mode=TwoWay}" FontSize="Medium" Format="dd.MM.yyyy" DateSelected="OnDateSelected" />
 					
 					<Label Text="Место проведения" FontSize="Medium" BackgroundColor="{StaticResource SubHeader}" />
 					<Entry Text="{Binding Place, Mode=TwoWay}" FontSize="Medium" TextChanged="OnTextChanged" />
@@ -41,14 +41,14 @@
 				</StackLayout>
 			</ScrollView>
 			<StackLayout VerticalOptions="End" BackgroundColor="{StaticResource PageBackground}" Padding="20,10" Margin="-10">
-				<Grid ColumnDefinitions="*,*" RowDefinitions="Auto, Auto">
-					<Button Text="Испытания" 
+				<Grid ColumnDefinitions="*,*" RowDefinitions="Auto, Auto" Margin="0, 0, 0, 5" RowSpacing="1" ColumnSpacing="1">
+					<Button Text="Испытания" FontSize="Medium" Padding="0, 10"
 							Clicked="OnExaminationsClicked" />
-					<Button Text="Спортсмены" Grid.Column="1"
+					<Button Text="Спортсмены" Grid.Column="1" FontSize="Medium" Padding="0, 10"
 							Clicked="OnPairsClicked" />
-					<Button Text="Судьи" Grid.Row="1"
+					<Button Text="Судьи" Grid.Row="1" FontSize="Medium" Padding="0, 10"
 							Clicked="OnJudgesClicked" />
-					<Button Text="Результаты" Grid.Row="1" Grid.Column="1"
+					<Button Text="Результаты" Grid.Row="1" Grid.Column="1" FontSize="Medium" Padding="0, 10"
 							Clicked="OnResultsClicked" />
 				</Grid>
 			</StackLayout>

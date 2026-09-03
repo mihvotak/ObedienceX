@@ -1,4 +1,4 @@
-﻿using ObedienceX.Data;
+using ObedienceX.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -81,16 +81,27 @@ namespace ObedienceX.Views
 			}
 		}
 
-		void OnGoHomeClick(object sender, EventArgs e)
+		void OnGoDownloadClick(object sender, EventArgs e)
 		{
-			App.FolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+			App.FolderPath = Path.Combine(GetCurrentStorageRoot(), "Download");
 			UpdateList();
 		}
 
 		void OnGoRootClick(object sender, EventArgs e)
 		{
-			App.FolderPath = "/storage/emulated/0/";
+			App.FolderPath = GetCurrentStorageRoot();
 			UpdateList();
+		}
+
+		private static string GetCurrentStorageRoot()
+		{
+#if ANDROID
+			string externalStorage = Android.OS.Environment.ExternalStorageDirectory?.AbsolutePath;
+			if (!string.IsNullOrEmpty(externalStorage) && Directory.Exists(externalStorage))
+				return externalStorage;
+#endif
+			string root = Path.GetPathRoot(App.FolderPath);
+			return !string.IsNullOrEmpty(root) && Directory.Exists(root) ? root : App.FolderPath;
 		}
 
 		void OnGoUpClick(object sender, EventArgs e)
@@ -131,6 +142,7 @@ namespace ObedienceX.Views
 					Competition competition = Model.ExcelProxy.ReadExcel(file.FileName);
 					if (competition != null)
 					{
+						App.RememberExcelFolder(file.FileName);
 						Competition savedPrev = Model.Prev;
 						Model.Competition = competition;
 						if (Model.Prev!= null && !string.IsNullOrEmpty(Model.Prev.ExcelName) && !string.IsNullOrEmpty(Model.Competition.ExcelName) && Model.Prev.ExcelName == Model.Competition.ExcelName)

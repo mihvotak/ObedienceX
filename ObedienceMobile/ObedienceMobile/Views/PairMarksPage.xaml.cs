@@ -17,6 +17,10 @@ namespace ObedienceX.Views
 		public PairMarksPage()
 		{
 			InitializeComponent();
+			Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+			{
+				Command = new Command(OnHeaderBackClicked)
+			});
 		}
 
 		private Pair CurrentPair
@@ -29,8 +33,6 @@ namespace ObedienceX.Views
 				return Model.Competition.Pairs[index];
 			}
 		}
-
-		private Layout _marksSelectionLayout;
 
 		protected override void OnAppearing()
 		{
@@ -65,8 +67,7 @@ namespace ObedienceX.Views
 			BindingContext = pair;
 			collectionView.ItemsSource = pair.Marks;
 			ToolbarItems[0].BindingContext = competition;
-			_marksSelectionLayout = (Layout)FindByName("MarkSelector");
-			_marksSelectionLayout.IsVisible = false;
+			CloseMarkSelector();
 		}
 
 		void OnSaveClicked(object sender, EventArgs e)
@@ -83,7 +84,18 @@ namespace ObedienceX.Views
 			{
 				CurrentPair.CurrentExamIndex = index;
 				CurrentPair.CurrentJudgeIndex = judge;
-				_marksSelectionLayout.IsVisible = true;
+				MarksSet marksSet = CurrentPair.Marks[index];
+				Mark mark = marksSet.Marks[judge];
+				MarkSelectorTitle.Text = marksSet.ExamName;
+				Color normalColor = (Color)Application.Current.Resources["SubHeader"];
+				Color selectedColor = (Color)Application.Current.Resources["Primary"];
+				foreach (Button button in MarkSelector.Children.OfType<Button>())
+				{
+					button.BackgroundColor = mark.IsSet && button.CommandParameter?.ToString() == mark.ValueStr
+						? selectedColor
+						: normalColor;
+				}
+				MarkSelector.IsVisible = true;
 			}
 		}
 
@@ -105,10 +117,32 @@ namespace ObedienceX.Views
 
 		public void OnMarkSelected(object sender, EventArgs e)
 		{
-			string val = (string)((Button)sender).CommandParameter;
+			string val = ((Button)sender).CommandParameter?.ToString() ?? "";
 			CurrentPair.Marks[CurrentPair.CurrentExamIndex].Marks[CurrentPair.CurrentJudgeIndex].ValueStr = val;
 			CurrentPair.Marks[CurrentPair.CurrentExamIndex].DispatchValueChanged(CurrentPair.CurrentJudgeIndex);
-			_marksSelectionLayout.IsVisible = false;
+			CloseMarkSelector();
+		}
+
+		private void CloseMarkSelector()
+		{
+			MarkSelector.IsVisible = false;
+		}
+
+		private async void OnHeaderBackClicked()
+		{
+			if (MarkSelector.IsVisible)
+				CloseMarkSelector();
+			else
+				await Shell.Current.GoToAsync("..");
+		}
+
+		protected override bool OnBackButtonPressed()
+		{
+			if (!MarkSelector.IsVisible)
+				return base.OnBackButtonPressed();
+
+			CloseMarkSelector();
+			return true;
 		}
 	}
 }

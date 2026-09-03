@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -39,16 +39,18 @@ public class Competition : INotifyPropertyChanged
 	[JsonIgnore]
 	public string SaveText => Saved ? "Сохранено" : "Сохранить";
 	[JsonIgnore]
-	public string ExchangeText => Model.Prev == null ? "............" : "<Смена>";
+	public string ExchangeText => Model.Prev == null ? "............" : "↔" + (Model.Prev.NameShort ?? "");
 
 	//[JsonIgnore]
 	//public string FileName { get; set; }
 	[JsonIgnore]
 	public string ExcelName { get; set; }
 
-	[JsonIgnore]
+    [JsonIgnore]
 	public string Name { get { return string.IsNullOrEmpty(ExcelName) ? "" : Path.GetFileNameWithoutExtension(ExcelName); } }
-	public DateTime Date { get; set; }
+    public string NameShort { get { return string.IsNullOrEmpty(Name) ? "(n/a)" : Name.Length <= 2 ? Name : Name.Substring(0, 2) + "..."; } }
+    
+    public DateTime Date { get; set; }
 	private string _level;
 	public string Level
 	{
