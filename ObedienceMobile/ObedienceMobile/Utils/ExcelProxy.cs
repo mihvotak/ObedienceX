@@ -1,4 +1,4 @@
-﻿using ObedienceX.Data;
+using ObedienceX.Data;
 using OfficeOpenXml;
 using OfficeOpenXml.Core;
 using OfficeOpenXml.Style;
@@ -21,8 +21,8 @@ namespace ObedienceX.Utils
 
 			competition.ExcelName = fileName;
 
-			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-			using (var package = new ExcelPackage(fileName))
+            ExcelPackage.License.SetNonCommercialOrganization("Katov Mikhail");
+            using (var package = new ExcelPackage(fileName))
 			{
 				if (package == null || package.Workbook == null || package.Workbook.Worksheets == null || package.Workbook.Worksheets.Count == 0)
 				{
@@ -264,8 +264,8 @@ namespace ObedienceX.Utils
 
 		public bool WriteExcel(string fileName)
 		{
-			ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-			var competition = Model.Competition;
+            ExcelPackage.License.SetNonCommercialOrganization("Katov Mikhail");
+            var competition = Model.Competition;
 			string templateFile = Model.Competition.ExcelName == null ? App.ExcelTemplate : competition.ExcelName;
 			//competition.Name = Path.GetFileNameWithoutExtension(fileName);
 
@@ -284,7 +284,7 @@ namespace ObedienceX.Utils
 				}
 
 
-				using (var package = templateStream == null ? new ExcelPackage(fileName) : new ExcelPackage(resultStream, templateStream))
+                using (var package = templateStream == null ? new ExcelPackage(fileName) : new ExcelPackage(resultStream, templateStream))
 				{
 					if (package.Workbook.Worksheets.Count == 0)
 					{

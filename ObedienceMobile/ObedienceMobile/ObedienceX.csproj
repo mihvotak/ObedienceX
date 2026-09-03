@@ -19,7 +19,7 @@
     <None Remove="Res\folder.png" />
     <None Remove="Res\Template2.xlsx" />
     <None Remove="Template.xlsx" />
-    <PackageReference Include="EPPlus" Version="6.0.7" />
+    <PackageReference Include="EPPlus" Version="8.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.82" />
   </ItemGroup>

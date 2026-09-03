@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ObedienceMobile\ObedienceX.csproj" />
+    <PackageReference Include="EPPlus" Version="8.7.0" />
 	<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.82" />
   </ItemGroup>
 </Project>
