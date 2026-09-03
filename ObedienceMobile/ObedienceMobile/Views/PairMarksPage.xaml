@@ -140,7 +140,7 @@
 								Text="{Binding ExamName}"
 								VerticalTextAlignment="Center"
 								FontSize="Medium"
-								Margin="0" Padding="2,0,2,0"
+								Margin="0" Padding="4,0,2,0"
 								MaxLines="2"
 								BackgroundColor="{StaticResource SubHeader}" 
 							/>
@@ -180,7 +180,7 @@
 					</CollectionView.ItemTemplate>
 				</CollectionView>
 			</ScrollView>
-			<Grid Padding="5,0,5,10" RowSpacing="0" Margin="0,5,0,-5"  Grid.Row="3">
+			<Grid Padding="5,0,5,7" RowSpacing="0" Margin="0,2,0,-5"  Grid.Row="3">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
 				</Grid.RowDefinitions>
@@ -195,19 +195,19 @@
 				Text="Штраф"
 				VerticalTextAlignment="Center"
 				FontSize="Medium"
-				Margin="0"
+				Margin="0" Padding="0"
 				BackgroundColor="{StaticResource SubHeader}"
 			/>
 				<Entry Grid.Column="1" Text="{Binding PenaltyStr}"
 				Keyboard="Numeric"
 				FontSize="Medium"  HorizontalTextAlignment="Center"
-				Margin="-5,0,-5,0"
+				Margin="-5,0,-5,0" 
 			/>
 				<Picker Grid.Column="3"
 				ItemsSource="{Binding StatusesList}" 
 				SelectedItem="{Binding SpecialStatus}" 
 				BackgroundColor="{StaticResource SubHeader}" 
-					TextColor="Yellow"
+				TextColor="Yellow" Margin="0"
 				
 			/>
 			</Grid>

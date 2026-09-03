@@ -6,7 +6,7 @@
     <UseMaui>True</UseMaui>
     <AssemblyTitle>ObedienceX.Android</AssemblyTitle>
     <Product>ObedienceX.Android</Product>
-    <Copyright>Copyright ©  2014</Copyright>
+    <Copyright>Copyright ©  2026</Copyright>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">28.0</SupportedOSPlatformVersion>
@@ -31,6 +31,9 @@
     <AndroidSigningStorePass>obipass</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>obikey</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>obipass</AndroidSigningKeyPass>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ObedienceMobile\ObedienceX.csproj" />

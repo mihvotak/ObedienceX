@@ -37,9 +37,9 @@ public class Competition : INotifyPropertyChanged
 		}
 	}
 	[JsonIgnore]
-	public string SaveText => Saved ? "Сохранено" : "Сохранить";
+	public string SaveText => Saved ? "Сохранено" : "[Сохранить]";
 	[JsonIgnore]
-	public string ExchangeText => Model.Prev == null ? "............" : "↔" + (Model.Prev.NameShort ?? "");
+	public string ExchangeText => Model.Prev == null ? "............" : "[↔" + (Model.Prev.NameShort ?? "") + "]";
 
 	//[JsonIgnore]
 	//public string FileName { get; set; }
